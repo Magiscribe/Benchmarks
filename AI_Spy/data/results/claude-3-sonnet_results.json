@@ -1,0 +1,939 @@
+{
+  "overall_row_accuracy": 0.5833333333333334,
+  "overall_char_accuracy": 0.8763888888888889,
+  "total_images": 10,
+  "total_rows": 60,
+  "total_rows_matched": 35,
+  "total_chars": 720,
+  "total_chars_correct": 631,
+  "accuracy_by_font": {
+    "Arial": 0.9375,
+    "Times New Roman": 0.7986111111111112,
+    "Comic Sans": 0.8819444444444444,
+    "Courier": 0.8611111111111112,
+    "Verdana": 0.9027777777777778
+  },
+  "accuracy_by_size_range": {
+    "12-72": 0.8763888888888889
+  },
+  "accuracy_by_font_size": {
+    "72": 0.9833333333333333,
+    "48": 0.9916666666666667,
+    "36": 0.975,
+    "24": 0.9666666666666667,
+    "18": 0.8666666666666667,
+    "12": 0.475
+  },
+  "image_results": [
+    {
+      "image_path": "test_images\\Arial\\1747602261551.png",
+      "metadata": {
+        "font": "Arial",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "lrwCbPNsaFDG",
+          "prediction": "IrwCbPNsaFDG",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "LYBTiZrMcYQd",
+          "prediction": "LYBTiZrMcYQd",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "KmzqfIEqtsGr",
+          "prediction": "KmzqflEqtsGr",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "vjudmJWUvsVY",
+          "prediction": "vjudmJWUvsVY",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "tHPfFOddRRRI",
+          "prediction": "tHPfFOddRRRI",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "dbsyeEqJCzDv",
+          "prediction": "dbsyeEqJCzDv",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 4,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.6666666666666666,
+      "char_accuracy": 0.9722222222222222,
+      "accuracy_by_size": {
+        "72": 0.9166666666666666,
+        "48": 1.0,
+        "36": 0.9166666666666666,
+        "24": 1.0,
+        "18": 1.0,
+        "12": 1.0
+      }
+    },
+    {
+      "image_path": "test_images\\Arial\\1747602262639.png",
+      "metadata": {
+        "font": "Arial",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "MxoGaruxDqRq",
+          "prediction": "MxoGaruxDqRq",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "HJLRehVymSng",
+          "prediction": "HJLRehVymSng",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "IZfaIeJSAWoS",
+          "prediction": "IZfaleJSAWoS",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "EKmfSoiTYKdw",
+          "prediction": "EKmfSoiTYKdw",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "wsFgpdOgGFpx",
+          "prediction": "wsFgpdQgGFpx",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "pCqoENQqDQjQ",
+          "prediction": "pCqeENQdDlQ",
+          "char_accuracy": 0.5833333333333334,
+          "exact_match": false,
+          "correct_chars": 7,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.5,
+      "char_accuracy": 0.9027777777777778,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 0.9166666666666666,
+        "24": 1.0,
+        "18": 0.9166666666666666,
+        "12": 0.5833333333333334
+      }
+    },
+    {
+      "image_path": "test_images\\Times_New_Roman\\1747602262668.png",
+      "metadata": {
+        "font": "Times New Roman",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "cmDhfgMqwcwG",
+          "prediction": "cmDhfgMqwcwG",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "CqoDKExoBVtX",
+          "prediction": "CqoDKExoBVtX",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "AZlCsVVnqiqd",
+          "prediction": "AZlCsVVnqiqd",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "ApJGBNGJrdeM",
+          "prediction": "ApJGBNGIrdeM",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "DIfPjIOwpqbv",
+          "prediction": "DltPjOwpqbv",
+          "char_accuracy": 0.25,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "nXKBvykBOcNr",
+          "prediction": "nXrBvyEoONt",
+          "char_accuracy": 0.5,
+          "exact_match": false,
+          "correct_chars": 6,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.5,
+      "char_accuracy": 0.7777777777777778,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 0.9166666666666666,
+        "18": 0.25,
+        "12": 0.5
+      }
+    },
+    {
+      "image_path": "test_images\\Times_New_Roman\\1747602263704.png",
+      "metadata": {
+        "font": "Times New Roman",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "ptoRXVerKIVU",
+          "prediction": "ptoRXVerKIVU",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "LbcILqFdWVUN",
+          "prediction": "LbcILqFdWVUN",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "gSsEBvalYVVx",
+          "prediction": "gSsEBvalYVVx",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "ywXHigyFZwje",
+          "prediction": "ywXHigvFZwje",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "XQMGOJCiIebi",
+          "prediction": "xQMGOiCiIebi",
+          "char_accuracy": 0.8333333333333334,
+          "exact_match": false,
+          "correct_chars": 10,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "PCdWjfFwOeZD",
+          "prediction": "PcdVgFvOeZD",
+          "char_accuracy": 0.16666666666666666,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.5,
+      "char_accuracy": 0.8194444444444444,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 0.9166666666666666,
+        "18": 0.8333333333333334,
+        "12": 0.16666666666666666
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747602263733.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "owuTRIPKszSI",
+          "prediction": "owuTRIPKszSI",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "QnZoUsTOufAS",
+          "prediction": "QnZoUsTOufAS",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "oMyamPZgxkaO",
+          "prediction": "oMyamPZgxkaO",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "WqtyEsBKYcKb",
+          "prediction": "WqtyEsBKYckb",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "WkXqtNsdMmWK",
+          "prediction": "WkXqHNsdMmWK",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "hBJPsgcfMJKA",
+          "prediction": "hBTPsgcfMTKA",
+          "char_accuracy": 0.8333333333333334,
+          "exact_match": false,
+          "correct_chars": 10,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.5,
+      "char_accuracy": 0.9444444444444444,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 0.9166666666666666,
+        "18": 0.9166666666666666,
+        "12": 0.8333333333333334
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747602264764.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "QxeMUKzsrQNM",
+          "prediction": "QxeMUKzsrQNM",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "TDioqklYvUJS",
+          "prediction": "TDioqklYvUTS",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "gLNZlaUZieTG",
+          "prediction": "gLNZlaUZieT6",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "CHYELYSLoehf",
+          "prediction": "CHYELYSLoehf",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "blGTXNkZSnnF",
+          "prediction": "bI6TXNkZSnnF",
+          "char_accuracy": 0.8333333333333334,
+          "exact_match": false,
+          "correct_chars": 10,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "obVvCbYIxjQU",
+          "prediction": "abVvDvTxjqU",
+          "char_accuracy": 0.25,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 2,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.8194444444444444,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 0.9166666666666666,
+        "36": 0.9166666666666666,
+        "24": 1.0,
+        "18": 0.8333333333333334,
+        "12": 0.25
+      }
+    },
+    {
+      "image_path": "test_images\\Courier\\1747602264794.png",
+      "metadata": {
+        "font": "Courier",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "YSbZtbcmUrrY",
+          "prediction": "YSbZtbcmUrrY",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "lVrPiLUmBIGn",
+          "prediction": "lVrPiLUmBIGn",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "BKFOdQfxxCky",
+          "prediction": "BKFOdQfxxCky",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "asGuolRLFobv",
+          "prediction": "asGuolRLFobv",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "SpIxRKqVkoVL",
+          "prediction": "SpIxRKqVkoVL",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "ERZxKiJPilQg",
+          "prediction": "ERZRLVPllQq",
+          "char_accuracy": 0.25,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 5,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.8333333333333334,
+      "char_accuracy": 0.875,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 1.0,
+        "18": 1.0,
+        "12": 0.25
+      }
+    },
+    {
+      "image_path": "test_images\\Courier\\1747602265829.png",
+      "metadata": {
+        "font": "Courier",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "glxKzyZMcqBx",
+          "prediction": "glxKzyZMcqBx",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "HyWRupLoSZEM",
+          "prediction": "HyWRupLoSZEM",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "IFRenjdSECwK",
+          "prediction": "IFRenjdSECwK",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "xvHVAILXaTKw",
+          "prediction": "xvHVAILxaTKw",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "yWPhxaSzbBHl",
+          "prediction": "yWPhxaSzbBHl",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "gUaXFTrJQBMm",
+          "prediction": "gUxFrxQBNm",
+          "char_accuracy": 0.16666666666666666,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 4,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.6666666666666666,
+      "char_accuracy": 0.8472222222222222,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 0.9166666666666666,
+        "18": 1.0,
+        "12": 0.16666666666666666
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747602265877.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "IaVVQgAnWPaR",
+          "prediction": "IaVVQgAnWPaR",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "IzwtgTYHuGPR",
+          "prediction": "IzwtgTYHuGPR",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "byPtJqZNAmyy",
+          "prediction": "byPtJqZNAmyy",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "ApnySFVxlyyC",
+          "prediction": "ApnySFVxlyyC",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "pAYQylGrwPqf",
+          "prediction": "pAYQylGrwPqf",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "ihizbENElete",
+          "prediction": "ihizBENElete",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 5,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.8333333333333334,
+      "char_accuracy": 0.9861111111111112,
+      "accuracy_by_size": {
+        "72": 1.0,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 1.0,
+        "18": 1.0,
+        "12": 0.9166666666666666
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747602266918.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          72,
+          48,
+          36,
+          24,
+          18,
+          12
+        ],
+        "num_rows": 6,
+        "chars_per_row": 12
+      },
+      "row_results": [
+        {
+          "ground_truth": "pzxzBfKQCbWB",
+          "prediction": "pZxzBfKQCbWB",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 0,
+          "font_size": 72
+        },
+        {
+          "ground_truth": "ITVyxdggIyhm",
+          "prediction": "ITVyxdggIyhm",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 1,
+          "font_size": 48
+        },
+        {
+          "ground_truth": "mWFmrkqrGFKg",
+          "prediction": "mWFmrkqrGFKg",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 2,
+          "font_size": 36
+        },
+        {
+          "ground_truth": "jlGvgHSsLJvN",
+          "prediction": "jlGvgHSsLJvN",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 12,
+          "total_chars": 12,
+          "row": 3,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "ONhKOnplHOQl",
+          "prediction": "ONhKOnpIHOQl",
+          "char_accuracy": 0.9166666666666666,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 12,
+          "row": 4,
+          "font_size": 18
+        },
+        {
+          "ground_truth": "fFUayuwPUAxq",
+          "prediction": "fUayuwPUAxq",
+          "char_accuracy": 0.08333333333333333,
+          "exact_match": false,
+          "correct_chars": 1,
+          "total_chars": 12,
+          "row": 5,
+          "font_size": 12
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 6,
+      "total_rows": 6,
+      "row_accuracy": 0.5,
+      "char_accuracy": 0.8194444444444444,
+      "accuracy_by_size": {
+        "72": 0.9166666666666666,
+        "48": 1.0,
+        "36": 1.0,
+        "24": 1.0,
+        "18": 0.9166666666666666,
+        "12": 0.08333333333333333
+      }
+    }
+  ]
+}

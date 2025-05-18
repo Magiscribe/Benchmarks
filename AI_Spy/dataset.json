@@ -1,0 +1,482 @@
+[
+  {
+    "image_path": "test_images\\Arial\\1747602261551.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "lrwCbPNsaFDG",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "LYBTiZrMcYQd",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "KmzqfIEqtsGr",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "vjudmJWUvsVY",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "tHPfFOddRRRI",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "dbsyeEqJCzDv",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Arial\\1747602262639.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "MxoGaruxDqRq",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "HJLRehVymSng",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "IZfaIeJSAWoS",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "EKmfSoiTYKdw",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "wsFgpdOgGFpx",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "pCqoENQqDQjQ",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Times_New_Roman\\1747602262668.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "cmDhfgMqwcwG",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "CqoDKExoBVtX",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "AZlCsVVnqiqd",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "ApJGBNGJrdeM",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "DIfPjIOwpqbv",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "nXKBvykBOcNr",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Times_New_Roman\\1747602263704.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "ptoRXVerKIVU",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "LbcILqFdWVUN",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "gSsEBvalYVVx",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "ywXHigyFZwje",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "XQMGOJCiIebi",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "PCdWjfFwOeZD",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Comic_Sans\\1747602263733.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "owuTRIPKszSI",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "QnZoUsTOufAS",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "oMyamPZgxkaO",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "WqtyEsBKYcKb",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "WkXqtNsdMmWK",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "hBJPsgcfMJKA",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Comic_Sans\\1747602264764.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "QxeMUKzsrQNM",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "TDioqklYvUJS",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "gLNZlaUZieTG",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "CHYELYSLoehf",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "blGTXNkZSnnF",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "obVvCbYIxjQU",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Courier\\1747602264794.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "YSbZtbcmUrrY",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "lVrPiLUmBIGn",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "BKFOdQfxxCky",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "asGuolRLFobv",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "SpIxRKqVkoVL",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "ERZxKiJPilQg",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Courier\\1747602265829.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "glxKzyZMcqBx",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "HyWRupLoSZEM",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "IFRenjdSECwK",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "xvHVAILXaTKw",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "yWPhxaSzbBHl",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "gUaXFTrJQBMm",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Verdana\\1747602265877.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "IaVVQgAnWPaR",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "IzwtgTYHuGPR",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "byPtJqZNAmyy",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "ApnySFVxlyyC",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "pAYQylGrwPqf",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "ihizbENElete",
+        "size": 12
+      }
+    ]
+  },
+  {
+    "image_path": "test_images\\Verdana\\1747602266918.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        72,
+        48,
+        36,
+        24,
+        18,
+        12
+      ],
+      "num_rows": 6,
+      "chars_per_row": 12
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "pzxzBfKQCbWB",
+        "size": 72
+      },
+      {
+        "row": 1,
+        "text": "ITVyxdggIyhm",
+        "size": 48
+      },
+      {
+        "row": 2,
+        "text": "mWFmrkqrGFKg",
+        "size": 36
+      },
+      {
+        "row": 3,
+        "text": "jlGvgHSsLJvN",
+        "size": 24
+      },
+      {
+        "row": 4,
+        "text": "ONhKOnplHOQl",
+        "size": 18
+      },
+      {
+        "row": 5,
+        "text": "fFUayuwPUAxq",
+        "size": 12
+      }
+    ]
+  }
+]

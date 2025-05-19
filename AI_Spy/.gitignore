@@ -43,11 +43,6 @@ env/
 # Uncomment if you prefer not to track test images
 # test_images/
 
-# Generated data (responses, results, visualizations)
-data/responses/*.json
-data/results/*.json
-data/visualizations/*.png
-
 # Logs
 *.log
 

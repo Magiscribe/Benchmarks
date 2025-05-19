@@ -5,6 +5,7 @@ import base64
 import argparse
 from typing import List, Dict, Any, Optional
 import anthropic
+import config
 
 class ModelRunner:
     """Handles running vision models on eye chart test images."""
@@ -58,6 +59,7 @@ class ModelRunner:
         return (
             "You are an expert at reading text from eye chart images. You will be shown an eye chart image with "
             "multiple rows of text of decreasing size from top to bottom."
+            f"There are ${config.CHARS_PER_ROW} characters per row, and the font sizes are standardized. There is only capitalized and lower case English letters in the image. "
             "\n\n"
             "Your task is to read each row of text and report what you see, starting from row 0 (top row) to the last row. "
             "Be extremely precise in your reading, attempting to identify each character correctly. "
@@ -70,9 +72,9 @@ class ModelRunner:
             "Example response format:\n"
             "```json\n"
             "[\n"
-            "  {\"row\": 0, \"text\": \"ABCDEF\"},\n"
-            "  {\"row\": 1, \"text\": \"GHIJKL\"},\n"
-            "  {\"row\": 2, \"text\": \"MNOPQR\"}\n"
+            "  {\"row\": 0, \"text\": \"ABCadgeDEF\"},\n"
+            "  {\"row\": 1, \"text\": \"GHIdsvvJKL\"},\n"
+            "  {\"row\": 2, \"text\": \"MNOewvPQR\"}\n"
             "]\n"
             "```"
             "\n\n"
@@ -139,12 +141,80 @@ class ModelRunner:
             
             if json_start >= 0 and json_end > json_start:
                 json_str = response_text[json_start:json_end]
-                return json.loads(json_str)
+                try:
+                    return json.loads(json_str)
+                except json.JSONDecodeError as e:
+                    print(f"JSON decode error: {str(e)}. Attempting to fix malformed JSON...")
+                    # Manual fix for common JSON errors in model responses
+                    import re
+                    
+                    # Fix for unescaped quotes within strings
+                    fixed_json = json_str
+                    
+                    # Fix unescaped quotes in text field values
+                    pattern = r'("text": ".*?)(")(.*?")'
+                    fixed_json = re.sub(pattern, r'\1\\\2\3', fixed_json)
+                    
+                    # Fix other common issues (add more patterns as needed)
+                    # Replace non-standard quotes
+                    fixed_json = fixed_json.replace('"', '"').replace('"', '"')
+                    
+                    print(f"Attempting to parse fixed JSON: {fixed_json[:100]}...")
+                    try:
+                        return json.loads(fixed_json)
+                    except json.JSONDecodeError:
+                        print("Still unable to parse JSON after fixes. Creating manual structure...")
+                        
+                        # Create a structure manually
+                        results = []
+                        row_pattern = r'"row"\s*:\s*(\d+)\s*,\s*"text"\s*:\s*"([^"]*?)"'
+                        matches = re.findall(row_pattern, json_str)
+                        
+                        if matches:
+                            for row_num, text in matches:
+                                results.append({"row": int(row_num), "text": text})
+                            return results
+                        else:
+                            # Last resort: create mock structure from lines
+                            lines = json_str.strip().split('\n')
+                            results = []
+                            for i, line in enumerate(lines):
+                                if line.strip() and not line.strip().startswith('{') and not line.strip().startswith('}'):
+                                    # Extract any text content
+                                    text_content = re.sub(r'[^a-zA-Z0-9]', '', line)
+                                    if text_content:
+                                        results.append({"row": i, "text": text_content})
+                            return results
             else:
                 # If no JSON array is found, try to parse the whole response
                 return json.loads(response_text)
         except json.JSONDecodeError:
-            raise ValueError(f"Could not parse JSON from response: {response_text}")
+            print(f"Could not parse JSON from response. Creating fallback response.")
+            print(f"Response text: {response_text[:200]}...")
+            
+            # Create a fallback response
+            fallback = []
+            lines = response_text.strip().split('\n')
+            
+            for i, line in enumerate(lines):
+                if line.strip():
+                    # Try to extract anything that looks like text
+                    text_match = re.search(r'"text"\s*:\s*"([^"]*)"', line)
+                    if text_match:
+                        text = text_match.group(1)
+                        fallback.append({"row": i, "text": text})
+                    else:
+                        # Just use the line as is, removing non-alphanumeric chars
+                        text = re.sub(r'[^a-zA-Z0-9]', '', line)
+                        if text:
+                            fallback.append({"row": i, "text": text})
+            
+            if fallback:
+                print(f"Created fallback response with {len(fallback)} rows")
+                return fallback
+            else:
+                print(f"WARNING: Returning empty result for {image_path}")
+                return []
     
     def run_on_dataset(self, dataset_path: str) -> List[List[Dict[str, Any]]]:
         """

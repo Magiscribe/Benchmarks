@@ -148,8 +148,12 @@ class VisionModelEvaluator:
         by_font_size = defaultdict(lambda: {"correct": 0, "total": 0})
         by_size_range = defaultdict(list)
         
+        # New: Track accuracy by font size AND font
+        by_font_size_and_font = defaultdict(lambda: defaultdict(lambda: {"correct": 0, "total": 0}))
+        
         for r in image_results:
-            by_font[r["metadata"]["font"]].append(r["char_accuracy"])
+            font_name = r["metadata"]["font"]
+            by_font[font_name].append(r["char_accuracy"])
             
             # Group by font sizes range - use min/max of font_sizes
             if 'font_sizes' in r['metadata']:
@@ -162,6 +166,10 @@ class VisionModelEvaluator:
                 if font_size > 0:
                     by_font_size[font_size]["correct"] += row["correct_chars"]
                     by_font_size[font_size]["total"] += row["total_chars"]
+                    
+                    # Also track by both font size and font type
+                    by_font_size_and_font[font_size][font_name]["correct"] += row["correct_chars"]
+                    by_font_size_and_font[font_size][font_name]["total"] += row["total_chars"]
         
         # Calculate average accuracy for each group
         font_accuracies = {font: statistics.mean(accs) for font, accs in by_font.items()}
@@ -172,6 +180,15 @@ class VisionModelEvaluator:
             size: metrics["correct"] / metrics["total"] if metrics["total"] > 0 else 0
             for size, metrics in by_font_size.items()
         }
+        
+        # New: Calculate accuracy by font size and font type
+        font_size_and_font_accuracies = {}
+        for size, fonts in by_font_size_and_font.items():
+            font_size_and_font_accuracies[str(size)] = {}
+            for font, metrics in fonts.items():
+                font_size_and_font_accuracies[str(size)][font] = (
+                    metrics["correct"] / metrics["total"] if metrics["total"] > 0 else 0
+                )
         
         return {
             "overall_row_accuracy": total_rows_matched / total_rows if total_rows > 0 else 0,
@@ -184,6 +201,7 @@ class VisionModelEvaluator:
             "accuracy_by_font": font_accuracies,
             "accuracy_by_size_range": size_range_accuracies,
             "accuracy_by_font_size": font_size_accuracies,
+            "accuracy_by_font_size_and_font": font_size_and_font_accuracies,
             "image_results": image_results
         }
     

@@ -1,938 +1,2571 @@
 {
-  "overall_row_accuracy": 0.7666666666666667,
-  "overall_char_accuracy": 0.9513888888888888,
-  "total_images": 10,
-  "total_rows": 60,
-  "total_rows_matched": 46,
-  "total_chars": 720,
-  "total_chars_correct": 685,
+  "overall_row_accuracy": 0.2777777777777778,
+  "overall_char_accuracy": 0.6708904704044437,
+  "total_images": 20,
+  "total_rows": 180,
+  "total_rows_matched": 50,
+  "total_chars": 5761,
+  "total_chars_correct": 3865,
   "accuracy_by_font": {
-    "Arial": 0.9791666666666667,
-    "Times New Roman": 0.9097222222222223,
-    "Comic Sans": 0.9652777777777778,
-    "Courier": 0.9236111111111112,
-    "Verdana": 0.9791666666666667
+    "Arial": 0.7517361111111112,
+    "Times New Roman": 0.4869791666666667,
+    "Comic Sans": 0.6927083333333334,
+    "Courier": 0.6519097222222222,
+    "Verdana": 0.7710105488273741
   },
   "accuracy_by_size_range": {
-    "12-72": 0.951388888888889
+    "8-24": 0.6708687764321415
   },
   "accuracy_by_font_size": {
-    "72": 0.9916666666666667,
-    "48": 1.0,
-    "36": 0.975,
-    "24": 0.9916666666666667,
-    "18": 0.925,
-    "12": 0.825
+    "24": 0.990625,
+    "20": 0.9875,
+    "16": 0.9359375,
+    "14": 0.871875,
+    "12": 0.6390625,
+    "11": 0.6640625,
+    "10": 0.546875,
+    "9": 0.21875,
+    "8": 0.18408736349453977
   },
   "image_results": [
     {
-      "image_path": "test_images\\Arial\\1747602261551.png",
+      "image_path": "test_images\\Arial\\1747615332631.png",
       "metadata": {
         "font": "Arial",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "lrwCbPNsaFDG",
-          "prediction": "IrwCbPNsaFDG",
-          "char_accuracy": 0.9166666666666666,
-          "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
+          "ground_truth": "PtCZJzTotRbplGdjcWypRyVErzHPhisE",
+          "prediction": "PtCZJzTotRbplGdjcWypRyVErzHPhisE",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "LYBTiZrMcYQd",
-          "prediction": "LYBTiZrMcYQd",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "KmzqfIEqtsGr",
-          "prediction": "KmzqfIEqtsGr",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "vjudmJWUvsVY",
-          "prediction": "vjudmJWUvsVY",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "tHPfFOddRRRI",
-          "prediction": "tHPfFOddRRRI",
+          "ground_truth": "VKHwtvtNHWSnrSASZnINOXLPOQVmYewi",
+          "prediction": "VKHwtvtNHWSnrSASZnlNOXLPOQVmYewi",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "bIoFKuEGyEtYNRypwivsxtFKpbCpCDKM",
+          "prediction": "bloFKuEGyEfYNRypwivsxfFKpbCpCDKM",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "TlgRJkUBPGKOOvrxmsLGXADPZCdCPmVv",
+          "prediction": "TlgRJkUBPGKOOvrxmsLGXADPZCdCPmVv",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "hSyOXwMZdhrUmQeeKkMfvmPzoZNbvWXv",
+          "prediction": "hSyOXwMZdhrUmQeefKMfvmPzoZNbvWXv",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
           "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "dbsyeEqJCzDv",
-          "prediction": "dbsyeEqJCzDv",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 5,
           "font_size": 12
-        }
-      ],
-      "rows_matched": 5,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.8333333333333334,
-      "char_accuracy": 0.9861111111111112,
-      "accuracy_by_size": {
-        "72": 0.9166666666666666,
-        "48": 1.0,
-        "36": 1.0,
-        "24": 1.0,
-        "18": 1.0,
-        "12": 1.0
-      }
-    },
-    {
-      "image_path": "test_images\\Arial\\1747602262639.png",
-      "metadata": {
-        "font": "Arial",
-        "font_sizes": [
-          72,
-          48,
-          36,
-          24,
-          18,
-          12
-        ],
-        "num_rows": 6,
-        "chars_per_row": 12
-      },
-      "row_results": [
-        {
-          "ground_truth": "MxoGaruxDqRq",
-          "prediction": "MxoGaruxDqRq",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 0,
-          "font_size": 72
         },
         {
-          "ground_truth": "HJLRehVymSng",
-          "prediction": "HJLRehVymSng",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "IZfaIeJSAWoS",
-          "prediction": "IZfaleJSAWoS",
-          "char_accuracy": 0.9166666666666666,
+          "ground_truth": "ETCEmyyhPopzcUoCDnPBlrpgJGnoZpFX",
+          "prediction": "ETCEmyyhPopzcUoCDnPBirpgJGnoZpFX",
+          "char_accuracy": 0.96875,
           "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "EKmfSoiTYKdw",
-          "prediction": "EKmfSoiTYKdw",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
-          "font_size": 24
-        },
-        {
-          "ground_truth": "wsFgpdOgGFpx",
-          "prediction": "wsFgpdOgGFpx",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "pCqoENQqDQjQ",
-          "prediction": "pCqoENQqDQiQ",
-          "char_accuracy": 0.9166666666666666,
-          "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
+          "correct_chars": 31,
+          "total_chars": 32,
           "row": 5,
-          "font_size": 12
-        }
-      ],
-      "rows_matched": 4,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.6666666666666666,
-      "char_accuracy": 0.9722222222222222,
-      "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 0.9166666666666666,
-        "24": 1.0,
-        "18": 1.0,
-        "12": 0.9166666666666666
-      }
-    },
-    {
-      "image_path": "test_images\\Times_New_Roman\\1747602262668.png",
-      "metadata": {
-        "font": "Times New Roman",
-        "font_sizes": [
-          72,
-          48,
-          36,
-          24,
-          18,
-          12
-        ],
-        "num_rows": 6,
-        "chars_per_row": 12
-      },
-      "row_results": [
-        {
-          "ground_truth": "cmDhfgMqwcwG",
-          "prediction": "cmDhfgMqwcwG",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 0,
-          "font_size": 72
+          "font_size": 11
         },
         {
-          "ground_truth": "CqoDKExoBVtX",
-          "prediction": "CqoDKExoBVtX",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "AZlCsVVnqiqd",
-          "prediction": "AZICsVVnqiqd",
-          "char_accuracy": 0.9166666666666666,
+          "ground_truth": "yrjvmvMuUUhNBPxpdWXVtpyvPeJgmKWu",
+          "prediction": "yjyvmvMuUUhNBPxpdWXVbyvPeJgmKWu",
+          "char_accuracy": 0.5625,
           "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
+          "correct_chars": 18,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
         },
         {
-          "ground_truth": "ApJGBNGJrdeM",
-          "prediction": "ApJGBNGJrdeM",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
-          "font_size": 24
-        },
-        {
-          "ground_truth": "DIfPjIOwpqbv",
-          "prediction": "DIfPjIOwpqbv",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "nXKBvykBOcNr",
-          "prediction": "nXKBvykBOcNr",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 5,
-          "font_size": 12
-        }
-      ],
-      "rows_matched": 5,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.8333333333333334,
-      "char_accuracy": 0.9861111111111112,
-      "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 0.9166666666666666,
-        "24": 1.0,
-        "18": 1.0,
-        "12": 1.0
-      }
-    },
-    {
-      "image_path": "test_images\\Times_New_Roman\\1747602263704.png",
-      "metadata": {
-        "font": "Times New Roman",
-        "font_sizes": [
-          72,
-          48,
-          36,
-          24,
-          18,
-          12
-        ],
-        "num_rows": 6,
-        "chars_per_row": 12
-      },
-      "row_results": [
-        {
-          "ground_truth": "ptoRXVerKIVU",
-          "prediction": "ptoRXVerKIVU",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "LbcILqFdWVUN",
-          "prediction": "LbcILqFdWVUN",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "gSsEBvalYVVx",
-          "prediction": "gSsEBvaIYVVx",
-          "char_accuracy": 0.9166666666666666,
-          "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "ywXHigyFZwje",
-          "prediction": "ywXHigyFZwje",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
-          "font_size": 24
-        },
-        {
-          "ground_truth": "XQMGOJCiIebi",
-          "prediction": "XQMGOJCifbi",
-          "char_accuracy": 0.6666666666666666,
+          "ground_truth": "styKrdyyzvHknNWNGCmtRRWTVOUtgGCv",
+          "prediction": "styKztyyzHknNWNGCmtRRWTVOUigGCv",
+          "char_accuracy": 0.25,
           "exact_match": false,
           "correct_chars": 8,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
         },
         {
-          "ground_truth": "PCdWjfFwOeZD",
-          "prediction": "PCdWjFwOeZD",
-          "char_accuracy": 0.4166666666666667,
+          "ground_truth": "OujbaoNoltGbiroWzRGXhluqhsxTZjyN",
+          "prediction": "OgpaxNofSzroVvzRGXnvqnpkTZryN",
+          "char_accuracy": 0.03125,
           "exact_match": false,
-          "correct_chars": 5,
-          "total_chars": 12,
-          "row": 5,
+          "correct_chars": 1,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 2,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.2222222222222222,
+      "char_accuracy": 0.7361111111111112,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 0.96875,
+        "16": 0.90625,
+        "14": 1.0,
+        "12": 0.9375,
+        "11": 0.96875,
+        "10": 0.5625,
+        "9": 0.25,
+        "8": 0.03125
+      }
+    },
+    {
+      "image_path": "test_images\\Arial\\1747615333719.png",
+      "metadata": {
+        "font": "Arial",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "wcLdfsfALPYFBSItzGlkMmkBULRLYorn",
+          "prediction": "wcLdfsfALPYFBSItzGlkMmkBULRLYorn",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "AVYBfzowtbHQCzDvKfdLOHkrjcocivCv",
+          "prediction": "AVYBfzowtbHQCzDvKfdLOHkrjcocivCv",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "wgJnoWMUucLElvNvMGtAocijrngjhdmy",
+          "prediction": "wgJnoWMUucLEIvNvMGtAocijmgjhdmv",
+          "char_accuracy": 0.71875,
+          "exact_match": false,
+          "correct_chars": 23,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "WUcRgUkerKJLSRonXcVyBgBAsxaYufge",
+          "prediction": "WUcRgUkerKJLSRonXcVyBgBAsxaYufge",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "ipRbOkxSmKDqkrCkRZXuANQVltdlRtwP",
+          "prediction": "ipRbOkxSmKDqkrCkRZXuANQVltdIRtwP",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 4,
           "font_size": 12
+        },
+        {
+          "ground_truth": "LIbmKawAYQAmyexzEIPCePPUNZflzaQX",
+          "prediction": "LlbmKawAYQAmyexzEiPCePPUNZftzaQX",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "bpXtWyehstzlpdDWNuUmOEGueeDNGoQJ",
+          "prediction": "bpXtWyehstzjodDWNuUmOEGueeONGoQJ",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "KKKfjHokdiwVJZEigTdJznbDpxmSXvOK",
+          "prediction": "KKKjHokdwVJZEgTzJzreOpvmSXvOK",
+          "char_accuracy": 0.09375,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "VCBwqMOxvDNrsHlWvddfFPUPQDYIcTYm",
+          "prediction": "VCBegKOvDNzHWvdtFPUPQDYeTYm",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
       "rows_matched": 3,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.5,
-      "char_accuracy": 0.8333333333333334,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.7465277777777778,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 0.9166666666666666,
         "24": 1.0,
-        "18": 0.6666666666666666,
-        "12": 0.4166666666666667
+        "20": 1.0,
+        "16": 0.71875,
+        "14": 1.0,
+        "12": 0.96875,
+        "11": 0.90625,
+        "10": 0.90625,
+        "9": 0.09375,
+        "8": 0.125
       }
     },
     {
-      "image_path": "test_images\\Comic_Sans\\1747602263733.png",
+      "image_path": "test_images\\Arial\\1747615334790.png",
       "metadata": {
-        "font": "Comic Sans",
+        "font": "Arial",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "owuTRIPKszSI",
-          "prediction": "owuTRIPKszSI",
+          "ground_truth": "dtKUAUvqoKGeaXpVVTjcYJFwOomPUCIp",
+          "prediction": "dtKUAUvqoKGeaXpVVTjcYJFwOomPUCIp",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "QnZoUsTOufAS",
-          "prediction": "QnZoUsTOufAS",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "oMyamPZgxkaO",
-          "prediction": "oMyamPZgxkaO",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "WqtyEsBKYcKb",
-          "prediction": "WqtyEsBKYcKb",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "WkXqtNsdMmWK",
-          "prediction": "WkXgtNsdMmWK",
-          "char_accuracy": 0.9166666666666666,
+          "ground_truth": "ojbJCUtqJifioFKvVoNQzajIJWmfXVxK",
+          "prediction": "ojbJCUtqJifioFKvVoNQzajlJWmfXVxK",
+          "char_accuracy": 0.96875,
           "exact_match": false,
-          "correct_chars": 11,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
         },
         {
-          "ground_truth": "hBJPsgcfMJKA",
-          "prediction": "hBTPsgcfMTKA",
-          "char_accuracy": 0.8333333333333334,
+          "ground_truth": "erfvBoeZqChToYWqhXAfqYByAFxIGCWm",
+          "prediction": "erfvBoeZqChToYWqhXAfqYByAFxIGCWm",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "iQealBfQdDHIUBJeFsJnGMhqeMTPOSZG",
+          "prediction": "iQealBfQdDHIUBJeFsJnGMhqeMTPOSZG",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "WWjayzxsVBwJGimLHOIljcIJMXezGFNM",
+          "prediction": "WWjayzsVBwJGimLHOIljcUMXezGFNM",
+          "char_accuracy": 0.1875,
           "exact_match": false,
-          "correct_chars": 10,
-          "total_chars": 12,
-          "row": 5,
+          "correct_chars": 6,
+          "total_chars": 32,
+          "row": 4,
           "font_size": 12
+        },
+        {
+          "ground_truth": "eEnpfyQcqQjTXBmDGdBJuNgidJvHDKOc",
+          "prediction": "eEnpfyQcqQjTXBmDGdBJuNgdJvHDKOc",
+          "char_accuracy": 0.71875,
+          "exact_match": false,
+          "correct_chars": 23,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "yIhSzGmnStvvAPMSDMhAHGctHHRSZOZs",
+          "prediction": "yIhSzGmnSfvvAPMSDMhAHGdHHRSZOZs",
+          "char_accuracy": 0.6875,
+          "exact_match": false,
+          "correct_chars": 22,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "EBkNiaXxthZjDKFlKnoNGkvMCykxhsfi",
+          "prediction": "EBkNaXkhZDKFiKoNGkyMCykxhsfi",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "vFDHhuayyKZdKAXOyIPPVDottjjfJiuW",
+          "prediction": "vFDHugyiyZJKAVOyRPvDqRjsuW",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
-      "rows_matched": 4,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.6666666666666666,
-      "char_accuracy": 0.9583333333333334,
+      "rows_matched": 3,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.6527777777777778,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
         "24": 1.0,
-        "18": 0.9166666666666666,
-        "12": 0.8333333333333334
+        "20": 0.96875,
+        "16": 1.0,
+        "14": 1.0,
+        "12": 0.1875,
+        "11": 0.71875,
+        "10": 0.6875,
+        "9": 0.15625,
+        "8": 0.15625
       }
     },
     {
-      "image_path": "test_images\\Comic_Sans\\1747602264764.png",
+      "image_path": "test_images\\Arial\\1747615335864.png",
       "metadata": {
-        "font": "Comic Sans",
+        "font": "Arial",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "QxeMUKzsrQNM",
-          "prediction": "QxeMUKzsrQNM",
+          "ground_truth": "iXuLUVMFKtXRTpJInPmpDJvHQyIvKaVv",
+          "prediction": "iXuLUVMFKtXRTpJInPmpDJvHQyIvKaVv",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "TDioqklYvUJS",
-          "prediction": "TDioqklYvUJS",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "gLNZlaUZieTG",
-          "prediction": "gLNZlaUZieTG",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "CHYELYSLoehf",
-          "prediction": "CHYELYSLoehf",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "blGTXNkZSnnF",
-          "prediction": "bI6TXNkZSnnF",
-          "char_accuracy": 0.8333333333333334,
-          "exact_match": false,
-          "correct_chars": 10,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "obVvCbYIxjQU",
-          "prediction": "obVvCbYIxjQU",
+          "ground_truth": "ExQIsveNeSkImzgFGEaPLMPXeEImNWEE",
+          "prediction": "ExQIsveNeSkImzgFGEaPLMPXeEImNWEE",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 5,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "fPRlGreqVkbafFKSbkjVVdYRjNGavokj",
+          "prediction": "fPRIGreqVkbafFKSbkjVVdYRjNGavokj",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "pexdlSPQPAGBWcZbaeVrBVhBIcopeque",
+          "prediction": "pexdISPQPAGBWcZbaeVrBVhBIcopeque",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "PGrftarcaNlbtodbnSSlBqoYOAKtXMoK",
+          "prediction": "PGrftarcaNlbtodbnSSIBqoYOAKtXMoK",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 4,
           "font_size": 12
+        },
+        {
+          "ground_truth": "AWTrSpmykxDtcJgCZVGMnHHMDfzIxdXq",
+          "prediction": "AWTrSpmykxDtcJgCZVGMnHHMDfzIxdXq",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "RprUvKIGvPYoTrmxeyErXOTInCWLpzsD",
+          "prediction": "RpnUvKIGvPYoTrmxeyEiXOTInCWLpzsD",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "URXBDISuLsIreGPwVbwkELLHhwHTqfnu",
+          "prediction": "URXBDISxLsIreGPvVbwkELHtiwHTqfnu",
+          "char_accuracy": 0.84375,
+          "exact_match": false,
+          "correct_chars": 27,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "pGCVnmVtGLJUinKrZcmyicXhvZSprYjC",
+          "prediction": "pGCrWmVGcJunwZzxmykoNrZSpryC",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
-      "rows_matched": 5,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.8333333333333334,
-      "char_accuracy": 0.9722222222222222,
+      "rows_matched": 3,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.8715277777777778,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
         "24": 1.0,
-        "18": 0.8333333333333334,
-        "12": 1.0
+        "20": 1.0,
+        "16": 0.96875,
+        "14": 0.96875,
+        "12": 0.96875,
+        "11": 1.0,
+        "10": 0.9375,
+        "9": 0.84375,
+        "8": 0.15625
       }
     },
     {
-      "image_path": "test_images\\Courier\\1747602264794.png",
+      "image_path": "test_images\\Times_New_Roman\\1747615335899.png",
       "metadata": {
-        "font": "Courier",
+        "font": "Times New Roman",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "YSbZtbcmUrrY",
-          "prediction": "YSbZtbcmUrrY",
+          "ground_truth": "YrvZQwxJWcVMILwQPlEmIBJqLSQSKjjV",
+          "prediction": "YrvZQwxJWcVMILwQPlEmIBJqLSQSKjjV",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "lVrPiLUmBIGn",
-          "prediction": "lVrPiLUmBIGn",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "BKFOdQfxxCky",
-          "prediction": "BKFOdQfxxCky",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "asGuolRLFobv",
-          "prediction": "asGuolRLFobv",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "SpIxRKqVkoVL",
-          "prediction": "SpIxRKqVkoVL",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
+          "ground_truth": "hpeBMtTLAoDpuiVyCWJQRqofVtHZUDTv",
+          "prediction": "hpeBMrTLAoDpuiVyCWJQRqofVtHZUDTv",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
         },
         {
-          "ground_truth": "ERZxKiJPilQg",
-          "prediction": "ERZRIJFIlQg",
-          "char_accuracy": 0.25,
+          "ground_truth": "CnGUIeWfuoROhkevlnfMyFnMbQhIxgAj",
+          "prediction": "CnGUIeWfuoROhkevhnMyFnMbQhIxgAj",
+          "char_accuracy": 0.53125,
+          "exact_match": false,
+          "correct_chars": 17,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "hvPnmKGulzZcutZJItEpKWFKrWYieZPj",
+          "prediction": "hvPnmKGuIzZcutZJtEpKWFKtWYteZPj",
+          "char_accuracy": 0.46875,
+          "exact_match": false,
+          "correct_chars": 15,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "XEFYATjcrxreecRCHUBjMHTuWQrhKbqe",
+          "prediction": "XEFYATjcrsreeCRHUBjMHTuWQnfKbqe",
+          "char_accuracy": 0.40625,
+          "exact_match": false,
+          "correct_chars": 13,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "jnnMeNhYZCOlvzdiXyRVStNcCKHKNeqX",
+          "prediction": "jnnMeNhYZCOkrzdtXyRVSNcGCHKNsqX",
+          "char_accuracy": 0.59375,
+          "exact_match": false,
+          "correct_chars": 19,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "dsvrYzqDJnXKzQaVsSgmcGrVtTAsaKUj",
+          "prediction": "dsvYzqDhXEQqVvSgmcGtVTAsdKUj",
+          "char_accuracy": 0.09375,
           "exact_match": false,
           "correct_chars": 3,
-          "total_chars": 12,
-          "row": 5,
-          "font_size": 12
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "INIyUVmctckYiWZcWTSZKrYyxnyBbCGZ",
+          "prediction": "fNjVUmcktYWZcWTkZKyYynyBkCGZ",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "EZTVgpMyCoLApYJCnBjYpoezxalQRvRy",
+          "prediction": "EZTvgMvGeLqYVnBYpssxsQRcRy",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
-      "rows_matched": 5,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.8333333333333334,
-      "char_accuracy": 0.875,
+      "rows_matched": 1,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.1111111111111111,
+      "char_accuracy": 0.4791666666666667,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
         "24": 1.0,
-        "18": 1.0,
-        "12": 0.25
+        "20": 0.96875,
+        "16": 0.53125,
+        "14": 0.46875,
+        "12": 0.40625,
+        "11": 0.59375,
+        "10": 0.09375,
+        "9": 0.125,
+        "8": 0.125
       }
     },
     {
-      "image_path": "test_images\\Courier\\1747602265829.png",
+      "image_path": "test_images\\Times_New_Roman\\1747615336933.png",
+      "metadata": {
+        "font": "Times New Roman",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "RIJYxEYaoLUmviDBVUqGbJMcqgpZulmf",
+          "prediction": "RIJYxEYaoLUmviDBVUqGbJMcqgpZulmf",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "AQsAmSpjDLSenJsTqVuAllLyFEVWeIet",
+          "prediction": "AQsAmSpjDLSenIsTqVuAIlLyFEVWeIet",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "UoZdyaFKjCJSFKeWAVwJRmhtTYsXXOfY",
+          "prediction": "UoZdyaFKjCISFKeWAVwJRmhtTYxXXOfY",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "kudJuxtPqmvdIHNXdZpILvIpUQJzAbwJ",
+          "prediction": "kudfuxPqmvdiHNXdZpILvIpUQIzAbwJ",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "bsiEIpwsRoKboiUGEgYkBMYABVlWLVEf",
+          "prediction": "bxEipvrRoKboUGEgYkBMYABVlWLVEf",
+          "char_accuracy": 0.03125,
+          "exact_match": false,
+          "correct_chars": 1,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "sIRUlXCPqcoOyogcHBuUPZJwioVqfpGe",
+          "prediction": "aRUIXCFqeoOyogcHBaUPZhvioVqfpGe",
+          "char_accuracy": 0.0,
+          "exact_match": false,
+          "correct_chars": 0,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "rxvkhNgNghHZIXiVvwEtlCMykBUxhOcH",
+          "prediction": "zvvkhNgOghEKNUvwEitCMykBUaOoH",
+          "char_accuracy": 0.21875,
+          "exact_match": false,
+          "correct_chars": 7,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "scWvLpljRlwpbloezWZEyAvKAgeIxBbK",
+          "prediction": "scWvLpJjElrpblesWZEyAvKAgeBBK",
+          "char_accuracy": 0.34375,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "gQsRslvgjEGyfitwQxGEmSPagYBXKNPE",
+          "prediction": "gNaRogEGyJmQaoEuiDkyTKKDVE",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 1,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.1111111111111111,
+      "char_accuracy": 0.4097222222222222,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 0.9375,
+        "16": 0.9375,
+        "14": 0.15625,
+        "12": 0.03125,
+        "11": 0.0,
+        "10": 0.21875,
+        "9": 0.34375,
+        "8": 0.0625
+      }
+    },
+    {
+      "image_path": "test_images\\Times_New_Roman\\1747615337967.png",
+      "metadata": {
+        "font": "Times New Roman",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "CvCEYcFtDNHrRThabJNQZkprZrVpsKjz",
+          "prediction": "CvCEYcFtDNHrRThabJNQZkprZrVpsKjz",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "WnTKdRXqHLXDXLrfVeRJyDqClcsBDczr",
+          "prediction": "WnTKdRXqHLXDXLrfVeRJyDqCIcsBDczr",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "kCRsFgxYKsDKCJrOMReAmDODRIkAUEPG",
+          "prediction": "kCRsFgxYKsDKCJrOMReAmDODRIkAUEPG",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "xgFItwgkWbXcJbMfuJRdEkEXkUkUexhn",
+          "prediction": "xgFItwgkWbXcJbMfuRdEkEXkUkUexhn",
+          "char_accuracy": 0.53125,
+          "exact_match": false,
+          "correct_chars": 17,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "GVbzcxJGskKEPvQDkunZDRPQaKUDVjXC",
+          "prediction": "GVbzzsJGskEEPcQDkmZDRPQaKUDVjXC",
+          "char_accuracy": 0.40625,
+          "exact_match": false,
+          "correct_chars": 13,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "AbbUChjdDaeIZGMiSNnIIDFzIlSRfvJM",
+          "prediction": "AbbUCbjdDasIZGMsNnHDFzHSRrJM",
+          "char_accuracy": 0.40625,
+          "exact_match": false,
+          "correct_chars": 13,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "sjiVveSvfsiPVsbzfknLMWoSjnjLzinQ",
+          "prediction": "sjVveSvRiPVvbcRaLMWsSjpjLmQ",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "UfjcdODVyZUmXJYLhIFSpWuIPtoCRKIg",
+          "prediction": "UfgdOPVyZUmXIYLhIFjpWuPbcEREg",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "zKXIREFqexwZeWelxQKsjdhhixGSqtpN",
+          "prediction": "sEXHEFgxscZsWasQPuSbbbvSjgN",
+          "char_accuracy": 0.03125,
+          "exact_match": false,
+          "correct_chars": 1,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 2,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.2222222222222222,
+      "char_accuracy": 0.4965277777777778,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 0.96875,
+        "16": 1.0,
+        "14": 0.53125,
+        "12": 0.40625,
+        "11": 0.40625,
+        "10": 0.0625,
+        "9": 0.0625,
+        "8": 0.03125
+      }
+    },
+    {
+      "image_path": "test_images\\Times_New_Roman\\1747615339002.png",
+      "metadata": {
+        "font": "Times New Roman",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "mNlvoEzxXHAAvYCfXfxFpXVoZBrtcTlP",
+          "prediction": "mNIvoEzxXHAAyYCfXfxFpXVoZBrtcTIP",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "yrziGNWijqkvHXxkWoqfxCYXoxnhSTnx",
+          "prediction": "yrziGNWijqkvHXxkWoqfxCYXoxnhSTnx",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "DAaHYddnAxZOrZwYxojqMEpCJxUCkBQW",
+          "prediction": "DAnHYddnAxZOtZwYxojqMEpCIxUCkBQW",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "NCkKsdrvWjOpcPCWauwpVdQipjtjihaR",
+          "prediction": "NCkKsdrvWjOpePCWauwpVdQqpjtjhaR",
+          "char_accuracy": 0.8125,
+          "exact_match": false,
+          "correct_chars": 26,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "OXLKmvcisgplrPmvLuXkFUHPyjqGmuln",
+          "prediction": "OXLKuwcrgphPunLnXkFUHPyjgGmnln",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "rJyaAFDVIEiUudEydbLrGIeqQJQHqwds",
+          "prediction": "rJyaAFDVIEtUudEyshLrGfeqQOHqwdx",
+          "char_accuracy": 0.65625,
+          "exact_match": false,
+          "correct_chars": 21,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "ReyhDDxNgAmwZJSZQoNeFKSKgcPUXoHE",
+          "prediction": "RgyhDDobAguwZISZQeNsEKSKgPUXnHf",
+          "char_accuracy": 0.46875,
+          "exact_match": false,
+          "correct_chars": 15,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "EbNJsKhDIwhfkkRYKVAuSvrkeAyFtNPB",
+          "prediction": "ENNJKhDJwhkRFYKVAaSvzkaAyFNPB",
+          "char_accuracy": 0.09375,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "KBTGfBGVrLSQpAJTuXejVpPYyaxMiEof",
+          "prediction": "kRTGBGVLdQgAThMgVgPVyynMEkf",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 1,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.1111111111111111,
+      "char_accuracy": 0.5625,
+      "accuracy_by_size": {
+        "24": 0.90625,
+        "20": 1.0,
+        "16": 0.90625,
+        "14": 0.8125,
+        "12": 0.15625,
+        "11": 0.65625,
+        "10": 0.46875,
+        "9": 0.09375,
+        "8": 0.0625
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747615339027.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "XyPQQRTLjRcgJTdFIGIPTrgPuwYhpKnB",
+          "prediction": "XyPQQRTLjRcgJTdFIGIPTrgPuwYhpKnB",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "qZOICtvLANIUxrGRjwSPYCcWGPTjXFvS",
+          "prediction": "qZOICtvLANIUxrGRjwSPYCcWGPTjXFvS",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "YUwcLwJunqrRyLgdBcwEWSOqKkjJEdoj",
+          "prediction": "YUwcLwJunqrRyLgdBewEWSOqKkjJEdoj",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "CqUWnaaUQyAaQyayyjjqIWGaTQjcOIbK",
+          "prediction": "CqUWnaaUQyAaQyayyijqIWGaTQjrOIbK",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "uFagVUVsvWOUrCaRarHaUQVxVIhvSzEF",
+          "prediction": "uFagVUVsvWOUrCaRarHwUQVsVIhvSzEF",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "pIJRyHetlgvWBuVYBcfkVRMaDNdAnsDI",
+          "prediction": "pIJRyHcHgyWBuVYBcFkVRMaDNdAnsDI",
+          "char_accuracy": 0.1875,
+          "exact_match": false,
+          "correct_chars": 6,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "UHCvgzLCKDugEdXUBHqmkgIIFYAdfaBv",
+          "prediction": "UHcvgsLCKDwgEdXUBHgmkgIIFYAdfaBv",
+          "char_accuracy": 0.875,
+          "exact_match": false,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "gFJOzadmgCrwvswxoYeXLtYhNfYHqvLc",
+          "prediction": "gFOZsdngOwewswoYsXLtYNNFYHqvLc",
+          "char_accuracy": 0.09375,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "qAhCqcjYMSQCzGHaWknsNWTlQSqukVLM",
+          "prediction": "gAhCegYWSQCzPtsvWswNWTQSeavLM",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 2,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.2222222222222222,
+      "char_accuracy": 0.6805555555555556,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 0.96875,
+        "14": 0.9375,
+        "12": 0.9375,
+        "11": 0.1875,
+        "10": 0.875,
+        "9": 0.09375,
+        "8": 0.125
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747615340056.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "YQkcCvwpynonUaeHFhcdnecUxKqkvtSH",
+          "prediction": "YQkcCvwpynonUaeHFhcdnecUxKqkvtSH",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "FsKaKaAvCAnuKXhIhueaHBojxacprdiL",
+          "prediction": "FsKaKaAvCAnuKXhIhueaHBojxacprdiL",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "VREFARMBAuIkEdsexSqVWlFjcVbWBOwB",
+          "prediction": "VREFARMBAuIkEdsexSqVWlFjcVbWBOwB",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "eBBxTdMdqCDrEcLPPxVwmehvewYzNHDR",
+          "prediction": "eBBxTdMdqCDrEcLPPxVwmehvewYzNHDR",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "VCASeFicVqCgYTuEjlvMQehvHgNFemdS",
+          "prediction": "VCASeFicVqCgYTuEjlvMQehvHgNFemdS",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "okPUpihVmoOtgOkNtLFVkZwOpknrABer",
+          "prediction": "okPUpIhVmoOTgOkNHLFVkZwOpknrABer",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "VigiyrxWgaMZdgOIlVlexyJnrOFJplpO",
+          "prediction": "VigyrxWgwMZdgOIVlxsyZreOFTdpIO",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "eNZhjMYUJBqLWlGwbgDRauhURsQdQsDN",
+          "prediction": "eNZnjAVUZBqLWbxwgD8AauURsQaQaDN",
+          "char_accuracy": 0.375,
+          "exact_match": false,
+          "correct_chars": 12,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "RBUOrAkgWjBrhXPvloHNqgzAhBHoYbCf",
+          "prediction": "RBUOrAwgVjBmVXvieNbgzAhBHvYsCT",
+          "char_accuracy": 0.3125,
+          "exact_match": false,
+          "correct_chars": 10,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 5,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.5555555555555556,
+      "char_accuracy": 0.7465277777777778,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 1.0,
+        "12": 1.0,
+        "11": 0.90625,
+        "10": 0.125,
+        "9": 0.375,
+        "8": 0.3125
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747615341078.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "wPzTcGNxnFAFFJtwePIswBIQglsBCVWk",
+          "prediction": "wPzTcGNxnFAFFJtwePIswBIQglsBCVWk",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "QHyEWwFWVGnIaeQbLtRmvfIgpWTMqvRM",
+          "prediction": "QHyEWwFWVGnIaeQbLtRmvfIgpWTMqvRM",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "BxroKWbqTJnRHoAZeXZjWvaqiyAKRyRg",
+          "prediction": "BxroKWbqTJnRHoAZeXZjWvaqiyAKRyRg",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "TnIRLjCaobDOaKzJAomlSRcSsIHdJkzO",
+          "prediction": "TnIRLjCoobDOaKzJAomlSRcSsIHdJkzO",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "PIBPHWzFNXPYLxWFPETFurnRskvfNGAN",
+          "prediction": "PIBPHWzFNXPYLxWFPETFurnRskvfN5AN",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "QubDcYxoGBRlEjvXKKXjmyOpVOdHoXmv",
+          "prediction": "QuDbcYxoGBRIEjvXKKXjmyOpVOdHoXmv",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "fSdcClKnEjtZYvvpJeytHBDhjIWHuDFS",
+          "prediction": "fSdcIKiEjrZVvvpJeyHBDhjIWHubFS",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "RvjjWpFdWZUyEaTPGnugAyfbihNwmaDq",
+          "prediction": "RujWgFdWZUyEqTPGnugAyFbhNxmaDq",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "PWXsiaFJdvKubxWYFehiFJWkHCYPPBGS",
+          "prediction": "PWXsaPZdvKdsWVFdlPJWWHCYPR6S",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.6875,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 0.96875,
+        "12": 0.96875,
+        "11": 0.90625,
+        "10": 0.15625,
+        "9": 0.0625,
+        "8": 0.125
+      }
+    },
+    {
+      "image_path": "test_images\\Comic_Sans\\1747615342112.png",
+      "metadata": {
+        "font": "Comic Sans",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "loXrqxbojzeexCJbBhxKFKhQGttMczSP",
+          "prediction": "loXrqxbojzeexCJbBhxKFKhQGttMczSP",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "LiJpZQiPCuYhXWTFfDqBSvXnfWyVRomL",
+          "prediction": "LiJpZQiPCuYhXWTFfDqBSvXnfWyVRomL",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "HKxeMfKMAKEYuOKcvQsfywLnJwzzUArs",
+          "prediction": "HKxeMfKMAkEYuOKevQsfywLnJwzzUArs",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "OkfxEdZLMQtujUPysFaHPSeZRrezPEDW",
+          "prediction": "OkfxEdZLMQtujURysFaHPSeZRrezPEDW",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "YknkbHQtWkukEALUXIWEsOiVxwujnGHJ",
+          "prediction": "YknkhHqYWkukEALUXIWEeOiVxwujn6H7",
+          "char_accuracy": 0.8125,
+          "exact_match": false,
+          "correct_chars": 26,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "ZjiLKXnCzuUUNonBJXINxIbzMCnoJTeT",
+          "prediction": "ZjLkXnCZuUUNonBJXINxIbzMCnoJTeT",
+          "char_accuracy": 0.09375,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "tKWOKdtKcyFAoZETbkNMRyUtYVdxeLIA",
+          "prediction": "tKWOKzHKcyFAoZETkhNMRyUtYVdxeLIA",
+          "char_accuracy": 0.875,
+          "exact_match": false,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "KaxzNGkVdLnhcmpxxXkjJzVMmmGXEeZf",
+          "prediction": "KazN5kVdLnhcnpxxXkjTzVWmn6XEeZf",
+          "char_accuracy": 0.09375,
+          "exact_match": false,
+          "correct_chars": 3,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "wAHEkYTabxDYfFcODxWlNuVjtomPclKx",
+          "prediction": "wAHEWTSeaOYFFzOoWNsUYoemPdKx",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 2,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.2222222222222222,
+      "char_accuracy": 0.65625,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 0.9375,
+        "14": 0.96875,
+        "12": 0.8125,
+        "11": 0.09375,
+        "10": 0.875,
+        "9": 0.09375,
+        "8": 0.125
+      }
+    },
+    {
+      "image_path": "test_images\\Courier\\1747615342142.png",
       "metadata": {
         "font": "Courier",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "glxKzyZMcqBx",
-          "prediction": "glxKzyZMcqBx",
+          "ground_truth": "RUZplJZiDUDWPUPBNobfUNYZcccKotdV",
+          "prediction": "RUZplJZiDUDWPUPBNobfUNYZcccKotdV",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "HyWRupLoSZEM",
-          "prediction": "HyWRupLoSZEM",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "IFRenjdSECwK",
-          "prediction": "IFRenjdSECwK",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "xvHVAILXaTKw",
-          "prediction": "xvHVAILXaTKw",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "yWPhxaSzbBHl",
-          "prediction": "yWPhxaSzbBHl",
+          "ground_truth": "puAAPpMNJPOkErkajvRvKBJsXEPwQvwF",
+          "prediction": "puAAPpMNJPOkErkajvRvKBJsXEPwQvwF",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
         },
         {
-          "ground_truth": "gUaXFTrJQBMm",
-          "prediction": "gUaXFIrJQBNm",
-          "char_accuracy": 0.8333333333333334,
+          "ground_truth": "ThGOFRGPbjyNcRACfOQqhBNWChFlxFck",
+          "prediction": "ThcOFRGPbjyNcRAcfOOghBNWChFlxFck",
+          "char_accuracy": 0.875,
           "exact_match": false,
-          "correct_chars": 10,
-          "total_chars": 12,
-          "row": 5,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "cmBQJXTfSgkbrWqXOnNgdnBPdsOgnCLQ",
+          "prediction": "cmBQJXTfsgkbrWqXOnNgdnBFdsOgnCLQ",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "ZGghbmeyvZNkUJdTIzFRIiHiqJHJvHBg",
+          "prediction": "ZGqhmeyrZNXUJdTIrFRIiHiqHJvHBg",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 4,
           "font_size": 12
+        },
+        {
+          "ground_truth": "EhaGNhenfzwGnhgVMWYeUWAItEQiyAur",
+          "prediction": "EhaGNhenfzvGnhgTMNTeUWAIrEQiyAur",
+          "char_accuracy": 0.84375,
+          "exact_match": false,
+          "correct_chars": 27,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "JLRwXTEasKQCJHIgjUSrisorcELYBAHi",
+          "prediction": "JLRwXTEasVgcJHfgjUBzissrELYRAHL",
+          "char_accuracy": 0.53125,
+          "exact_match": false,
+          "correct_chars": 17,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "ieABdjPOcXIxAYDumDyJABaUnUexyrrP",
+          "prediction": "isNBqFQkILhAVDumDyTBAJnUeuyzrF",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "CzjQdhuPZjbITogqIWCcFIFKdhkERkRP",
+          "prediction": "CrIQdhuFIjRITrqgIWCrFIFKhLEFkFP",
+          "char_accuracy": 0.46875,
+          "exact_match": false,
+          "correct_chars": 15,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
-      "rows_matched": 5,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.8333333333333334,
-      "char_accuracy": 0.9722222222222222,
+      "rows_matched": 2,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.2222222222222222,
+      "char_accuracy": 0.65625,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
         "24": 1.0,
-        "18": 1.0,
-        "12": 0.8333333333333334
+        "20": 1.0,
+        "16": 0.875,
+        "14": 0.9375,
+        "12": 0.125,
+        "11": 0.84375,
+        "10": 0.53125,
+        "9": 0.125,
+        "8": 0.46875
       }
     },
     {
-      "image_path": "test_images\\Verdana\\1747602265877.png",
+      "image_path": "test_images\\Courier\\1747615343170.png",
       "metadata": {
-        "font": "Verdana",
+        "font": "Courier",
         "font_sizes": [
-          72,
-          48,
-          36,
           24,
-          18,
-          12
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
         ],
-        "num_rows": 6,
-        "chars_per_row": 12
+        "num_rows": 9,
+        "chars_per_row": 32
       },
       "row_results": [
         {
-          "ground_truth": "IaVVQgAnWPaR",
-          "prediction": "IaVVQgAnWPaR",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "ground_truth": "zyGffXzJgTEdxKSKqeDdRtdkndgYVNwe",
+          "prediction": "zyGfIXZJgTEdxKSKqeDdRtdkndgYVNwe",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
           "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "IzwtgTYHuGPR",
-          "prediction": "IzwtgTYHuGPR",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 1,
-          "font_size": 48
-        },
-        {
-          "ground_truth": "byPtJqZNAmyy",
-          "prediction": "byPtJqZNAmyy",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 2,
-          "font_size": 36
-        },
-        {
-          "ground_truth": "ApnySFVxlyyC",
-          "prediction": "ApnySFVxlyyC",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 3,
           "font_size": 24
         },
         {
-          "ground_truth": "pAYQylGrwPqf",
-          "prediction": "pAYQylGrwPqf",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "ihizbENElete",
-          "prediction": "ihizbENElete",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 5,
-          "font_size": 12
-        }
-      ],
-      "rows_matched": 6,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 1.0,
-      "char_accuracy": 1.0,
-      "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
-        "24": 1.0,
-        "18": 1.0,
-        "12": 1.0
-      }
-    },
-    {
-      "image_path": "test_images\\Verdana\\1747602266918.png",
-      "metadata": {
-        "font": "Verdana",
-        "font_sizes": [
-          72,
-          48,
-          36,
-          24,
-          18,
-          12
-        ],
-        "num_rows": 6,
-        "chars_per_row": 12
-      },
-      "row_results": [
-        {
-          "ground_truth": "pzxzBfKQCbWB",
-          "prediction": "pzxzBfKQCbWB",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 0,
-          "font_size": 72
-        },
-        {
-          "ground_truth": "ITVyxdggIyhm",
-          "prediction": "ITVyxdggIyhm",
-          "char_accuracy": 1.0,
-          "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "ground_truth": "PltSzhDqfgRoFBmyqWzUEgowoNhrjBpa",
+          "prediction": "PltSzhDqfqRoFBmyqWzUEgowoNhrjBpa",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
           "row": 1,
-          "font_size": 48
+          "font_size": 20
         },
         {
-          "ground_truth": "mWFmrkqrGFKg",
-          "prediction": "mWFmrkqrGFKg",
+          "ground_truth": "LVMblraORSKCmyhpCQigeYAYiDupROXU",
+          "prediction": "LVMblraORSKCmyhpCQigeYAYiDupROXU",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
+          "correct_chars": 32,
+          "total_chars": 32,
           "row": 2,
-          "font_size": 36
+          "font_size": 16
         },
         {
-          "ground_truth": "jlGvgHSsLJvN",
-          "prediction": "jIGvgHSsLJvN",
-          "char_accuracy": 0.9166666666666666,
+          "ground_truth": "qIMDGcgQnBpkWuYsiWpvkGphUgLgQduA",
+          "prediction": "qIMDGcgQnBpKMuYsiNpvKGphUgLgQduA",
+          "char_accuracy": 0.875,
+          "exact_match": false,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "qObIzOPgdTVIXDowyoRarmPDxAvkSBpr",
+          "prediction": "qQbIzOPgdTVIXDovpRarmPOhAvkSBpr",
+          "char_accuracy": 0.4375,
+          "exact_match": false,
+          "correct_chars": 14,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "JwLCexecdqQPEzMGfDuxTuDEgOcTgcHc",
+          "prediction": "JvLCexecdqQPEzMGfDuxTuEKgOcTgeHc",
+          "char_accuracy": 0.875,
+          "exact_match": false,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "BNTQtyAaIcBlgdSHibcGkZHDDihOQZsP",
+          "prediction": "BNTqsyRaIzBsgdMihkGkHDDahOQSaP",
+          "char_accuracy": 0.28125,
+          "exact_match": false,
+          "correct_chars": 9,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "VWGWlUVoyclBmWCWUiZZanHiKnqDFTeI",
+          "prediction": "VWQHLVPgylLBwDVOLIfawUJngQFTsI",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "lCZQqXlhcDFXRCOZJLQxapuYInfiwEvr",
+          "prediction": "lCDQgEIhcDFMKDOEJQwdapvTHfIvEVr",
+          "char_accuracy": 0.34375,
           "exact_match": false,
           "correct_chars": 11,
-          "total_chars": 12,
-          "row": 3,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 1,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.1111111111111111,
+      "char_accuracy": 0.6493055555555556,
+      "accuracy_by_size": {
+        "24": 0.9375,
+        "20": 0.96875,
+        "16": 1.0,
+        "14": 0.875,
+        "12": 0.4375,
+        "11": 0.875,
+        "10": 0.28125,
+        "9": 0.125,
+        "8": 0.34375
+      }
+    },
+    {
+      "image_path": "test_images\\Courier\\1747615344198.png",
+      "metadata": {
+        "font": "Courier",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "NNbTmPDTjIhKkjMLUiHOadTdNxkRWZKm",
+          "prediction": "NNbTmPDTjIhKkjMLUiHOadTdNxkRWZKm",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
           "font_size": 24
         },
         {
-          "ground_truth": "ONhKOnplHOQl",
-          "prediction": "ONhKOnpIHOQI",
-          "char_accuracy": 0.8333333333333334,
-          "exact_match": false,
-          "correct_chars": 10,
-          "total_chars": 12,
-          "row": 4,
-          "font_size": 18
-        },
-        {
-          "ground_truth": "fFUayuwPUAxq",
-          "prediction": "fFUayuwPUAxq",
+          "ground_truth": "sPkQiFtpyadmePrOCyMhbiWHWeIumrgk",
+          "prediction": "sPkQiFtpyadmePrOCyMhbiWHWeIumrgk",
           "char_accuracy": 1.0,
           "exact_match": true,
-          "correct_chars": 12,
-          "total_chars": 12,
-          "row": 5,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "YpqxMLLMpJmUWcFLFnBVObEfwPGOQdms",
+          "prediction": "YpqxMLLMpJmUWcFLFnBVObEfwPGOQdms",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "kWRLqURnRwxtaEYfxGQbWMezOFhUeOaB",
+          "prediction": "kWRLqURnBwxtaEYfxGQbWMezOFnUeOaB",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "JloVaxrPaMuGcvGxdDOdomhqkngKKOtK",
+          "prediction": "JloVaxrPaMuGcvSxdDOdmhqkngKKOcK",
+          "char_accuracy": 0.625,
+          "exact_match": false,
+          "correct_chars": 20,
+          "total_chars": 32,
+          "row": 4,
           "font_size": 12
+        },
+        {
+          "ground_truth": "WrylkmYJDBnTnuQWlLMxHNehCZakOTex",
+          "prediction": "WrylmYJDBnInqWiIMdRNebCZakOTex",
+          "char_accuracy": 0.125,
+          "exact_match": false,
+          "correct_chars": 4,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "vYcxfWojfyablhKJTAcQGpiNuMPlCegx",
+          "prediction": "vXenPeqfyabihUJTAcOgsiNuOPiCequ",
+          "char_accuracy": 0.03125,
+          "exact_match": false,
+          "correct_chars": 1,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "DyiaPmkZuwkKZozfSCIJGJBtvnYcMXbo",
+          "prediction": "DyiaPmIZmWEHzeFKTJOzBxnVxMOOe",
+          "char_accuracy": 0.21875,
+          "exact_match": false,
+          "correct_chars": 7,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "KsLFoDCQvDUUuTWKwCVWpRgGzHxsgCAV",
+          "prediction": "KaLFnDQyUDTuTWPmCVWpRziNxqcAV",
+          "char_accuracy": 0.15625,
+          "exact_match": false,
+          "correct_chars": 5,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.5659722222222222,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 0.9375,
+        "12": 0.625,
+        "11": 0.125,
+        "10": 0.03125,
+        "9": 0.21875,
+        "8": 0.15625
+      }
+    },
+    {
+      "image_path": "test_images\\Courier\\1747615345227.png",
+      "metadata": {
+        "font": "Courier",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "IBoxQOQKQnCywaGeKiqKSytjmJuuwmOz",
+          "prediction": "IBoxQOQKQnCywaGeKiqKSytjmJuuwmOZ",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "VMmUUEGCntSYgragNCeAlXxdnCWNhfGf",
+          "prediction": "VMmUUEGCntSYgragNCeAlXxdnCWNhfGf",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "QHIkNgdpDIXqZugtgPEuLnNVdMvfbHXn",
+          "prediction": "OHIkNgdpDIXqZugtgPEuLnNVdMvfbHXn",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "FVqkhiZUXHLPIBZQNvouYuWEkujbiEBB",
+          "prediction": "FVqkhiZUXHLPIBZQNvouYuWEkujbiPBB",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "xyxbPrYFSpPJUdwluZVMaGpdsRPhVTkE",
+          "prediction": "xyhbPcYFSpFTHdwiuZVMaGpdaRPhVTkE",
+          "char_accuracy": 0.78125,
+          "exact_match": false,
+          "correct_chars": 25,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "xVUDqsKJrzCZbMyBbDLcWVGSoYjynWZg",
+          "prediction": "aVUDqsKJzsCZbMyBbDLcTVGSoYjynWZg",
+          "char_accuracy": 0.875,
+          "exact_match": false,
+          "correct_chars": 28,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "ueaODcJIgpGljEEHahhSHrvtNeJpbazl",
+          "prediction": "ueaCDcJTgp9ijEEHahhBHcnbNeTpbazi",
+          "char_accuracy": 0.6875,
+          "exact_match": false,
+          "correct_chars": 22,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "oKaZqbdPZyDSLcepycIkcoCZpjwOtvde",
+          "prediction": "eFaDgdPZyDEicepvIhocZpjyOcvde",
+          "char_accuracy": 0.03125,
+          "exact_match": false,
+          "correct_chars": 1,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "BGiBVYSSyHYNHTSbUcjgCBamAxJOQxkj",
+          "prediction": "RciRVVEjyHVNTZHDicVjCRaHAkJDOqkY",
+          "char_accuracy": 0.34375,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 1,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.1111111111111111,
+      "char_accuracy": 0.7361111111111112,
+      "accuracy_by_size": {
+        "24": 0.96875,
+        "20": 1.0,
+        "16": 0.96875,
+        "14": 0.96875,
+        "12": 0.78125,
+        "11": 0.875,
+        "10": 0.6875,
+        "9": 0.03125,
+        "8": 0.34375
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747615345285.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "bZhWZVqVznNGMaKoGTvfzYWWfpPOxYtT",
+          "prediction": "bZhWZVqVznNGMaKoGTvfzYWWfpPOxYtT",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "BGuTrjApOIozsubWXvTaGFGaVirXFbSX",
+          "prediction": "BGuTrjApOIozsubWXvTaGFGaVirXFbSX",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "mNOPpPUqOOetvLpQOQzvyxapAiLtEHPo",
+          "prediction": "mNOPpPUqOOetvLpQOQzvyxapAiLtEHPo",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "hhDdKQcMimmDcMoIVwRPEoceQhATKhro",
+          "prediction": "hhDdKQcMimmDcMoIVwRPEoceQhATKhro",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "IwedfChDlknGMfJszZHEqVBXOpQKLJZv",
+          "prediction": "IwedfChDlknGMJszZHEqVBXOpQKLJZv",
+          "char_accuracy": 0.40625,
+          "exact_match": false,
+          "correct_chars": 13,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "VMVuPyqbfJUmmizsclQLpdnAXxXAUQqm",
+          "prediction": "VMVuPyqbFJUmmizscIQLpdnAXxXAUQqm",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "vRcMQNHQmrzwRWNHnwHbyVTBmKwxerag",
+          "prediction": "vRcMQNHQmrzvRWNHnwHbyVTBmKvxerag",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "WkzqfjBfnxsbByMUInaojjmUtnywJKlx",
+          "prediction": "WlzqfjBfnxsBjyMUnagjmUtnyxJklx",
+          "char_accuracy": 0.40625,
+          "exact_match": false,
+          "correct_chars": 13,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "DGzmmjrWHOTPhILVEqngAhcgbFwHOYtN",
+          "prediction": "DGzmmjWHOTPHLVEqrgAhcgBFwNOYtN",
+          "char_accuracy": 0.1875,
+          "exact_match": false,
+          "correct_chars": 6,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
         }
       ],
       "rows_matched": 4,
-      "rows_attempted": 6,
-      "total_rows": 6,
-      "row_accuracy": 0.6666666666666666,
-      "char_accuracy": 0.9583333333333334,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.4444444444444444,
+      "char_accuracy": 0.7638888888888888,
       "accuracy_by_size": {
-        "72": 1.0,
-        "48": 1.0,
-        "36": 1.0,
-        "24": 0.9166666666666666,
-        "18": 0.8333333333333334,
-        "12": 1.0
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 1.0,
+        "12": 0.40625,
+        "11": 0.9375,
+        "10": 0.9375,
+        "9": 0.40625,
+        "8": 0.1875
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747615346328.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "dOcCLOzAqVLYyDmxiBJKYhdFcMAJpeTt",
+          "prediction": "dOcCLOzAqVLYyDmxiBJKYhdFcMAJpeTt",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "WRodHfBkwXuCdNHSgmhInwJFtdgsKrcj",
+          "prediction": "WRodHfBkwXuCdNHSgmhInwJFtdgsKrcj",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "aDlthCmDMcafJMPCVzjaDQFoVDQunrRe",
+          "prediction": "aDlthCmDMcafJMPCVzjaDQFoVDQunrRe",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "glkCLVxazTROxylFoMgGARofmJfaTNFt",
+          "prediction": "glkCLVxazTROxyIFoMgGARofmJfaTNFt",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "aPytXGEAVSNkrISEUowWyHxzraRcHsNc",
+          "prediction": "aPytXGEAVSNkrISEUowWyHxzraRcHsNc",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "qbSnlyoGkdYtJlsFvYCBmvhVszVSPfyc",
+          "prediction": "qbSnIyoGkdYDlsFvYCBmvhVszVSPfyc",
+          "char_accuracy": 0.3125,
+          "exact_match": false,
+          "correct_chars": 10,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "RAMOVjSaNMDWmCtbjDuowawjRZSFBqbC",
+          "prediction": "RAMOVjSaNMDWmCtbjDuowavJRZSFBqbC",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "yWWkrmktncBJTBtLydCSdcaUfPIDhUmN",
+          "prediction": "yWWkrmktncBTBtLydCSdcaURDhUmN",
+          "char_accuracy": 0.34375,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "etsIWRGshAOZBEmbFEQiwxHjewtmWFQe",
+          "prediction": "etNWRGaAOZBEnbFEQwvHjevtmWFQe",
+          "char_accuracy": 0.0625,
+          "exact_match": false,
+          "correct_chars": 2,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 4,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.4444444444444444,
+      "char_accuracy": 0.7361111111111112,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 0.96875,
+        "12": 1.0,
+        "11": 0.3125,
+        "10": 0.9375,
+        "9": 0.34375,
+        "8": 0.0625
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747615347395.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "WeXFSMxFPbbviWOtabFpQKKSbvLtKxBJ",
+          "prediction": "WeXFSMxFPbbviWOtabFpQKKSbvLtKxBJ",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "ivhdLvPkLdSOuJmaGABlEfecaXfstGuv",
+          "prediction": "ivhdLvPkLdSOuJmaGABlEfecaXfstGuv",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "cFytNGOdXHkIKffAGQIYxyTzwAcFOQpR",
+          "prediction": "cFytNGOdXHkIKffAGQIYxyTzwAcFOQpR",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "PWwOltdtvmdEFzpdlGPqwKYDwsSoMeeu",
+          "prediction": "PWwOItdtvmdEFzpdIGPqwKYDwsSoMeeu",
+          "char_accuracy": 0.9375,
+          "exact_match": false,
+          "correct_chars": 30,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "XfUXswNwZSGZuwZPNnGGKOaMRUaKBrRg",
+          "prediction": "xfUXswNwZSGZuwZPNnGGKOaMRUaKBrRg",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "LiPeaOqauKCDQfezTLJzJWKkVUEWqQuz",
+          "prediction": "LiPeaOqauKCDQfezTLJzJWkkVUEWqQuz",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "ruHfJgHMVNzQpMTadQZTkpUutkDlSDWF",
+          "prediction": "ruhFJgkMVNzQpMTadQZTkpUukDISDWF",
+          "char_accuracy": 0.65625,
+          "exact_match": false,
+          "correct_chars": 21,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "QsVRdlZYOcfIGZFTEXBwYEfrFDrDJfOH",
+          "prediction": "QsVRdlZYOcRGZFTEXBuVEfrDrDJOH",
+          "char_accuracy": 0.34375,
+          "exact_match": false,
+          "correct_chars": 11,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "JQyDboyOleBDscBSAKtxagHuCKtvEhLf",
+          "prediction": "JQyOboyOeBDcBSAKUxgHuCKKrENf",
+          "char_accuracy": 0.21875,
+          "exact_match": false,
+          "correct_chars": 7,
+          "total_chars": 32,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 3,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.3333333333333333,
+      "char_accuracy": 0.7881944444444444,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 1.0,
+        "16": 1.0,
+        "14": 0.9375,
+        "12": 0.96875,
+        "11": 0.96875,
+        "10": 0.65625,
+        "9": 0.34375,
+        "8": 0.21875
+      }
+    },
+    {
+      "image_path": "test_images\\Verdana\\1747615348447.png",
+      "metadata": {
+        "font": "Verdana",
+        "font_sizes": [
+          24,
+          20,
+          16,
+          14,
+          12,
+          11,
+          10,
+          9,
+          8
+        ],
+        "num_rows": 9,
+        "chars_per_row": 32
+      },
+      "row_results": [
+        {
+          "ground_truth": "DitCVEGFKxASsutUdApyRKoOFPWSJQSf",
+          "prediction": "DitCVEGFKxASsutUdApyRKoOFPWSJQSf",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 0,
+          "font_size": 24
+        },
+        {
+          "ground_truth": "fcJQBysgoYablPHvGPyLPSjgxsjpSTqL",
+          "prediction": "fcJQBysgoYabIPHvGPyLPSjgxsjpSTqL",
+          "char_accuracy": 0.96875,
+          "exact_match": false,
+          "correct_chars": 31,
+          "total_chars": 32,
+          "row": 1,
+          "font_size": 20
+        },
+        {
+          "ground_truth": "FOyCcxoBRPpReKdjXtgvnZxShLUHINPN",
+          "prediction": "FOyCcxoBRPpReKdjXtgvnZxShLUHINPN",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 2,
+          "font_size": 16
+        },
+        {
+          "ground_truth": "QHxYFDcsZMaSRQhnyAPsxtPWcYvfzfBk",
+          "prediction": "QHxYFDcsZMaSRQhnyAPsxtPWcYvfzfBk",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 3,
+          "font_size": 14
+        },
+        {
+          "ground_truth": "kKweQzxqBFfPMkxuhYtAJriPAnRjsVrG",
+          "prediction": "kKweQzxqBFfPMkxuhYtAJiPAnRjSVrG",
+          "char_accuracy": 0.65625,
+          "exact_match": false,
+          "correct_chars": 21,
+          "total_chars": 32,
+          "row": 4,
+          "font_size": 12
+        },
+        {
+          "ground_truth": "DgyKkBgsRPdJoMrnqwdOYFbuWcmUZeGe",
+          "prediction": "DgyKkBgsRPdJoMrnqwdOYFbuWcmUZeGe",
+          "char_accuracy": 1.0,
+          "exact_match": true,
+          "correct_chars": 32,
+          "total_chars": 32,
+          "row": 5,
+          "font_size": 11
+        },
+        {
+          "ground_truth": "CiyCrulSEQwooJyxhRVVLvzDfHBJkekd",
+          "prediction": "CiyCruISEQvooJyxhRVVLvzDfHBJkakd",
+          "char_accuracy": 0.90625,
+          "exact_match": false,
+          "correct_chars": 29,
+          "total_chars": 32,
+          "row": 6,
+          "font_size": 10
+        },
+        {
+          "ground_truth": "YaBIZVniHcFkPUFjLcLjbdedRQuNzGYe",
+          "prediction": "YaBtZVnHcFkPUFjLcLjbdedRQvNzGYe",
+          "char_accuracy": 0.1875,
+          "exact_match": false,
+          "correct_chars": 6,
+          "total_chars": 32,
+          "row": 7,
+          "font_size": 9
+        },
+        {
+          "ground_truth": "ZeLSYlCnkVzMFRPHSPwxEHnGDynzREBL",
+          "prediction": "ZaLSYiCnkV2MFRPHSPyvkEHnGDyndREBL",
+          "char_accuracy": 0.45454545454545453,
+          "exact_match": false,
+          "correct_chars": 15,
+          "total_chars": 33,
+          "row": 8,
+          "font_size": 8
+        }
+      ],
+      "rows_matched": 4,
+      "rows_attempted": 9,
+      "total_rows": 9,
+      "row_accuracy": 0.4444444444444444,
+      "char_accuracy": 0.7958477508650519,
+      "accuracy_by_size": {
+        "24": 1.0,
+        "20": 0.96875,
+        "16": 1.0,
+        "14": 1.0,
+        "12": 0.65625,
+        "11": 1.0,
+        "10": 0.90625,
+        "9": 0.1875,
+        "8": 0.45454545454545453
       }
     }
   ]

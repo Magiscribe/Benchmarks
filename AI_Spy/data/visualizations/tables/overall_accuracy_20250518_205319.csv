@@ -1,8 +1,0 @@
-Model,Character Accuracy,Row Accuracy
-claude-3-5-sonnet-v2,0.6995,0.2833
-claude-3-7-sonnet,0.6877,0.2889
-claude-3-5-sonnet,0.6709,0.2778
-claude-3-opus,0.6203,0.1778
-claude-3-5-haiku,0.5488,0.1333
-claude-3-haiku,0.5355,0.0833
-claude-3-sonnet,0.3681,0.0444

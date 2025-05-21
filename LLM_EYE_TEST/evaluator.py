@@ -122,19 +122,39 @@ class VisionModelEvaluator:
         Evaluate model responses for the entire dataset.
         
         Args:
-            model_responses: List of model responses, one per image.
-                Each response is a list of dicts with format [{row: int, text: str}].
+            model_responses: List of dicts with format:
+                {
+                    "image_path": str,
+                    "responses": [{row: int, text: str}]
+                }
             
         Returns:
             dict: Overall evaluation metrics.
         """
-        if len(model_responses) != len(self.dataset):
-            raise ValueError(f"Expected {len(self.dataset)} model responses, got {len(model_responses)}")
-            
+        # Create a mapping of image paths to dataset indices
+        image_path_to_idx = {}
+        for i, item in enumerate(self.dataset):
+            # Normalize path for comparison
+            norm_path = item["image_path"].replace("\\", "/")
+            image_path_to_idx[norm_path] = i
+            # Also store without test_images prefix
+            if norm_path.startswith("test_images/"):
+                image_path_to_idx[norm_path.replace("test_images/", "")] = i
+        
         # Evaluate each image
         image_results = []
-        for i, response in enumerate(model_responses):
-            image_result = self.evaluate_image(i, response)
+        for response_item in model_responses:
+            # Normalize response path
+            resp_path = response_item["image_path"].replace("\\", "/")
+            if resp_path not in image_path_to_idx and not resp_path.startswith("test_images/"):
+                resp_path = "test_images/" + resp_path
+            
+            if resp_path not in image_path_to_idx:
+                print(f"Warning: No matching dataset entry found for {resp_path}")
+                continue
+                
+            idx = image_path_to_idx[resp_path]
+            image_result = self.evaluate_image(idx, response_item["responses"])
             image_results.append(image_result)
         
         # Calculate overall metrics
@@ -212,58 +232,14 @@ class VisionModelEvaluator:
 
 
 if __name__ == "__main__":
-    # Example usage with mock model responses
+    # Example showing evaluator usage
     evaluator = VisionModelEvaluator()
-    
-    # Create mock model responses - in a real scenario, these would come from the model
-    mock_responses = []
-    for item in evaluator.dataset:
-        # For this example, we'll assume the model gets some rows correct, some partially correct
-        mock_response = []
-        for gt_row in item["ground_truth"]:
-            row_num = gt_row["row"]
-            true_text = gt_row["text"]
-            font_size = gt_row["size"]
-            
-            # Simulate different levels of accuracy based on font size
-            # Larger font sizes are easier to read
-            if font_size >= 36:
-                # Model gets large text exactly right
-                pred_text = true_text
-            elif font_size >= 18:
-                # Model makes some errors in medium text
-                # Simulate by replacing 20% of characters with errors
-                chars = list(true_text)
-                error_positions = sorted(set([int(i) for i in range(len(chars)) if i % 5 == 0]))
-                for pos in error_positions:
-                    if pos < len(chars):
-                        chars[pos] = 'X'  # Replace with a wrong character
-                pred_text = ''.join(chars)
-            else:
-                # Model struggles with small text, missing characters or getting them wrong
-                # Simulate by getting only first half right
-                half_len = len(true_text) // 2
-                pred_text = true_text[:half_len] + 'X' * (len(true_text) - half_len)
-            
-            mock_response.append({"row": row_num, "text": pred_text})
-        
-        mock_responses.append(mock_response)
-    
-    # Evaluate the mock model
-    results = evaluator.evaluate_model(mock_responses)
-    
-    # Print summary results
-    print(f"Overall character accuracy: {results['overall_char_accuracy']:.2%}")
-    print(f"Overall row accuracy: {results['overall_row_accuracy']:.2%}")
-    
-    print("\nAccuracy by font:")
-    for font, acc in sorted(results['accuracy_by_font'].items(), key=lambda x: x[1], reverse=True):
-        print(f"  {font}: {acc:.2%}")
-    
-    print("\nAccuracy by font size:")
-    for size, acc in sorted(results['accuracy_by_font_size'].items(), key=lambda x: int(x[0]), reverse=True):
-        print(f"  {size:3d}pt: {acc:.2%}")
-    
-    # Save detailed results
-    evaluator.save_evaluation(results)
-    print(f"\nDetailed evaluation saved to evaluation_results.json")
+    print("VisionModelEvaluator initialized and ready to use.")
+    print("Use evaluate_model() with a list of response objects in the format:")
+    print('{')
+    print('    "image_path": "path/to/image.png",')
+    print('    "responses": [')
+    print('        {"row": 0, "text": "predicted text"},')
+    print('        ...')
+    print('    ]')
+    print('}')

@@ -18,6 +18,14 @@ class DatasetCreator:
         Returns:
             List of dataset entries.
         """
+        # Check if file exists
+        if os.path.exists(self.output_file):
+            print(f"\nWarning: {self.output_file} already exists.")
+            response = input("Do you want to overwrite it? (y/N): ").lower()
+            if response != 'y':
+                print("Operation cancelled.")
+                return self.load_dataset()
+
         # Generate test images
         if num_fonts is None:
             fonts = list(self.image_generator.fonts.keys())
@@ -33,7 +41,7 @@ class DatasetCreator:
             ground_truth = []
             for row_data in item['metadata']['row_data']:
                 ground_truth.append({
-                    "row": row_data['row'],  # Already 0-indexed
+                    "row": row_data['row'], 
                     "text": row_data['text'],
                     "size": row_data['size']
                 })

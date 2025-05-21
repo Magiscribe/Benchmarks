@@ -21,11 +21,10 @@ def parse_args():
     # Evaluation arguments
     parser.add_argument("--evaluate", action="store_true", help="Run evaluation")
     parser.add_argument("--model", type=str, choices=[
-        "mock", 
         "claude-3-opus", "claude-3-sonnet", "claude-3-haiku",
         "claude-3-5-sonnet", "claude-3-5-sonnet-v2", "claude-3-5-haiku",
         "claude-3-7-sonnet"
-    ], default="mock", help="Model to evaluate (default: mock)")
+    ], required=True, help="Model to evaluate")
     parser.add_argument("--model-responses", type=str, default=None, 
                       help="Path to saved model responses JSON (default: None = run the model)")
     parser.add_argument("--api-key", type=str, default=None, 
@@ -35,57 +34,8 @@ def parse_args():
     parser.add_argument("--results", type=str, default=None, 
                       help="Path to save evaluation results (default: data/results/model_name_results.json)")
     
-    # Compare models
-    parser.add_argument("--compare", nargs="+", 
-                      help="Compare multiple models by specifying their result files")
-    
     return parser.parse_args()
 
-def generate_mock_responses(dataset_path):
-    """
-    Generate mock model responses for testing the evaluator.
-    
-    Args:
-        dataset_path: Path to the dataset JSON file.
-        
-    Returns:
-        List of mock responses, one per image.
-    """
-    with open(dataset_path, 'r') as f:
-        dataset = json.load(f)
-    
-    mock_responses = []
-    for item in dataset:
-        # For testing, we'll assume the model gets some rows correct, some partially correct
-        mock_response = []
-        for gt_row in item["ground_truth"]:
-            row_num = gt_row["row"]  # Already 0-indexed
-            true_text = gt_row["text"]
-            font_size = gt_row["size"]
-            
-            # Simulate different levels of accuracy based on font size
-            # Larger font sizes are easier to read
-            if font_size >= 36:
-                # Model gets large text exactly right
-                pred_text = true_text
-            elif font_size >= 18:
-                # Model makes some errors in medium text
-                chars = list(true_text)
-                error_positions = [i for i in range(len(chars)) if i % 5 == 0]
-                for pos in error_positions:
-                    if pos < len(chars):
-                        chars[pos] = 'X'  # Replace with a wrong character
-                pred_text = ''.join(chars)
-            else:
-                # Model struggles with smaller text
-                half_len = len(true_text) // 2
-                pred_text = true_text[:half_len] + 'X' * (len(true_text) - half_len)
-            
-            mock_response.append({"row": row_num, "text": pred_text})
-        
-        mock_responses.append(mock_response)
-    
-    return mock_responses
 
 def print_summary(results, model_name="Model"):
     """Print a summary of evaluation results."""
@@ -122,62 +72,6 @@ def print_summary(results, model_name="Model"):
         if 'font_sizes' in img_result['metadata']:
             sizes = img_result['metadata']['font_sizes']
             print(f"    Font sizes: {min(sizes)}-{max(sizes)}pt")
-    
-    print("\n" + "="*50)
-
-def compare_models(result_files):
-    """Compare results from multiple models."""
-    results = []
-    for file_path in result_files:
-        if not os.path.exists(file_path):
-            print(f"Warning: Result file {file_path} not found, skipping")
-            continue
-            
-        with open(file_path, 'r') as f:
-            result = json.load(f)
-            model_name = os.path.basename(file_path).replace("_results.json", "")
-            results.append((model_name, result))
-    
-    if not results:
-        print("No valid result files found for comparison")
-        return
-    
-    print("\n" + "="*50)
-    print("MODEL COMPARISON")
-    print("="*50)
-    
-    # Overall comparison
-    print("\nOverall Character Accuracy:")
-    for model_name, result in sorted(results, key=lambda x: x[1]["overall_char_accuracy"], reverse=True):
-        print(f"  {model_name}: {result['overall_char_accuracy']:.2%}")
-    
-    print("\nOverall Row Accuracy:")
-    for model_name, result in sorted(results, key=lambda x: x[1]["overall_row_accuracy"], reverse=True):
-        print(f"  {model_name}: {result['overall_row_accuracy']:.2%}")
-    
-    # Comparison by font size
-    print("\nAccuracy by Font Size:")
-    size_comparison = {}
-    
-    # Collect all font sizes across all models
-    all_sizes = set()
-    for _, result in results:
-        all_sizes.update(result["accuracy_by_font_size"].keys())
-    
-    # Format comparison for each font size
-    for size in sorted([int(s) for s in all_sizes], reverse=True):
-        size_str = str(size)
-        size_comparison[size_str] = []
-        
-        for model_name, result in results:
-            accuracy = result["accuracy_by_font_size"].get(size_str, 0)
-            size_comparison[size_str].append((model_name, accuracy))
-    
-    # Print comparison for each font size
-    for size, model_accuracies in sorted(size_comparison.items(), key=lambda x: int(x[0]), reverse=True):
-        print(f"\n  Font Size {size}pt:")
-        for model_name, accuracy in sorted(model_accuracies, key=lambda x: x[1], reverse=True):
-            print(f"    {model_name}: {accuracy:.2%}")
     
     print("\n" + "="*50)
 
@@ -227,11 +121,6 @@ def main():
             
         print(f"\nDataset saved to {args.dataset}")
     
-    # Compare models if requested
-    if args.compare:
-        compare_models(args.compare)
-        return
-    
     # Evaluate model if requested
     if args.evaluate:
         if not os.path.exists(args.dataset):
@@ -263,10 +152,6 @@ def main():
             print(f"Loading saved responses from {args.responses}")
             with open(args.responses, 'r') as f:
                 model_responses = json.load(f)
-        elif args.model == "mock":
-            # Generate mock responses
-            print("Generating mock responses")
-            model_responses = generate_mock_responses(args.dataset)
         else:
             # Run real model
             print(f"Running {args.model} model on dataset...")

@@ -17,14 +17,25 @@ def process_responses():
         model = response_file.stem.replace('_responses', '')
         
         with open(response_file, 'r') as f:
-            responses = json.load(f)
-
-        # Process each image's responses
-        for image_data, image_responses in zip(dataset, responses):
-            font = image_data['metadata']['font']
+            model_responses = json.load(f)        # Process each image's responses
+        for image_results in model_responses:            # Find matching dataset entry by image path
+            # Normalize both paths for comparison by:
+            # 1. Converting backslashes to forward slashes
+            # 2. Removing any leading test_images/ or test_images\
+            resp_path = image_results['image_path'].replace('\\', '/').replace('test_images/', '')
+            
+            # Try to find exact match by normalizing both paths
+            matching_data = next((img for img in dataset 
+                                if img['image_path'].replace('\\', '/').replace('test_images/', '') == resp_path), None)
+            
+            if not matching_data:
+                print(f"ERROR: Could not find matching image for {resp_path}")
+                continue
+                
+            font = matching_data['metadata']['font']
             
             # Compare ground truth with responses
-            for gt_row, resp_row in zip(image_data['ground_truth'], image_responses):
+            for gt_row, resp_row in zip(matching_data['ground_truth'], image_results['responses']):
                 size = gt_row['size']
                 gt_text = gt_row['text']
                 resp_text = resp_row['text']

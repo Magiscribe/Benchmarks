@@ -1,4 +1,4 @@
-# Standard configuration settings for AI Spy
+# Standard configuration settings for LLM_EYE_TEST
 
 # Standard font sizes for all eye charts
 STANDARD_FONT_SIZES = [24, 20, 16, 14, 12, 11, 10, 9, 8] 

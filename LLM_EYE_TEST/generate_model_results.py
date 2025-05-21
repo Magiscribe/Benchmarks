@@ -1,15 +1,21 @@
 import json
 import csv
+import os
 from pathlib import Path
 from collections import defaultdict
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def load_dataset():
-    with open('dataset.json', 'r') as f:
+    dataset_file = os.getenv('DATASET_FILE', 'dataset.json')
+    with open(dataset_file, 'r') as f:
         return json.load(f)
 
 def process_responses():
     results = defaultdict(lambda: {"correct": 0, "total": 0})
-    responses_dir = Path('./data/responses')
+    responses_dir = Path(os.getenv('RESPONSES_DIR', './data/responses'))
     dataset = load_dataset()
 
     # Process each response file
@@ -49,7 +55,10 @@ def process_responses():
 
     return results
 
-def write_results(results, output_file='model_results.csv'):
+def write_results(results, output_file=None):
+    if output_file is None:
+        output_file = os.getenv('RESULTS_CSV', 'model_results.csv')
+    
     headers = ["model", "font", "size", "character", "correct", "total"]
     
     with open(output_file, 'w', newline='') as f:

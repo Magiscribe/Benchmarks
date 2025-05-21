@@ -24,3 +24,29 @@ FONTS = {
 
 # Characters to use (uppercase and lowercase letters)
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+# Model definitions
+# Format: {"display_name": "api_endpoint_name"}
+MODELS = {
+    # Anthropic Claude models
+    "claude-3-opus": "claude-3-opus-20240229",
+    "claude-3-sonnet": "claude-3-sonnet-20240229",
+    "claude-3-haiku": "claude-3-haiku-20240307",
+    
+    # Claude 3.5 family
+    "claude-3-5-sonnet": "claude-3-5-sonnet-20240620",
+    "claude-3-5-sonnet-v2": "claude-3-5-sonnet-20241022",
+    "claude-3-5-haiku": "claude-3-5-haiku-20241022",
+    
+    # Claude 3.7 family
+    "claude-3-7-sonnet": "claude-3-7-sonnet-20250219",
+    
+    # OpenAI models
+    "gpt-4o": "gpt-4o",
+    "gpt-4.1": "gpt-4.1",
+    "o4-mini": "o4-mini",
+    "o3": "o3",
+}
+
+# List of all available model names (for command line choices)
+AVAILABLE_MODELS = list(MODELS.keys())

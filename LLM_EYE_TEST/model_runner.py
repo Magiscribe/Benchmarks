@@ -3,9 +3,15 @@ import json
 import time
 import base64
 import argparse
+import re
 from typing import List, Dict, Any, Optional
 import anthropic
+import openai
+from dotenv import load_dotenv
 import config
+
+# Load environment variables
+load_dotenv()
 
 class ModelRunner:
     """Handles running vision models on eye chart test images."""
@@ -21,20 +27,70 @@ class ModelRunner:
         Initialize the model runner.
         
         Args:
-            model_name: Name of the model to use (e.g., "claude-3-sonnet-20240229", "claude-3-haiku-20240307")
-            api_key: Anthropic API key. If None, will look for ANTHROPIC_API_KEY environment variable
+            model_name: Name of the model to use (e.g., "claude-3-sonnet-20240229", "gpt-4-vision-preview")
+            api_key: API key. If None, will look for appropriate environment variable
             max_retries: Maximum number of retries for API calls
             retry_delay: Delay between retries in seconds
         """
         self.model_name = model_name
-        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+        self.provider = self._get_provider(model_name)
+        self.api_key = api_key or self._get_api_key()
         
         if not self.api_key:
-            raise ValueError("API key must be provided or set as ANTHROPIC_API_KEY environment variable")
+            raise ValueError(f"API key must be provided or set as {self._get_env_var_name()} environment variable")
         
-        self.client = anthropic.Anthropic(api_key=self.api_key)
+        # Initialize the appropriate client
+        if self.provider == "anthropic":
+            self.client = anthropic.Anthropic(api_key=self.api_key)
+        elif self.provider == "openai":
+            self.client = openai.OpenAI(api_key=self.api_key)
+        else:
+            raise ValueError(f"Unsupported model provider: {self.provider}")
+            
         self.max_retries = max_retries
         self.retry_delay = retry_delay
+    
+    def _get_provider(self, model_name: str) -> str:
+        """
+        Determine the provider based on the model name.
+        
+        Args:
+            model_name: Name of the model
+            
+        Returns:
+            Provider name ("anthropic" or "openai")
+        """
+        if model_name.startswith(("claude", "Claude")):
+            return "anthropic"
+        elif model_name.startswith(("gpt", "o")):
+            return "openai"
+        else:
+            # Default to anthropic for backward compatibility
+            return "anthropic"
+    
+    def _get_env_var_name(self) -> str:
+        """
+        Get the environment variable name for the API key.
+        
+        Returns:
+            Environment variable name
+        """
+        if self.provider == "anthropic":
+            return "ANTHROPIC_API_KEY"
+        elif self.provider == "openai":
+            return "OPENAI_API_KEY"
+        else:
+            return "API_KEY"
+    
+    def _get_api_key(self) -> Optional[str]:
+        """
+        Get the API key from environment variables.
+        
+        Returns:
+            API key if found, None otherwise
+        """
+        env_var_name = self._get_env_var_name()
+        return os.environ.get(env_var_name)
     
     def encode_image(self, image_path: str) -> str:
         """
@@ -59,7 +115,7 @@ class ModelRunner:
         return (
             "You are an expert at reading text from eye chart images. You will be shown an eye chart image with "
             "multiple rows of text of decreasing size from top to bottom."
-            f"There are ${config.CHARS_PER_ROW} characters per row, and the font sizes are standardized. There is only capitalized and lower case English letters in the image. "
+            f"There are {config.CHARS_PER_ROW} characters per row, and the font sizes are standardized. There is only capitalized and lower case English letters in the image. "
             "\n\n"
             "Your task is to read each row of text and report what you see, starting from row 0 (top row) to the last row. "
             "Be extremely precise in your reading, attempting to identify each character correctly. "
@@ -104,21 +160,10 @@ class ModelRunner:
         
         while retries <= self.max_retries:
             try:
-                response = self.client.messages.create(
-                    model=self.model_name,
-                    system=system_prompt,
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {"type": "text", "text": user_prompt},
-                                {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": encoded_image}}
-                            ]
-                        }
-                    ],
-                    temperature=0,
-                    max_tokens=1000
-                )
+                if self.provider == "anthropic":
+                    response = self._run_anthropic(encoded_image, system_prompt, user_prompt)
+                elif self.provider == "openai":
+                    response = self._run_openai(encoded_image, system_prompt, user_prompt)
                 break
             except Exception as e:
                 retries += 1
@@ -130,9 +175,66 @@ class ModelRunner:
         if not response:
             raise Exception("Failed to get a response from the API")
         
-        # Extract and parse the response
-        response_text = response.content[0].text
+        # Parse the response text
+        return self._parse_response(response, image_path)
+    
+    def _run_anthropic(self, encoded_image, system_prompt, user_prompt):
+        """Run the Anthropic Claude model and return the response"""
+        response = self.client.messages.create(
+            model=self.model_name,
+            system=system_prompt,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": user_prompt},
+                        {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": encoded_image}}
+                    ]
+                }
+            ],
+            temperature=0,
+            max_tokens=1000
+        )
+        return response.content[0].text
+    
+    def _run_openai(self, encoded_image, system_prompt, user_prompt):
+        """Run the OpenAI GPT-4 Vision model and return the response"""
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": user_prompt},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/png;base64,{encoded_image}"
+                            }
+                        }
+                    ]
+                }
+            ],
+            # temperature=0,
+            # max_tokens=1000
+        )
+        return response.choices[0].message.content
+    
+    def _parse_response(self, response_text, image_path):
+        """
+        Extract and parse the response text to JSON.
         
+        Args:
+            response_text: Text response from the model
+            image_path: Path to the image file (for error reporting)
+            
+        Returns:
+            Parsed JSON as a list of dictionaries
+        """
         # Try to extract JSON array
         try:
             # Look for JSON array in the response
@@ -146,7 +248,6 @@ class ModelRunner:
                 except json.JSONDecodeError as e:
                     print(f"JSON decode error: {str(e)}. Attempting to fix malformed JSON...")
                     # Manual fix for common JSON errors in model responses
-                    import re
                     
                     # Fix for unescaped quotes within strings
                     fixed_json = json_str
@@ -233,7 +334,10 @@ class ModelRunner:
         for i, item in enumerate(dataset):
             print(f"Processing image {i+1}/{len(dataset)}: {item['image_path']}")
             response = self.run_model_on_image(item['image_path'])
-            results.append(response)
+            results.append({
+                "image_path": item['image_path'],
+                "responses": response
+            })
             # Add a small delay between requests
             if i < len(dataset) - 1:
                 time.sleep(1)
@@ -254,14 +358,15 @@ class ModelRunner:
 def parse_args():
     parser = argparse.ArgumentParser(description="Run AI models on the eye chart dataset")
     
-    parser.add_argument("--model", type=str, default="claude-3-sonnet-20240229", 
-                      help="Model name (default: claude-3-sonnet-20240229)")
-    parser.add_argument("--dataset", type=str, default="dataset.json", 
+    parser.add_argument("--model", type=str, choices=config.AVAILABLE_MODELS,
+                      default=os.getenv('DEFAULT_MODEL', 'claude-3-7-sonnet'),
+                      help="Model name to evaluate")
+    parser.add_argument("--dataset", type=str, default=os.getenv('DATASET_FILE', 'dataset.json'), 
                       help="Path to dataset file (default: dataset.json)")
     parser.add_argument("--output", type=str, default=None, 
                       help="Path to save model responses (default: model_name_responses.json)")
     parser.add_argument("--api-key", type=str, default=None, 
-                      help="API key (default: uses ANTHROPIC_API_KEY environment variable)")
+                      help="API key (default: uses appropriate environment variable)")
     
     return parser.parse_args()
 
@@ -270,12 +375,14 @@ if __name__ == "__main__":
     
     # Set default output path if not provided
     if not args.output:
-        model_short_name = args.model.split("-")[-1] if "-" in args.model else args.model
-        args.output = f"{model_short_name}_responses.json"
+        args.output = f"{args.model}_responses.json"
     
-    runner = ModelRunner(model_name=args.model, api_key=args.api_key)
+    # Get the actual model ID from config
+    model_id = config.MODELS[args.model]
     
-    print(f"Running model {args.model} on dataset {args.dataset}")
+    runner = ModelRunner(model_name=model_id, api_key=args.api_key)
+    
+    print(f"Running model {args.model} (API: {model_id}) on dataset {args.dataset}")
     responses = runner.run_on_dataset(args.dataset)
     
     runner.save_responses(responses, args.output)

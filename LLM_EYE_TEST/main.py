@@ -2,6 +2,12 @@ import argparse
 import os
 import json
 from datetime import datetime
+from pathlib import Path
+from dotenv import load_dotenv
+import config
+
+# Load environment variables from .env file
+load_dotenv()
 
 from image_generator import EyeChartGenerator
 from dataset_creator import DatasetCreator
@@ -9,30 +15,31 @@ from evaluator import VisionModelEvaluator
 from model_runner import ModelRunner
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="AI Spy - Vision model eye chart benchmark")
+    parser = argparse.ArgumentParser(description="LLM Eye Test - Vision model benchmark")
     
     # Dataset generation arguments
     parser.add_argument("--generate", action="store_true", help="Generate new test images and dataset")
     parser.add_argument("--fonts", type=int, default=None, help="Number of fonts to use (default: all)")
-    parser.add_argument("--images-per-font", type=int, default=3, help="Number of images per font (default: 3)")
-    parser.add_argument("--output-dir", type=str, default="test_images", help="Directory for test images")
-    parser.add_argument("--dataset", type=str, default="dataset.json", help="Path to dataset file")
+    parser.add_argument("--images-per-font", type=int, default=int(os.getenv('IMAGES_PER_FONT', 3)), 
+                      help=f"Number of images per font (default: {os.getenv('IMAGES_PER_FONT', 3)})")
+    parser.add_argument("--output-dir", type=str, default=os.getenv('OUTPUT_DIR', 'test_images'), 
+                      help=f"Directory for test images (default: {os.getenv('OUTPUT_DIR', 'test_images')})")
+    parser.add_argument("--dataset", type=str, default=os.getenv('DATASET_FILE', 'dataset.json'), 
+                      help=f"Path to dataset file (default: {os.getenv('DATASET_FILE', 'dataset.json')})")
     
     # Evaluation arguments
     parser.add_argument("--evaluate", action="store_true", help="Run evaluation")
-    parser.add_argument("--model", type=str, choices=[
-        "claude-3-opus", "claude-3-sonnet", "claude-3-haiku",
-        "claude-3-5-sonnet", "claude-3-5-sonnet-v2", "claude-3-5-haiku",
-        "claude-3-7-sonnet"
-    ], required=True, help="Model to evaluate")
+    parser.add_argument("--model", type=str, choices=config.AVAILABLE_MODELS,
+        default=os.getenv('DEFAULT_MODEL', 'claude-3-7-sonnet'), 
+        help=f"Model to evaluate (default: {os.getenv('DEFAULT_MODEL', 'claude-3-7-sonnet')})")
     parser.add_argument("--model-responses", type=str, default=None, 
                       help="Path to saved model responses JSON (default: None = run the model)")
     parser.add_argument("--api-key", type=str, default=None, 
-                      help="API key for real models (default: uses ANTHROPIC_API_KEY environment variable)")
+                      help="API key for models (default: uses appropriate API key from .env based on model provider)")
     parser.add_argument("--responses", type=str, default=None, 
-                      help="Path to save model responses (default: data/responses/model_name_responses.json)")
+                      help=f"Path to save model responses (default: {os.getenv('RESPONSES_DIR', 'data/responses')}/model_name_responses.json)")
     parser.add_argument("--results", type=str, default=None, 
-                      help="Path to save evaluation results (default: data/results/model_name_results.json)")
+                      help=f"Path to save evaluation results (default: {os.getenv('RESULTS_DIR', 'data/results')}/model_name_results.json)")
     
     return parser.parse_args()
 
@@ -156,32 +163,14 @@ def main():
             # Run real model
             print(f"Running {args.model} model on dataset...")
             
-            # Map model choice to Anthropic model ID
-            model_map = {
-                # Claude 3 family
-                "claude-3-opus": "claude-3-opus-20240229",
-                "claude-3-sonnet": "claude-3-sonnet-20240229",
-                "claude-3-haiku": "claude-3-haiku-20240307",
-                
-                # Claude 3.5 family
-                "claude-3-5-sonnet": "claude-3-5-sonnet-20240620",
-                "claude-3-5-sonnet-v2": "claude-3-5-sonnet-20241022",
-                "claude-3-5-haiku": "claude-3-5-haiku-20241022",
-                
-                # Claude 3.7 family
-                "claude-3-7-sonnet": "claude-3-7-sonnet-20250219"
-            }
-            
-            if args.model not in model_map:
+            # Get model ID from config
+            if args.model not in config.MODELS:
                 print(f"Error: Unknown model '{args.model}'")
                 return
             
-            model_id = model_map[args.model]
+            model_id = config.MODELS[args.model]
             
-            # Check for API key
-            if not args.api_key and not os.environ.get("ANTHROPIC_API_KEY"):
-                print("Error: API key must be provided via --api-key or ANTHROPIC_API_KEY environment variable")
-                return
+            # API key will be handled by ModelRunner class
             
             # Run model
             runner = ModelRunner(model_name=model_id, api_key=args.api_key)

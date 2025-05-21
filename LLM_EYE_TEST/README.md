@@ -4,7 +4,7 @@ A benchmark for testing vision models' ability to read text at different sizes, 
 
 ## Overview
 
-LLM Eye Test generates eye chart images with standard font sizes and evaluates how well vision models can read text as it gets smaller. Currently supports evaluation of Anthropic Claude models.
+LLM Eye Test generates eye chart images with standard font sizes and evaluates how well vision models can read text as it gets smaller. Currently supports evaluation of Anthropic Claude and OpenAI GPT models.
 
 ## Setup
 
@@ -19,6 +19,10 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Configure environment
+cp .env.template .env
+# Edit .env and add your API keys
 ```
 
 ## Usage
@@ -32,11 +36,11 @@ python main.py --generate --images-per-font 3
 ### Evaluate a Model
 
 ```bash
-# Set API key as environment variable
-export ANTHROPIC_API_KEY=your_api_key
-
-# Run evaluation
+# Run evaluation with Anthropic Claude (uses API key from .env file)
 python main.py --evaluate --model claude-3-7-sonnet
+
+# Run evaluation with OpenAI GPT (uses API key from .env file)
+python main.py --evaluate --model gpt-4o-vision
 ```
 
 ### Generate CSV Results
@@ -47,9 +51,16 @@ python generate_model_results.py
 
 ## Supported Models
 
+### Anthropic
 - Claude 3: Opus, Sonnet, Haiku
 - Claude 3.5: Sonnet, Sonnet V2, Haiku
 - Claude 3.7: Sonnet
+
+### OpenAI
+- GPT-4 Vision Preview
+- GPT-4o Vision
+- GPT-4o Mini Vision
+- GPT-4 Turbo
 
 ## Project Structure
 
@@ -60,6 +71,8 @@ python generate_model_results.py
 - `model_runner.py` - Handles API calls to models
 - `evaluator.py` - Evaluates model responses
 - `generate_model_results.py` - Creates consolidated CSV of results
+- `.env.template` - Template for environment variables
+- `.env` - Local environment configuration (not committed to git)
 - `data/` - Contains model responses
 - `test_images/` - Generated test images organized by font
 

@@ -5,10 +5,9 @@ import base64
 import argparse
 import re
 from typing import List, Dict, Any, Optional
-import anthropic
-import openai
 from dotenv import load_dotenv
 import config
+from vision_providers import PROVIDER_REGISTRY, VisionProvider
 
 # Load environment variables
 load_dotenv()
@@ -33,20 +32,14 @@ class ModelRunner:
             retry_delay: Delay between retries in seconds
         """
         self.model_name = model_name
-        self.provider = self._get_provider(model_name)
+        self.provider_name = self._get_provider(model_name)
+        self.provider_class = PROVIDER_REGISTRY[self.provider_name]
         self.api_key = api_key or self._get_api_key()
         
         if not self.api_key:
-            raise ValueError(f"API key must be provided or set as {self._get_env_var_name()} environment variable")
+            raise ValueError(f"API key must be provided or set as {self.provider_class(None, None).get_env_var_name()} environment variable")
         
-        # Initialize the appropriate client
-        if self.provider == "anthropic":
-            self.client = anthropic.Anthropic(api_key=self.api_key)
-        elif self.provider == "openai":
-            self.client = openai.OpenAI(api_key=self.api_key)
-        else:
-            raise ValueError(f"Unsupported model provider: {self.provider}")
-            
+        self.provider = self.provider_class(model_name, self.api_key)
         self.max_retries = max_retries
         self.retry_delay = retry_delay
     
@@ -58,29 +51,17 @@ class ModelRunner:
             model_name: Name of the model
             
         Returns:
-            Provider name ("anthropic" or "openai")
+            Provider name ("anthropic", "openai", or "gemini")
         """
-        if model_name.startswith(("claude", "Claude")):
+        if model_name.startswith(("claude")):
             return "anthropic"
         elif model_name.startswith(("gpt", "o")):
             return "openai"
+        elif model_name.startswith("gemini"):
+            return "gemini"
         else:
             # Default to anthropic for backward compatibility
             return "anthropic"
-    
-    def _get_env_var_name(self) -> str:
-        """
-        Get the environment variable name for the API key.
-        
-        Returns:
-            Environment variable name
-        """
-        if self.provider == "anthropic":
-            return "ANTHROPIC_API_KEY"
-        elif self.provider == "openai":
-            return "OPENAI_API_KEY"
-        else:
-            return "API_KEY"
     
     def _get_api_key(self) -> Optional[str]:
         """
@@ -89,7 +70,7 @@ class ModelRunner:
         Returns:
             API key if found, None otherwise
         """
-        env_var_name = self._get_env_var_name()
+        env_var_name = self.provider_class.get_env_var_name()
         return os.environ.get(env_var_name)
     
     def encode_image(self, image_path: str) -> str:
@@ -160,10 +141,7 @@ class ModelRunner:
         
         while retries <= self.max_retries:
             try:
-                if self.provider == "anthropic":
-                    response = self._run_anthropic(encoded_image, system_prompt, user_prompt)
-                elif self.provider == "openai":
-                    response = self._run_openai(encoded_image, system_prompt, user_prompt)
+                response = self.provider.run_model_on_image(encoded_image, system_prompt, user_prompt)
                 break
             except Exception as e:
                 retries += 1
@@ -177,52 +155,6 @@ class ModelRunner:
         
         # Parse the response text
         return self._parse_response(response, image_path)
-    
-    def _run_anthropic(self, encoded_image, system_prompt, user_prompt):
-        """Run the Anthropic Claude model and return the response"""
-        response = self.client.messages.create(
-            model=self.model_name,
-            system=system_prompt,
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": user_prompt},
-                        {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": encoded_image}}
-                    ]
-                }
-            ],
-            temperature=0,
-            max_tokens=1000
-        )
-        return response.content[0].text
-    
-    def _run_openai(self, encoded_image, system_prompt, user_prompt):
-        """Run the OpenAI GPT-4 Vision model and return the response"""
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=[
-                {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": user_prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{encoded_image}"
-                            }
-                        }
-                    ]
-                }
-            ],
-            # temperature=0,
-            # max_tokens=1000
-        )
-        return response.choices[0].message.content
     
     def _parse_response(self, response_text, image_path):
         """

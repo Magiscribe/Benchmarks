@@ -191,6 +191,11 @@ def main():
         
         # Print summary
         print_summary(results, model_name=args.model.upper())
+        
+        # Automatically run generate_model_results.py after evaluation
+        print("\nGenerating consolidated model results...")
+        import subprocess
+        subprocess.run(["python", "generate_model_results.py"])
 
 if __name__ == "__main__":
     main()

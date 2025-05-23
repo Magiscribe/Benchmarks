@@ -109,9 +109,42 @@ class GoogleProvider(VisionProvider):
         
         return response.text
 
+# Groq provider implementation
+try:
+    from groq import Groq
+    groq_available = True
+except ImportError:
+    groq_available = False
+
+class GroqProvider(VisionProvider):
+    @classmethod
+    def get_env_var_name(cls):
+        return "GROQ_API_KEY"
+
+    def get_client(self, api_key):
+        if not groq_available:
+            raise ImportError("groq is not installed. Please install it to use Groq models.")
+        return Groq(api_key=api_key)
+
+    def run_model_on_image(self, encoded_image, system_prompt, user_prompt):
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": [
+                    {"type": "text", "text": user_prompt},
+                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{encoded_image}"}}
+                ]}
+            ],
+            temperature=0,
+            max_completion_tokens=1024,
+        )
+        return response.choices[0].message.content
+
 # Provider registry for easy lookup
 PROVIDER_REGISTRY = {
     "anthropic": AnthropicProvider,
     "openai": OpenAIProvider,
     "gemini": GoogleProvider,
+    "groq": GroqProvider,
 }

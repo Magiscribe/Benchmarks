@@ -51,7 +51,7 @@ class ModelRunner:
             model_name: Name of the model
             
         Returns:
-            Provider name ("anthropic", "openai", or "gemini")
+            Provider name ("anthropic", "openai", "gemini", or "groq")
         """
         if model_name.startswith(("claude")):
             return "anthropic"
@@ -59,6 +59,8 @@ class ModelRunner:
             return "openai"
         elif model_name.startswith("gemini"):
             return "gemini"
+        elif model_name.startswith(("meta-llama", "llama")):
+            return "groq"
         else:
             # Default to anthropic for backward compatibility
             return "anthropic"

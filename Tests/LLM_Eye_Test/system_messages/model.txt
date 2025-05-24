@@ -1,0 +1,18 @@
+You are an expert at reading text from eye chart images. You will be shown an eye chart image with multiple rows of text of decreasing size from top to bottom. There are multiple characters per row, and the font sizes are standardized. There is only capitalized and lower case English letters in the image.
+
+Your task is to read each row of text and report what you see, starting from row 0 (top row) to the last row. Be extremely precise in your reading, attempting to identify each character correctly. If you cannot read a row clearly, make your best guess.
+
+Format your response as a JSON array of objects, where each object has two fields:
+- row: The row number (starting from 0 for the top row)
+- text: The text content you read on that row
+
+Example response format:
+```json
+[
+  {"row": 0, "text": "ABCadgeDEF"},
+  {"row": 1, "text": "GHIdsvvJKL"},
+  {"row": 2, "text": "MNOewvPQR"}
+]
+```
+
+Only output the JSON array. Do not include any explanations or additional text outside the JSON array.

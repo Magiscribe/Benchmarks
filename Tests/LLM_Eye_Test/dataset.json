@@ -1,0 +1,1322 @@
+[
+  {
+    "image_path": "assets/Arial_1747615332631.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "PtCZJzTotRbplGdjcWypRyVErzHPhisE",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "VKHwtvtNHWSnrSASZnINOXLPOQVmYewi",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "bIoFKuEGyEtYNRypwivsxtFKpbCpCDKM",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "TlgRJkUBPGKOOvrxmsLGXADPZCdCPmVv",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "hSyOXwMZdhrUmQeeKkMfvmPzoZNbvWXv",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "ETCEmyyhPopzcUoCDnPBlrpgJGnoZpFX",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "yrjvmvMuUUhNBPxpdWXVtpyvPeJgmKWu",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "styKrdyyzvHknNWNGCmtRRWTVOUtgGCv",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "OujbaoNoltGbiroWzRGXhluqhsxTZjyN",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Arial_1747615333719.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "wcLdfsfALPYFBSItzGlkMmkBULRLYorn",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "AVYBfzowtbHQCzDvKfdLOHkrjcocivCv",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "wgJnoWMUucLElvNvMGtAocijrngjhdmy",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "WUcRgUkerKJLSRonXcVyBgBAsxaYufge",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "ipRbOkxSmKDqkrCkRZXuANQVltdlRtwP",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "LIbmKawAYQAmyexzEIPCePPUNZflzaQX",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "bpXtWyehstzlpdDWNuUmOEGueeDNGoQJ",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "KKKfjHokdiwVJZEigTdJznbDpxmSXvOK",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "VCBwqMOxvDNrsHlWvddfFPUPQDYIcTYm",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Arial_1747615334790.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "dtKUAUvqoKGeaXpVVTjcYJFwOomPUCIp",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "ojbJCUtqJifioFKvVoNQzajIJWmfXVxK",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "erfvBoeZqChToYWqhXAfqYByAFxIGCWm",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "iQealBfQdDHIUBJeFsJnGMhqeMTPOSZG",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "WWjayzxsVBwJGimLHOIljcIJMXezGFNM",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "eEnpfyQcqQjTXBmDGdBJuNgidJvHDKOc",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "yIhSzGmnStvvAPMSDMhAHGctHHRSZOZs",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "EBkNiaXxthZjDKFlKnoNGkvMCykxhsfi",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "vFDHhuayyKZdKAXOyIPPVDottjjfJiuW",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Arial_1747615335864.png",
+    "metadata": {
+      "font": "Arial",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "iXuLUVMFKtXRTpJInPmpDJvHQyIvKaVv",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "ExQIsveNeSkImzgFGEaPLMPXeEImNWEE",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "fPRlGreqVkbafFKSbkjVVdYRjNGavokj",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "pexdlSPQPAGBWcZbaeVrBVhBIcopeque",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "PGrftarcaNlbtodbnSSlBqoYOAKtXMoK",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "AWTrSpmykxDtcJgCZVGMnHHMDfzIxdXq",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "RprUvKIGvPYoTrmxeyErXOTInCWLpzsD",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "URXBDISuLsIreGPwVbwkELLHhwHTqfnu",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "pGCVnmVtGLJUinKrZcmyicXhvZSprYjC",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Times_New_Roman_1747615335899.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "YrvZQwxJWcVMILwQPlEmIBJqLSQSKjjV",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "hpeBMtTLAoDpuiVyCWJQRqofVtHZUDTv",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "CnGUIeWfuoROhkevlnfMyFnMbQhIxgAj",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "hvPnmKGulzZcutZJItEpKWFKrWYieZPj",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "XEFYATjcrxreecRCHUBjMHTuWQrhKbqe",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "jnnMeNhYZCOlvzdiXyRVStNcCKHKNeqX",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "dsvrYzqDJnXKzQaVsSgmcGrVtTAsaKUj",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "INIyUVmctckYiWZcWTSZKrYyxnyBbCGZ",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "EZTVgpMyCoLApYJCnBjYpoezxalQRvRy",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Times_New_Roman_1747615336933.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "RIJYxEYaoLUmviDBVUqGbJMcqgpZulmf",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "AQsAmSpjDLSenJsTqVuAllLyFEVWeIet",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "UoZdyaFKjCJSFKeWAVwJRmhtTYsXXOfY",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "kudJuxtPqmvdIHNXdZpILvIpUQJzAbwJ",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "bsiEIpwsRoKboiUGEgYkBMYABVlWLVEf",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "sIRUlXCPqcoOyogcHBuUPZJwioVqfpGe",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "rxvkhNgNghHZIXiVvwEtlCMykBUxhOcH",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "scWvLpljRlwpbloezWZEyAvKAgeIxBbK",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "gQsRslvgjEGyfitwQxGEmSPagYBXKNPE",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Times_New_Roman_1747615337967.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "CvCEYcFtDNHrRThabJNQZkprZrVpsKjz",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "WnTKdRXqHLXDXLrfVeRJyDqClcsBDczr",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "kCRsFgxYKsDKCJrOMReAmDODRIkAUEPG",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "xgFItwgkWbXcJbMfuJRdEkEXkUkUexhn",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "GVbzcxJGskKEPvQDkunZDRPQaKUDVjXC",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "AbbUChjdDaeIZGMiSNnIIDFzIlSRfvJM",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "sjiVveSvfsiPVsbzfknLMWoSjnjLzinQ",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "UfjcdODVyZUmXJYLhIFSpWuIPtoCRKIg",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "zKXIREFqexwZeWelxQKsjdhhixGSqtpN",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Times_New_Roman_1747615339002.png",
+    "metadata": {
+      "font": "Times New Roman",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "mNlvoEzxXHAAvYCfXfxFpXVoZBrtcTlP",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "yrziGNWijqkvHXxkWoqfxCYXoxnhSTnx",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "DAaHYddnAxZOrZwYxojqMEpCJxUCkBQW",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "NCkKsdrvWjOpcPCWauwpVdQipjtjihaR",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "OXLKmvcisgplrPmvLuXkFUHPyjqGmuln",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "rJyaAFDVIEiUudEydbLrGIeqQJQHqwds",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "ReyhDDxNgAmwZJSZQoNeFKSKgcPUXoHE",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "EbNJsKhDIwhfkkRYKVAuSvrkeAyFtNPB",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "KBTGfBGVrLSQpAJTuXejVpPYyaxMiEof",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Comic_Sans_1747615339027.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "XyPQQRTLjRcgJTdFIGIPTrgPuwYhpKnB",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "qZOICtvLANIUxrGRjwSPYCcWGPTjXFvS",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "YUwcLwJunqrRyLgdBcwEWSOqKkjJEdoj",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "CqUWnaaUQyAaQyayyjjqIWGaTQjcOIbK",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "uFagVUVsvWOUrCaRarHaUQVxVIhvSzEF",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "pIJRyHetlgvWBuVYBcfkVRMaDNdAnsDI",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "UHCvgzLCKDugEdXUBHqmkgIIFYAdfaBv",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "gFJOzadmgCrwvswxoYeXLtYhNfYHqvLc",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "qAhCqcjYMSQCzGHaWknsNWTlQSqukVLM",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Comic_Sans_1747615340056.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "YQkcCvwpynonUaeHFhcdnecUxKqkvtSH",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "FsKaKaAvCAnuKXhIhueaHBojxacprdiL",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "VREFARMBAuIkEdsexSqVWlFjcVbWBOwB",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "eBBxTdMdqCDrEcLPPxVwmehvewYzNHDR",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "VCASeFicVqCgYTuEjlvMQehvHgNFemdS",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "okPUpihVmoOtgOkNtLFVkZwOpknrABer",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "VigiyrxWgaMZdgOIlVlexyJnrOFJplpO",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "eNZhjMYUJBqLWlGwbgDRauhURsQdQsDN",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "RBUOrAkgWjBrhXPvloHNqgzAhBHoYbCf",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Comic_Sans_1747615341078.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "wPzTcGNxnFAFFJtwePIswBIQglsBCVWk",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "QHyEWwFWVGnIaeQbLtRmvfIgpWTMqvRM",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "BxroKWbqTJnRHoAZeXZjWvaqiyAKRyRg",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "TnIRLjCaobDOaKzJAomlSRcSsIHdJkzO",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "PIBPHWzFNXPYLxWFPETFurnRskvfNGAN",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "QubDcYxoGBRlEjvXKKXjmyOpVOdHoXmv",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "fSdcClKnEjtZYvvpJeytHBDhjIWHuDFS",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "RvjjWpFdWZUyEaTPGnugAyfbihNwmaDq",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "PWXsiaFJdvKubxWYFehiFJWkHCYPPBGS",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Comic_Sans_1747615342112.png",
+    "metadata": {
+      "font": "Comic Sans",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "loXrqxbojzeexCJbBhxKFKhQGttMczSP",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "LiJpZQiPCuYhXWTFfDqBSvXnfWyVRomL",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "HKxeMfKMAKEYuOKcvQsfywLnJwzzUArs",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "OkfxEdZLMQtujUPysFaHPSeZRrezPEDW",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "YknkbHQtWkukEALUXIWEsOiVxwujnGHJ",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "ZjiLKXnCzuUUNonBJXINxIbzMCnoJTeT",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "tKWOKdtKcyFAoZETbkNMRyUtYVdxeLIA",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "KaxzNGkVdLnhcmpxxXkjJzVMmmGXEeZf",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "wAHEkYTabxDYfFcODxWlNuVjtomPclKx",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Courier_1747615342142.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "RUZplJZiDUDWPUPBNobfUNYZcccKotdV",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "puAAPpMNJPOkErkajvRvKBJsXEPwQvwF",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "ThGOFRGPbjyNcRACfOQqhBNWChFlxFck",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "cmBQJXTfSgkbrWqXOnNgdnBPdsOgnCLQ",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "ZGghbmeyvZNkUJdTIzFRIiHiqJHJvHBg",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "EhaGNhenfzwGnhgVMWYeUWAItEQiyAur",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "JLRwXTEasKQCJHIgjUSrisorcELYBAHi",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "ieABdjPOcXIxAYDumDyJABaUnUexyrrP",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "CzjQdhuPZjbITogqIWCcFIFKdhkERkRP",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Courier_1747615343170.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "zyGffXzJgTEdxKSKqeDdRtdkndgYVNwe",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "PltSzhDqfgRoFBmyqWzUEgowoNhrjBpa",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "LVMblraORSKCmyhpCQigeYAYiDupROXU",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "qIMDGcgQnBpkWuYsiWpvkGphUgLgQduA",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "qObIzOPgdTVIXDowyoRarmPDxAvkSBpr",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "JwLCexecdqQPEzMGfDuxTuDEgOcTgcHc",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "BNTQtyAaIcBlgdSHibcGkZHDDihOQZsP",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "VWGWlUVoyclBmWCWUiZZanHiKnqDFTeI",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "lCZQqXlhcDFXRCOZJLQxapuYInfiwEvr",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Courier_1747615344198.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "NNbTmPDTjIhKkjMLUiHOadTdNxkRWZKm",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "sPkQiFtpyadmePrOCyMhbiWHWeIumrgk",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "YpqxMLLMpJmUWcFLFnBVObEfwPGOQdms",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "kWRLqURnRwxtaEYfxGQbWMezOFhUeOaB",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "JloVaxrPaMuGcvGxdDOdomhqkngKKOtK",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "WrylkmYJDBnTnuQWlLMxHNehCZakOTex",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "vYcxfWojfyablhKJTAcQGpiNuMPlCegx",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "DyiaPmkZuwkKZozfSCIJGJBtvnYcMXbo",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "KsLFoDCQvDUUuTWKwCVWpRgGzHxsgCAV",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Courier_1747615345227.png",
+    "metadata": {
+      "font": "Courier",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "IBoxQOQKQnCywaGeKiqKSytjmJuuwmOz",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "VMmUUEGCntSYgragNCeAlXxdnCWNhfGf",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "QHIkNgdpDIXqZugtgPEuLnNVdMvfbHXn",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "FVqkhiZUXHLPIBZQNvouYuWEkujbiEBB",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "xyxbPrYFSpPJUdwluZVMaGpdsRPhVTkE",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "xVUDqsKJrzCZbMyBbDLcWVGSoYjynWZg",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "ueaODcJIgpGljEEHahhSHrvtNeJpbazl",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "oKaZqbdPZyDSLcepycIkcoCZpjwOtvde",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "BGiBVYSSyHYNHTSbUcjgCBamAxJOQxkj",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Verdana_1747615345285.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "bZhWZVqVznNGMaKoGTvfzYWWfpPOxYtT",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "BGuTrjApOIozsubWXvTaGFGaVirXFbSX",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "mNOPpPUqOOetvLpQOQzvyxapAiLtEHPo",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "hhDdKQcMimmDcMoIVwRPEoceQhATKhro",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "IwedfChDlknGMfJszZHEqVBXOpQKLJZv",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "VMVuPyqbfJUmmizsclQLpdnAXxXAUQqm",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "vRcMQNHQmrzwRWNHnwHbyVTBmKwxerag",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "WkzqfjBfnxsbByMUInaojjmUtnywJKlx",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "DGzmmjrWHOTPhILVEqngAhcgbFwHOYtN",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Verdana_1747615346328.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "dOcCLOzAqVLYyDmxiBJKYhdFcMAJpeTt",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "WRodHfBkwXuCdNHSgmhInwJFtdgsKrcj",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "aDlthCmDMcafJMPCVzjaDQFoVDQunrRe",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "glkCLVxazTROxylFoMgGARofmJfaTNFt",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "aPytXGEAVSNkrISEUowWyHxzraRcHsNc",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "qbSnlyoGkdYtJlsFvYCBmvhVszVSPfyc",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "RAMOVjSaNMDWmCtbjDuowawjRZSFBqbC",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "yWWkrmktncBJTBtLydCSdcaUfPIDhUmN",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "etsIWRGshAOZBEmbFEQiwxHjewtmWFQe",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Verdana_1747615347395.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "WeXFSMxFPbbviWOtabFpQKKSbvLtKxBJ",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "ivhdLvPkLdSOuJmaGABlEfecaXfstGuv",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "cFytNGOdXHkIKffAGQIYxyTzwAcFOQpR",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "PWwOltdtvmdEFzpdlGPqwKYDwsSoMeeu",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "XfUXswNwZSGZuwZPNnGGKOaMRUaKBrRg",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "LiPeaOqauKCDQfezTLJzJWKkVUEWqQuz",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "ruHfJgHMVNzQpMTadQZTkpUutkDlSDWF",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "QsVRdlZYOcfIGZFTEXBwYEfrFDrDJfOH",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "JQyDboyOleBDscBSAKtxagHuCKtvEhLf",
+        "size": 8
+      }
+    ]
+  },
+  {
+    "image_path": "assets/Verdana_1747615348447.png",
+    "metadata": {
+      "font": "Verdana",
+      "font_sizes": [
+        24,
+        20,
+        16,
+        14,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "num_rows": 9,
+      "chars_per_row": 32
+    },
+    "ground_truth": [
+      {
+        "row": 0,
+        "text": "DitCVEGFKxASsutUdApyRKoOFPWSJQSf",
+        "size": 24
+      },
+      {
+        "row": 1,
+        "text": "fcJQBysgoYablPHvGPyLPSjgxsjpSTqL",
+        "size": 20
+      },
+      {
+        "row": 2,
+        "text": "FOyCcxoBRPpReKdjXtgvnZxShLUHINPN",
+        "size": 16
+      },
+      {
+        "row": 3,
+        "text": "QHxYFDcsZMaSRQhnyAPsxtPWcYvfzfBk",
+        "size": 14
+      },
+      {
+        "row": 4,
+        "text": "kKweQzxqBFfPMkxuhYtAJriPAnRjsVrG",
+        "size": 12
+      },
+      {
+        "row": 5,
+        "text": "DgyKkBgsRPdJoMrnqwdOYFbuWcmUZeGe",
+        "size": 11
+      },
+      {
+        "row": 6,
+        "text": "CiyCrulSEQwooJyxhRVVLvzDfHBJkekd",
+        "size": 10
+      },
+      {
+        "row": 7,
+        "text": "YaBIZVniHcFkPUFjLcLjbdedRQuNzGYe",
+        "size": 9
+      },
+      {
+        "row": 8,
+        "text": "ZeLSYlCnkVzMFRPHSPwxEHnGDynzREBL",
+        "size": 8
+      }
+    ]
+  }
+]

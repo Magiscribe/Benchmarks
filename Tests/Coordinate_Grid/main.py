@@ -16,7 +16,7 @@ root_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 env_path = os.path.join(root_dir, '.env')
 load_dotenv(env_path)
 
-from utils.image_generator import CoordinateGridGenerator
+from utils.asset_generator import CoordinateGridGenerator
 from utils.dataset_creator import DatasetCreator
 from utils.model_evaluator import CoordinateGridEvaluator
 from test_config import (

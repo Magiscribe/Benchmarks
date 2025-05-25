@@ -11,12 +11,11 @@ Tests/YourBenchmarkName/
 ├── responses/                # Model response files
 ├── assets/                   # Generated test data (images, etc.)
 ├── system_messages/          # LLM prompts
-│   ├── model.txt            # Main model evaluation prompt
-│   └── dataset_creator.txt  # Dataset generation prompt (if using LLM)
-└── utils/                    # Utility modules
+│   └── model.txt            # Main model evaluation prompt
+└── utils/                    # Utility modules (4-file pattern)
     ├── __init__.py
     ├── dataset_creator.py      # Dataset generation logic
-    ├── [benchmark_specific].py  # Core benchmark logic
+    ├── asset_generator.py      # Image/asset generation logic
     ├── model_evaluator.py      # Evaluation metrics and logic
     └── synthesize_model_results.py  # Export results to centralized CSV
 ```
@@ -48,11 +47,25 @@ runner = ModelRunner(model_name=model_id, api_key=args.api_key, system_messages_
 
 ### 4. Centralized Results Export
 ```python
-# Export to centralized Results folder
+# Export to centralized Results folder with _model_results.csv ending
 results_dir = os.path.join('..', '..', 'Results')
 os.makedirs(results_dir, exist_ok=True)
 output_file = os.path.join(results_dir, 'YourBenchmarkName_model_results.csv')
 ```
+
+## Required Utility Files (4-File Pattern)
+
+### 1. `dataset_creator.py`
+Creates test datasets and metadata. Should generate `dataset.json` with test cases.
+
+### 2. `asset_generator.py` (or equivalent asset generator)
+Generates benchmark-specific test assets (images, files, etc.). Name this file based on your primary asset type.
+
+### 3. `model_evaluator.py`
+Evaluates model responses against ground truth. Contains scoring logic and metrics calculation.
+
+### 4. `synthesize_model_results.py`
+Exports results to centralized CSV files in the `Results/` directory with standardized format.
 
 ## Configuration Guidelines
 

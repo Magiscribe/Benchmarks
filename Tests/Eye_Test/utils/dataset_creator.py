@@ -1,11 +1,11 @@
 import json
 import os
-from .image_generator import EyeChartGenerator
+from .asset_generator import EyeChartGenerator
 
 class DatasetCreator:
     def __init__(self, output_file="dataset.json"):
         self.output_file = output_file
-        self.image_generator = EyeChartGenerator()
+        self.asset_generator = EyeChartGenerator()
     
     def create_dataset(self, num_fonts=None, num_images_per_font=1):
         """
@@ -28,11 +28,11 @@ class DatasetCreator:
 
         # Generate test images
         if num_fonts is None:
-            fonts = list(self.image_generator.fonts.keys())
+            fonts = list(self.asset_generator.fonts.keys())
         else:
-            fonts = list(self.image_generator.fonts.keys())[:num_fonts]
+            fonts = list(self.asset_generator.fonts.keys())[:num_fonts]
         
-        test_set = self.image_generator.generate_test_set(fonts, num_images_per_font)
+        test_set = self.asset_generator.generate_test_set(fonts, num_images_per_font)
         
         # Format the dataset with ground truth
         dataset = []

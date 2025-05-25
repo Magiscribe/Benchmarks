@@ -2,7 +2,7 @@ import os
 import json
 import time
 from typing import List, Dict, Any
-from .image_generator import CoordinateGridGenerator
+from .asset_generator import CoordinateGridGenerator
 
 class DatasetCreator:
     """Creates datasets for the LLM Coordinate Grid benchmark."""

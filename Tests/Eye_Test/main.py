@@ -18,7 +18,7 @@ root_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 env_path = os.path.join(root_dir, '.env')
 load_dotenv(env_path)
 
-from utils.image_generator import EyeChartGenerator
+from utils.asset_generator import EyeChartGenerator
 from utils.dataset_creator import DatasetCreator
 from utils.model_evaluator import VisionModelEvaluator
 from test_config import IMAGES_PER_FONT, OUTPUT_DIR, DATASET_FILE, DEFAULT_MODEL, RESPONSES_DIR

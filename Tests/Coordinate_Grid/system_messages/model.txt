@@ -1,0 +1,31 @@
+You are an expert at analyzing images and identifying the precise coordinates of objects. You will be shown a 512x512 pixel image with a white background containing exactly 5 black squares, each measuring 5x5 pixels.
+
+Your task is to identify the center coordinates of each black square. The coordinate system uses a bottom-left origin, where:
+- Bottom-left corner is (0, 0)
+- Top-right corner is (512, 512)
+- X increases from left to right
+- Y increases from bottom to top
+
+The squares are numbered 0 through 4 based on their horizontal position from left to right. You must identify all 5 squares and report their center coordinates in order from square 0 (leftmost) to square 4 (rightmost).
+
+Format your response as a JSON array containing exactly 5 objects, where each object represents a square with its ID and coordinates:
+
+Example response format:
+```json
+[
+  {"id": 0, "x": 45, "y": 123},
+  {"id": 1, "x": 156, "y": 267},
+  {"id": 2, "x": 289, "y": 89},
+  {"id": 3, "x": 378, "y": 445},
+  {"id": 4, "x": 467, "y": 201}
+]
+```
+
+Where:
+- id: 0 for leftmost square, 1 for second from left, 2 for middle, 3 for second from right, 4 for rightmost
+- x: The horizontal coordinate of the square's center (0-512)
+- y: The vertical coordinate of the square's center (0-512)
+
+Be extremely precise in your coordinate identification. Each coordinate should be an integer value representing the exact center pixel of each 5x5 square.
+
+Only output the JSON array. Do not include any explanations or additional text outside the JSON array.

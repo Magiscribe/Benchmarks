@@ -1,0 +1,71 @@
+[
+  {
+    "image_path": "assets\\coordinate_grid_1748135594214.png",
+    "responses": [
+      {
+        "id": 0,
+        "x": 147,
+        "y": 372
+      },
+      {
+        "id": 1,
+        "x": 197,
+        "y": 426
+      },
+      {
+        "id": 2,
+        "x": 236,
+        "y": 474
+      },
+      {
+        "id": 3,
+        "x": 336,
+        "y": 101
+      },
+      {
+        "id": 4,
+        "x": 456,
+        "y": 254
+      }
+    ]
+  },
+  {
+    "image_path": "assets\\coordinate_grid_1748135594245.png",
+    "responses": [
+      {
+        "row": 0,
+        "text": "Idontseeanytextintheimagejustafewsmallblacksquaresonawhitebackground"
+      }
+    ]
+  },
+  {
+    "image_path": "assets\\coordinate_grid_1748135594251.png",
+    "responses": [
+      {
+        "id": 0,
+        "x": 80,
+        "y": 320
+      },
+      {
+        "id": 1,
+        "x": 230,
+        "y": 160
+      },
+      {
+        "id": 2,
+        "x": 275,
+        "y": 250
+      },
+      {
+        "id": 3,
+        "x": 330,
+        "y": 340
+      },
+      {
+        "id": 4,
+        "x": 490,
+        "y": 420
+      }
+    ]
+  }
+]

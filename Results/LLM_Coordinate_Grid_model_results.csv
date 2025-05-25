@@ -1,0 +1,12 @@
+Row Labels,Average of distance
+claude-4-sonnet,0.77
+claude-4-opus,1.33
+gemini-2.5-pro,61.90
+gemini-2.5-flash,65.07
+claude-3-7-sonnet,74.74
+o4-mini,76.30
+gpt-4o,154.60
+llama-4-scout,185.69
+llama-4-maverick,206.96
+claude-3-5-haiku,208.62
+Grand Total,103.60

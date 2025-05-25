@@ -63,10 +63,10 @@ def process_responses():
 def write_results(results, output_file=None):
     if output_file is None:
         # Export to centralized Results folder with benchmark name prefix
-        # Go up from utils/ -> LLM_Eye_Test/ -> Tests/ -> Benchmarks/ -> Results/
+        # Go up from utils/ -> Eye_Test/ -> Tests/ -> Benchmarks/ -> Results/
         results_dir = os.path.join('..', '..', '..', 'Results')
         os.makedirs(results_dir, exist_ok=True)
-        output_file = os.path.join(results_dir, 'LLM_Eye_Test_model_results.csv')
+        output_file = os.path.join(results_dir, 'Eye_Test_model_results.csv')
     
     headers = ["model", "font", "size", "character", "correct", "total"]
     
@@ -85,7 +85,7 @@ def write_results(results, output_file=None):
 def main():
     results = process_responses()
     write_results(results)
-    print("Results written to ../../../Results/LLM_Eye_Test_model_results.csv")
+    print("Results written to ../../../Results/Eye_Test_model_results.csv")
 
 if __name__ == "__main__":
     main()

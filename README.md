@@ -16,7 +16,7 @@ Benchmarks/
 │   └── {BenchmarkName}_model_results.csv
 └── Tests/                   # Individual benchmark implementations
     ├── TEMPLATE_README.md   # Guide for creating new benchmarks
-    └── LLM_Eye_Test/       # Vision benchmark for text recognition
+    └── Eye_Test/       # Vision benchmark for text recognition
         ├── main.py
         ├── test_config.py
         ├── responses/
@@ -52,7 +52,7 @@ cp .env.template .env
 
 ### Run LLM Eye Test
 ```bash
-cd Tests/LLM_Eye_Test
+cd Tests/Eye_Test
 
 # Generate test dataset (optional - already included)
 python main.py --generate
@@ -60,7 +60,7 @@ python main.py --generate
 # Evaluate a model
 python main.py --evaluate --model claude-3-5-sonnet
 
-# Results will be saved to ../../Results/LLM_Eye_Test_model_results.csv
+# Results will be saved to ../../Results/Eye_Test_model_results.csv
 ```
 
 ## Supported Models

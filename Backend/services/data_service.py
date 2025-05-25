@@ -15,7 +15,7 @@ class DataService:
     def __init__(self):
         """Initialize the data service and load CSV data."""
         self.results_path = Path(__file__).parent.parent.parent / "Results"
-        self.csv_file = self.results_path / "LLM_Eye_Test_model_results.csv"
+        self.csv_file = self.results_path / "Eye_Test_model_results.csv"
         self.df = None
         self._load_data()
     

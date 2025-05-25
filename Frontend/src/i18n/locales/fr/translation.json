@@ -1,0 +1,194 @@
+{
+  "site": {
+    "name": "Console de flux de travail GenAI",
+    "company": "Magiscribe",
+    "supportEmail": "kyle.lierer@magiscribe.com",
+    "footer": {
+      "title": "Magiscribe",
+      "links": [
+        { "label": "Contactez-nous", "href": "mailto:kyle.lierer@magiscribe.com" }
+      ]
+    }
+  },
+  "auth": {
+    "common": {
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "loading": "Chargement"
+    },
+    "signIn": {
+      "title": "Bienvenue",
+      "subtitle": "Connectez-vous à votre compte",
+      "buttonText": "Se connecter",
+      "ssoButtonText": "Se connecter avec {{provider}} SSO",
+      "newUser": "Nouveau ?",
+      "createAccount": "Créer un compte",
+      "forgotPassword": "Mot de passe oublié ?",
+      "requestReset": "Réinitialiser",
+      "noAuthMethod": "Aucune méthode d'authentification n'est configurée."
+    },
+    "signUp": {
+      "title": "Créer un compte",
+      "subtitle": "Prêt à commencer ?",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "buttonText": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "confirm": {
+      "title": "Confirmer le compte",
+      "subtitle": "Entrez le code de vérification envoyé à votre adresse e-mail",
+      "email": "E-mail",
+      "code": "Code de vérification",
+      "buttonText": "Vérifier le compte",
+      "alreadyVerified": "Déjà vérifié ?",
+      "signIn": "Se connecter"
+    },
+    "requestReset": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Saisissez votre e-mail pour recevoir un code de réinitialisation",
+      "email": "Adresse e-mail",
+      "buttonText": "Envoyer le code de réinitialisation",
+      "backToSignIn": "Retour à la connexion",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire"
+    },
+    "reset": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Saisissez votre code de confirmation et votre nouveau mot de passe",
+      "code": "Code de confirmation",
+      "newPassword": "Nouveau mot de passe",
+      "buttonText": "Réinitialiser le mot de passe",
+      "newUser": "Nouvel utilisateur ?",
+      "signUp": "S'inscrire",
+      "rememberPassword": "Vous vous souvenez de votre mot de passe ?",
+      "signIn": "Se connecter"
+    }
+  },
+  "settings": {
+    "title": "Paramètres du compte",
+    "subtitle": "Gérez vos informations personnelles et les paramètres de votre compte",
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "subtitle": "Mettez à jour votre nom tel qu'il apparaît dans votre compte",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "save": "Mettre à jour le profil",
+      "success": "Votre profil a été mis à jour avec succès"
+    },
+    "password": {
+      "title": "Modifier le mot de passe",
+      "subtitle": "Assurez la sécurité de votre compte en utilisant un mot de passe fort",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le nouveau mot de passe",
+      "save": "Modifier le mot de passe",
+      "success": "Votre mot de passe a été modifié avec succès",
+      "mismatch": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
+    },
+    "danger": {
+      "title": "Zone dangereuse",
+      "warning": "Les actions dans cette section sont irréversibles. Veuillez procéder avec prudence."
+    },
+    "delete": {
+      "button": "Supprimer mon compte",
+      "confirm": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée.",
+      "yes": "Oui, supprimer mon compte",
+      "no": "Annuler",
+      "success": "Votre compte a été supprimé avec succès"
+    },
+    "federatedInfo": {
+      "banner": "Certains paramètres sont gérés par votre fournisseur d'identité et ne peuvent pas être modifiés ici.",
+      "title": "Votre profil",
+      "subtitle": "Informations provenant de votre fournisseur d'identité",
+      "nameLabel": "Nom :",
+      "emailLabel": "E-mail :",
+      "providerLabel": "Fournisseur :",
+      "noEmail": "Aucune adresse e-mail disponible",
+      "defaultProvider": "Externe"
+    }
+  },
+  "common": {
+    "status": {
+      "succeeded": "Réussi",
+      "failed": "Échoué",
+      "inProgress": "En cours"
+    },
+    "banner": {
+      "errorTitle": "Une erreur s'est produite",
+      "successTitle": "Succès",
+      "infoTitle": "Information",
+      "support": "Besoin d'aide ?",
+      "contact": "Contactez {{email}}"
+    },
+    "polling": {
+      "start": "Démarrer l'interrogation",
+      "stop": "Arrêter l'interrogation"
+    },
+    "cancel": "Annuler",
+    "back": "Retour",
+    "format": "Format",
+    "validation": {
+      "invalidJson": "Format JSON invalide. Veuillez vérifier votre saisie."
+    },
+    "table": {
+      "noResults": "Aucun résultat.",
+      "pagination": {
+        "page": "Page {{current}} sur {{total}}",
+        "previous": "Précédent",
+        "next": "Suivant"
+      },
+      "actions": {
+        "seeDetails": "Voir les détails"
+      }
+    }
+  },
+  "workflows": {
+    "title": "Flux de travail",
+    "subtitle": "{{count}} sur {{total}} résultats",
+    "noDescription": "Aucune description fournie",
+    "actions": {
+      "trigger": "Déclencher le flux de travail"
+    },
+    "details": {
+      "schedule": "Planification",
+      "nextRun": "Prochaine exécution",
+      "noSchedule": "Aucune planification définie"
+    },
+    "table": {
+      "name": "Nom",
+      "description": "Description",
+      "nextRun": "Prochaine exécution",
+      "manualTrigger": "Déclenchement manuel uniquement"
+    },
+    "executions": {
+      "title": "Exécutions",
+      "subtitle": "{{count}} sur {{total}} résultats",
+      "details": {
+        "title": "Détails de l'exécution"
+      },
+      "inProgress": "L'exécution est toujours en cours...",
+      "noResult": "Aucun résultat disponible, l'exécution du flux de travail n'a pas pu se terminer correctement pour la raison suivante :",
+      "error": "Erreur : {{error}}",
+      "notFound": "Exécution introuvable",
+      "table": {
+        "status": "Statut",
+        "createdAt": "Créé le"
+      },
+      "viewStepFunction": "Voir la fonction Step dans AWS"
+    },
+    "trigger": {
+      "title": "Déclencheur : {{name}}",
+      "description": "(Facultatif) Remplacez l'entrée par défaut de ce flux de travail en fournissant un objet JSON valide.",
+      "success": "Flux de travail déclenché avec succès !",
+      "input": {
+        "title": "Remplacer l'entrée du flux de travail",
+        "label": "Entrée du flux de travail"
+      }
+    }
+  }
+}

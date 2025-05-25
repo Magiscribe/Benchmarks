@@ -1,0 +1,194 @@
+{
+  "site": {
+    "name": "Consola de Flujo de Trabajo GenAI",
+    "company": "Magiscribe",
+    "supportEmail": "kyle.lierer@magiscribe.com",
+    "footer": {
+      "title": "Magiscribe",
+      "links": [
+        { "label": "Contáctanos", "href": "mailto:kyle.lierer@magiscribe.com" }
+      ]
+    }
+  },
+  "auth": {
+    "common": {
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "newPassword": "Nueva contraseña",
+      "loading": "Cargando"
+    },
+    "signIn": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "buttonText": "Iniciar sesión",
+      "ssoButtonText": "Iniciar sesión con SSO de {{provider}}",
+      "newUser": "¿Nuevo?",
+      "createAccount": "Crear cuenta",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "requestReset": "Solicitar restablecimiento",
+      "noAuthMethod": "No hay ningún método de autenticación configurado."
+    },
+    "signUp": {
+      "title": "Crear cuenta",
+      "subtitle": "¿Listo para comenzar?",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "buttonText": "Crear cuenta",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar sesión"
+    },
+    "confirm": {
+      "title": "Confirmar cuenta",
+      "subtitle": "Introduce el código de verificación enviado a tu correo electrónico",
+      "email": "Correo electrónico",
+      "code": "Código de verificación",
+      "buttonText": "Verificar cuenta",
+      "alreadyVerified": "¿Ya está verificada?",
+      "signIn": "Iniciar sesión"
+    },
+    "requestReset": {
+      "title": "Restablecer contraseña",
+      "subtitle": "Introduce tu correo electrónico para recibir un código de restablecimiento",
+      "email": "Dirección de correo electrónico",
+      "buttonText": "Enviar código de restablecimiento",
+      "backToSignIn": "Volver a iniciar sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Registrarse"
+    },
+    "reset": {
+      "title": "Restablecer contraseña",
+      "subtitle": "Introduce tu código de confirmación y nueva contraseña",
+      "code": "Código de confirmación",
+      "newPassword": "Nueva contraseña",
+      "buttonText": "Restablecer contraseña",
+      "newUser": "¿Nuevo usuario?",
+      "signUp": "Registrarse",
+      "rememberPassword": "¿Recuerdas tu contraseña?",
+      "signIn": "Iniciar sesión"
+    }
+  },
+  "settings": {
+    "title": "Configuración de la cuenta",
+    "subtitle": "Gestiona tu información personal y configuración de la cuenta",
+    "personalInfo": {
+      "title": "Información personal",
+      "subtitle": "Actualiza tu nombre tal como aparece en tu cuenta",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "save": "Actualizar perfil",
+      "success": "Tu perfil se ha actualizado correctamente"
+    },
+    "password": {
+      "title": "Cambiar contraseña",
+      "subtitle": "Asegura que tu cuenta esté protegida usando una contraseña segura",
+      "current": "Contraseña actual",
+      "new": "Nueva contraseña",
+      "confirm": "Confirmar nueva contraseña",
+      "save": "Cambiar contraseña",
+      "success": "Tu contraseña se ha cambiado correctamente",
+      "mismatch": "La nueva contraseña y la confirmación no coinciden"
+    },
+    "danger": {
+      "title": "Zona de peligro",
+      "warning": "Las acciones en esta sección son irreversibles. Por favor, procede con precaución."
+    },
+    "delete": {
+      "button": "Eliminar mi cuenta",
+      "confirm": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
+      "yes": "Sí, eliminar mi cuenta",
+      "no": "Cancelar",
+      "success": "Tu cuenta se ha eliminado correctamente"
+    },
+    "federatedInfo": {
+      "banner": "Algunas configuraciones son administradas por tu proveedor de identidad y no pueden cambiarse aquí.",
+      "title": "Tu perfil",
+      "subtitle": "Información de tu proveedor de identidad",
+      "nameLabel": "Nombre:",
+      "emailLabel": "Correo electrónico:",
+      "providerLabel": "Proveedor:",
+      "noEmail": "No hay correo electrónico disponible",
+      "defaultProvider": "Externo"
+    }
+  },
+  "common": {
+    "status": {
+      "succeeded": "Completado",
+      "failed": "Fallido",
+      "inProgress": "En progreso"
+    },
+    "banner": {
+      "errorTitle": "Algo salió mal",
+      "successTitle": "Éxito",
+      "infoTitle": "Información",
+      "support": "¿Necesitas ayuda?",
+      "contact": "Contacta a {{email}}"
+    },
+    "polling": {
+      "start": "Iniciar sondeo",
+      "stop": "Detener sondeo"
+    },
+    "cancel": "Cancelar",
+    "back": "Atrás",
+    "format": "Formato",
+    "validation": {
+      "invalidJson": "Formato JSON no válido. Por favor revisa tu entrada."
+    },
+    "table": {
+      "noResults": "No hay resultados.",
+      "pagination": {
+        "page": "Página {{current}} de {{total}}",
+        "previous": "Anterior",
+        "next": "Siguiente"
+      },
+      "actions": {
+        "seeDetails": "Ver detalles"
+      }
+    }
+  },
+  "workflows": {
+    "title": "Flujos de trabajo",
+    "subtitle": "{{count}} de {{total}} resultados",
+    "noDescription": "No se ha proporcionado descripción",
+    "actions": {
+      "trigger": "Activar flujo de trabajo"
+    },
+    "details": {
+      "schedule": "Programación",
+      "nextRun": "Próxima ejecución",
+      "noSchedule": "Sin programación establecida"
+    },
+    "table": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "nextRun": "Próxima ejecución",
+      "manualTrigger": "Solo activación manual"
+    },
+    "executions": {
+      "title": "Ejecuciones",
+      "subtitle": "{{count}} de {{total}} resultados",
+      "details": {
+        "title": "Detalles de ejecución"
+      },
+      "inProgress": "La ejecución aún está en curso...",
+      "noResult": "No hay resultado disponible, la ejecución del flujo de trabajo no pudo completarse correctamente por el siguiente motivo:",
+      "error": "Error: {{error}}",
+      "notFound": "Ejecución no encontrada",
+      "table": {
+        "status": "Estado",
+        "createdAt": "Creado el"
+      },
+      "viewStepFunction": "Ver Step Function en AWS"
+    },
+    "trigger": {
+      "title": "Activador: {{name}}",
+      "description": "(Opcional) Reemplaza la entrada predeterminada para este flujo de trabajo proporcionando un objeto JSON válido.",
+      "success": "¡Flujo de trabajo activado correctamente!",
+      "input": {
+        "title": "Reemplazar entrada del flujo de trabajo",
+        "label": "Entrada del flujo de trabajo"
+      }
+    }
+  }
+}

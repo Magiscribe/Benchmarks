@@ -1,0 +1,194 @@
+{
+  "site": {
+    "name": "GenAI Workflow Console",
+    "company": "Magiscribe",
+    "supportEmail": "kyle.lierer@magiscribe.com",
+    "footer": {
+      "title": "Magiscribe",
+      "links": [
+        { "label": "Contact Us", "href": "mailto:kyle.lierer@magiscribe.com" }
+      ]
+    }
+  },
+  "auth": {
+    "common": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New Password",
+      "loading": "Loading"
+    },
+    "signIn": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account",
+      "buttonText": "Sign In",
+      "ssoButtonText": "Sign in with {{provider}} SSO",
+      "newUser": "New?",
+      "createAccount": "Create Account",
+      "forgotPassword": "Forgot Password?",
+      "requestReset": "Request Reset",
+      "noAuthMethod": "No authentication method is configured."
+    },
+    "signUp": {
+      "title": "Create Account",
+      "subtitle": "Ready to get started?",
+      "firstName": "Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "buttonText": "Create Account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign In"
+    },
+    "confirm": {
+      "title": "Confirm Account",
+      "subtitle": "Enter the verification code sent to your email",
+      "email": "Email",
+      "code": "Verification Code",
+      "buttonText": "Verify Account",
+      "alreadyVerified": "Already verified?",
+      "signIn": "Sign In"
+    },
+    "requestReset": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email to receive a reset code",
+      "email": "Email Address",
+      "buttonText": "Send Reset Code",
+      "backToSignIn": "Back to Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "reset": {
+      "title": "Reset Password",
+      "subtitle": "Enter your confirmation code and new password",
+      "code": "Confirmation Code",
+      "newPassword": "New Password",
+      "buttonText": "Reset Password",
+      "newUser": "New user?",
+      "signUp": "Sign Up",
+      "rememberPassword": "Remember your password?",
+      "signIn": "Sign In"
+    }
+  },
+  "settings": {
+    "title": "Account Settings",
+    "subtitle": "Manage your personal information and account settings",
+    "personalInfo": {
+      "title": "Personal Information",
+      "subtitle": "Update your name as it appears in your account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "save": "Update Profile",
+      "success": "Your profile has been updated successfully"
+    },
+    "password": {
+      "title": "Change Password",
+      "subtitle": "Ensure your account is secure by using a strong password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Confirm New Password",
+      "save": "Change Password",
+      "success": "Your password has been changed successfully",
+      "mismatch": "New password and confirmation don't match"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "warning": "Actions in this section are irreversible. Please proceed with caution."
+    },
+    "delete": {
+      "button": "Delete My Account",
+      "confirm": "Are you sure you want to delete your account? This action cannot be undone.",
+      "yes": "Yes, Delete My Account",
+      "no": "Cancel",
+      "success": "Your account has been deleted successfully"
+    },
+    "federatedInfo": {
+      "banner": "Some settings are managed by your identity provider and cannot be changed here.",
+      "title": "Your Profile",
+      "subtitle": "Information from your identity provider",
+      "nameLabel": "Name:",
+      "emailLabel": "Email:",
+      "providerLabel": "Provider:",
+      "noEmail": "No email available",
+      "defaultProvider": "External"
+    }
+  },
+  "common": {
+    "status": {
+      "succeeded": "Succeeded",
+      "failed": "Failed",
+      "inProgress": "In Progress"
+    },
+    "banner": {
+      "errorTitle": "Something went wrong",
+      "successTitle": "Success",
+      "infoTitle": "Information",
+      "support": "Need help?",
+      "contact": "Reach out to {{email}}"
+    },
+    "polling": {
+      "start": "Start Polling",
+      "stop": "Stop Polling"
+    },
+    "cancel": "Cancel",
+    "back": "Back",
+    "format": "Format",
+    "validation": {
+      "invalidJson": "Invalid JSON format. Please check your input."
+    },
+    "table": {
+      "noResults": "No results.",
+      "pagination": {
+        "page": "Page {{current}} of {{total}}",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "actions": {
+        "seeDetails": "See Details"
+      }
+    }
+  },
+  "workflows": {
+    "title": "Workflows",
+    "subtitle": "{{count}} of {{total}} results",
+    "noDescription": "No description provided",
+    "actions": {
+      "trigger": "Trigger Workflow"
+    },
+    "details": {
+      "schedule": "Schedule",
+      "nextRun": "Next Run",
+      "noSchedule": "No schedule set"
+    },
+    "table": {
+      "name": "Name",
+      "description": "Description",
+      "nextRun": "Next Run",
+      "manualTrigger": "Manual trigger only"
+    },
+    "executions": {
+      "title": "Executions",
+      "subtitle": "{{count}} of {{total}} results",
+      "details": {
+        "title": "Execution Details"
+      },
+      "inProgress": "Execution is still in progress...",
+      "noResult": "No result available, the workflow execution was not able to complete successfully for the following reason:",
+      "error": "Error: {{error}}",
+      "notFound": "Execution not found",
+      "table": {
+        "status": "Status",
+        "createdAt": "Created At"
+      },
+      "viewStepFunction": "View Step Function in AWS"
+    },
+    "trigger": {
+      "title": "Trigger: {{name}}",
+      "description": "(Optional) Override the default input for this workflow by providing a valid JSON object.",
+      "success": "Workflow triggered successfully!",
+      "input": {
+        "title": "Override Workflow Input",
+        "label": "Workflow Input"
+      }
+    }
+  }
+}

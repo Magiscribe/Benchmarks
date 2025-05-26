@@ -76,7 +76,8 @@
         { "op": "divide", "cols": ["failureCount", "totalChars"], "as": "failureRate" },
         { "op": "return", "value": "failureRate" }
       ]
-    },    {
+    },    
+    {
       "name": "successRate",
       "displayName": "Success Rate Above Threshold",
       "description": "Percentage of characters recognized correctly above specified threshold",

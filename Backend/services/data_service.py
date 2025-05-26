@@ -1,32 +1,22 @@
 """
-DSL-based data service for loading and processing benchmark results.
+Minimal data service for test type discovery.
 """
 
-import pandas as pd
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Any
-from dataclasses import asdict
-from services.dsl_executor import DSLExecutor, DSLFormat
-from services.filter_service import filter_service
-from api.models.schemas import (
-    ModelResult, TestResult, DataPoint, MetricResult,
-    ModelComparison, TestTypeInfo, ErrorResponse, AdvancedFilter,
-    FilterCapabilities
-)
+from typing import List
+from services.dsl_executor import DSLExecutor
+from api.models.schemas import TestTypeInfo, ResultsRequest, ResultsResponse, ModelResult
 
 
 class DataService:
-    """Service for handling benchmark data operations using DSL executor."""
+    """Minimal service for handling test type discovery."""
     
-    def __init__(self, results_dir: Path = None, tests_dir: Path = None):
+    def __init__(self, tests_dir: Path = None):
         """Initialize the data service with directory paths."""
-        if results_dir is None:
-            results_dir = Path(__file__).parent.parent.parent / "Results"
         if tests_dir is None:
             tests_dir = Path(__file__).parent.parent.parent / "Tests"
             
-        self.results_dir = results_dir
         self.tests_dir = tests_dir
         self.dsl_executor = DSLExecutor()
     
@@ -57,200 +47,273 @@ class DataService:
                         ))
         
         return test_types
-    
-    def load_test_results(self, test_type: str) -> Optional[pd.DataFrame]:
-        """Load results for a specific test type."""
-        results_file = self.results_dir / f"{test_type}_model_results.csv"
+
+    def get_available_models(self, test_type: str) -> List[str]:
+        """Get list of available models for a specific test type from the results CSV."""
+        # First check if we need to import pandas
+        try:
+            import pandas as pd
+        except ImportError:
+            return []
+            
+        results_file = Path(__file__).parent.parent.parent / "Results" / f"{test_type}_model_results.csv"
         
         if not results_file.exists():
-            return None
+            return []
         
         try:
-            return pd.read_csv(results_file)
+            df = pd.read_csv(results_file)
+            if 'model' in df.columns:
+                models = sorted(df['model'].unique().tolist())
+                return models
+            else:
+                return []
         except Exception as e:
-            print(f"Error loading results for {test_type}: {e}")
-            return None
-    
-    def load_format_config(self, test_type: str) -> Optional[DSLFormat]:
-        """Load DSL format configuration for a test type."""
-        format_file = self.tests_dir / test_type / "csv_format.json"
+            print(f"Error loading models for {test_type}: {e}")
+            return []    
+        
+    def get_available_filters(self, test_type: str) -> List[dict]:
+        """Get list of available filters (identifier and categorical columns) for a specific test type."""
+        test_dir = self.tests_dir / test_type
+        format_file = test_dir / "csv_format.json"
         
         if not format_file.exists():
-            return None
+            return []
         
         try:
-            return self.dsl_executor.load_format_config(format_file)
+            format_config = self.dsl_executor.load_format_config(format_file)
+            filters = []
+            
+            for column in format_config.columns:
+                # Access dictionary keys, not attributes
+                column_type = column['type']
+                if column_type in ['identifier', 'categorical']:
+                    filters.append({
+                        'name': column['name'],
+                        'type': column_type,
+                        'description': column['description']
+                    })
+            
+            return filters
         except Exception as e:
-            print(f"Error loading format config for {test_type}: {e}")
-            return None
-    
-    def calculate_metrics(self, test_type: str, df: pd.DataFrame, 
-                         metric_parameters: Optional[Dict[str, Dict[str, Any]]] = None) -> Dict[str, Any]:
-        """Calculate all metrics for a test type using DSL."""
-        format_config = self.load_format_config(test_type)
-        if not format_config:
-            return {}
-        
-        return self.dsl_executor.execute_all_metrics(df, format_config, metric_parameters)
-    
-    def get_model_results(self, test_type: str) -> List[ModelResult]:
-        """Get results grouped by model for a specific test type."""
-        df = self.load_test_results(test_type)
-        if df is None:
+            print(f"Error loading filters for {test_type}: {e}")
             return []
-        
-        results = []
-        
-        for model in df['model'].unique():
-            model_data = df[df['model'] == model]
-            
-            # Calculate metrics using DSL
-            metrics = self.calculate_metrics(test_type, model_data)
-            
-            # Get primary accuracy metric (fallback to first metric if 'accuracy' not found)
-            accuracy = 0
-            if 'accuracy' in metrics and 'value' in metrics['accuracy']:
-                accuracy = metrics['accuracy']['value']
-            elif metrics:
-                first_metric = next(iter(metrics.values()))
-                if 'value' in first_metric:
-                    accuracy = first_metric['value']
-            
-            # Create data points
-            data_points = []
-            for _, row in model_data.iterrows():
-                data_points.append(DataPoint(
-                    id=f"{row['model']}_{len(data_points)}",
-                    values=row.to_dict()
-                ))
-            
-            results.append(ModelResult(
-                model=model,
-                accuracy=accuracy,
-                totalTests=len(model_data),
-                dataPoints=data_points,
-                metrics=metrics
-            ))
-        
-        return results
-    
-    def get_test_results(self, test_type: str) -> List[TestResult]:
-        """Get individual test results for a specific test type."""
-        df = self.load_test_results(test_type)
-        if df is None:
-            return []
-        
-        # Calculate overall metrics
-        overall_metrics = self.calculate_metrics(test_type, df)
-        
-        results = []
-        for _, row in df.iterrows():
-            # Calculate metrics for this single row
-            single_row_df = pd.DataFrame([row])
-            row_metrics = self.calculate_metrics(test_type, single_row_df)
-            
-            # Get primary accuracy metric
-            accuracy = 0
-            if 'accuracy' in row_metrics and 'value' in row_metrics['accuracy']:
-                accuracy = row_metrics['accuracy']['value']
-            elif 'correct' in row and 'total' in row and row['total'] > 0:
-                accuracy = row['correct'] / row['total']
-            
-            results.append(TestResult(
-                id=f"{row['model']}_{len(results)}",
-                model=row['model'],
-                accuracy=accuracy,
-                metadata=row.to_dict(),
-                metrics=row_metrics
-            ))
-        
-        return results
-    
-    def get_model_comparison(self, test_type: str, models: List[str]) -> ModelComparison:
-        """Compare specific models on a test type."""
-        df = self.load_test_results(test_type)
-        if df is None:
-            return ModelComparison(models=models, metrics={}, summary="No data available")
-        
-        # Filter to requested models
-        model_data = df[df['model'].isin(models)]
-        
-        metrics = {}
-        for model in models:
-            model_df = model_data[model_data['model'] == model]
-            if len(model_df) > 0:
-                # Calculate all DSL metrics for this model
-                model_metrics = self.calculate_metrics(test_type, model_df)
-                
-                # Get primary accuracy metric
-                accuracy = 0
-                if 'accuracy' in model_metrics and 'value' in model_metrics['accuracy']:
-                    accuracy = model_metrics['accuracy']['value']
-                elif model_metrics:
-                    first_metric = next(iter(model_metrics.values()))
-                    if 'value' in first_metric:
-                        accuracy = first_metric['value']
-                
-                # Extract additional metrics (excluding accuracy)
-                additional_metrics = {}
-                for metric_name, metric_data in model_metrics.items():
-                    if metric_name != 'accuracy' and 'value' in metric_data:
-                        additional_metrics[metric_name] = metric_data['value']
-                
-                metrics[model] = MetricResult(
-                    accuracy=accuracy,
-                    totalTests=len(model_df),
-                    additionalMetrics=additional_metrics
-                )
-        
-        # Generate summary based on best performing model
-        if metrics:
-            best_model = max(metrics.keys(), key=lambda m: metrics[m].accuracy)
-            best_accuracy = metrics[best_model].accuracy
-            summary = f"Best performing model: {best_model} (accuracy: {best_accuracy:.3f})"
-        else:
-            summary = "No valid data for comparison"
-        
-        return ModelComparison(
-            models=models,
-            metrics=metrics,
-            summary=summary
-        )
-    
-    # Filter-related methods
-    def get_filter_capabilities(self, test_type: str) -> Optional[FilterCapabilities]:
-        """Get filter capabilities for a test type."""
+
+    def get_available_filter_values(self, test_type: str, filter_name: str) -> List[str]:
+        """Get list of unique values for a specific filter from the results CSV."""
         try:
-            # Load data and format config
-            df = self.load_test_results(test_type)
-            format_config = self.load_format_config(test_type)
+            import pandas as pd
+        except ImportError:
+            return []
             
-            if df is None or format_config is None:
-                return None
+        results_file = Path(__file__).parent.parent.parent / "Results" / f"{test_type}_model_results.csv"
+        
+        if not results_file.exists():
+            return []
+        
+        try:
+            df = pd.read_csv(results_file)
+            if filter_name in df.columns:                # Get unique values, sort them, and convert to list
+                unique_values = sorted(df[filter_name].dropna().unique().tolist())
+                # Convert numpy types to Python types for JSON serialization
+                return [str(val) for val in unique_values]
+            else:
+                return []
+        except Exception as e:
+            print(f"Error loading filter values for {test_type}.{filter_name}: {e}")
+            return []    
+        
+    def get_available_metrics(self, test_type: str) -> List[dict]:
+        """Get list of available metrics for a specific test type from csv_format.json."""
+        test_dir = self.tests_dir / test_type
+        format_file = test_dir / "csv_format.json"
+        
+        if not format_file.exists():
+            return []
+        
+        try:
+            format_config = self.dsl_executor.load_format_config(format_file)
+            metrics = []
             
-            return filter_service.get_filter_capabilities(df, asdict(format_config))
-        except Exception:
-            return None
-    
-    def apply_filters(self, df: pd.DataFrame, filters: Optional[AdvancedFilter]) -> pd.DataFrame:
-        """Apply filters to a dataframe as preprocessing step."""
-        if filters is None or filters.is_empty():
-            return df
+            # Access metrics directly from the DSLFormat dataclass
+            if format_config.metrics:
+                for metric in format_config.metrics:
+                    # Access attributes directly from DSLMetric dataclass
+                    metrics.append({
+                        'name': metric.name,
+                        'displayName': metric.displayName,
+                        'description': metric.description
+                    })
+            
+            return metrics
+        except Exception as e:
+            print(f"Error loading metrics for {test_type}: {e}")
+            return []
+
+    def get_available_parameters(self, test_type: str, metric_name: str) -> List[dict]:
+        """Get list of available parameters for a specific metric from csv_format.json."""
+        test_dir = self.tests_dir / test_type
+        format_file = test_dir / "csv_format.json"
         
-        return filter_service.apply_filters(df, filters)
-    
-    def load_filtered_data(self, test_type: str, filters: Optional[AdvancedFilter] = None) -> Optional[pd.DataFrame]:
-        """Load test data and apply filters as preprocessing step."""
-        # Load raw data
-        df = self.load_test_results(test_type)
-        if df is None:
-            return None
+        if not format_file.exists():
+            return []
         
-        # Apply filters if provided
-        if filters is not None:
-            df = self.apply_filters(df, filters)
+        try:
+            format_config = self.dsl_executor.load_format_config(format_file)
+            
+            # Find the specific metric
+            if format_config.metrics:
+                for metric in format_config.metrics:
+                    if metric.name == metric_name:                        # Check if metric has parameters
+                        if hasattr(metric, 'parameters') and metric.parameters:
+                            parameters = []
+                            for param in metric.parameters:
+                                # Parameters are stored as dictionaries, not dataclass objects
+                                parameters.append({
+                                    'name': param['name'],
+                                    'type': param['type'],
+                                    'default': param['default'],
+                                    'description': param['description']
+                                })
+                            return parameters
+                        else:
+                            return []
+            
+            return []
+        except Exception as e:
+            print(f"Error loading parameters for {test_type}.{metric_name}: {e}")
+            return []    
         
-        return df
+    def get_results(self, test_type: str, metric: str, request: ResultsRequest) -> ResultsResponse:
+        """Get filtered results grouped by model with metric calculation."""
+        try:
+            import pandas as pd
+        except ImportError:
+            raise Exception("pandas is required for results processing")
+            
+        # Load the results CSV
+        results_file = Path(__file__).parent.parent.parent / "Results" / f"{test_type}_model_results.csv"
+        
+        if not results_file.exists():
+            raise Exception(f"No results file found for test type: {test_type}")
+        
+        try:
+            df = pd.read_csv(results_file)
+            print(f"DEBUG: Loaded CSV with {len(df)} rows and columns: {list(df.columns)}")
+        except Exception as e:
+            raise Exception(f"Error loading results file: {str(e)}")
+        
+        # Filter by selected models
+        if request.selected_models:
+            if 'model' not in df.columns:
+                raise Exception("Results file missing 'model' column")
+            print(f"DEBUG: Filtering by models: {request.selected_models}")
+            df = df[df['model'].isin(request.selected_models)]
+            print(f"DEBUG: After model filtering: {len(df)} rows")
+          # Apply filter selections
+        for filter_name, selected_values in request.selected_filters.items():
+            if selected_values and filter_name in df.columns:
+                print(f"DEBUG: Filtering by {filter_name}: {selected_values}")
+                print(f"DEBUG: Column {filter_name} dtype: {df[filter_name].dtype}")
+                print(f"DEBUG: Sample values from column: {df[filter_name].head().tolist()}")
+                
+                # Convert filter values to match column data type
+                converted_values = []
+                for value in selected_values:
+                    try:
+                        # Try to convert to the same type as the column
+                        if df[filter_name].dtype in ['int64', 'int32', 'int16', 'int8']:
+                            converted_values.append(int(value))
+                        elif df[filter_name].dtype in ['float64', 'float32']:
+                            converted_values.append(float(value))
+                        else:
+                            converted_values.append(str(value))
+                    except (ValueError, TypeError):
+                        # If conversion fails, keep as string
+                        converted_values.append(str(value))
+                
+                print(f"DEBUG: Converted filter values: {converted_values}")
+                df = df[df[filter_name].isin(converted_values)]
+                print(f"DEBUG: After {filter_name} filtering: {len(df)} rows")
+        
+        # Group by model and calculate metrics
+        results = {}
+        
+        if 'model' not in df.columns:
+            raise Exception("Results file missing 'model' column")
+            
+        unique_models = df['model'].unique()
+        print(f"DEBUG: Unique models in filtered data: {list(unique_models)}")
+            
+        for model_name in unique_models:
+            model_data = df[df['model'] == model_name]
+            print(f"DEBUG: Processing model {model_name} with {len(model_data)} rows")
+            
+            if len(model_data) == 0:
+                continue
+                
+            # Calculate metric using DSL executor
+            try:
+                print(f"DEBUG: Calculating metric {metric} for {model_name}")
+                metric_value = self._calculate_metric(test_type, metric, model_data, request.parameter_values)
+                print(f"DEBUG: Metric value for {model_name}: {metric_value}")
+                
+                results[model_name] = ModelResult(
+                    metric_value=metric_value,
+                    sample_count=len(model_data)
+                )
+            except Exception as e:
+                print(f"Error calculating metric for {model_name}: {e}")
+                import traceback
+                traceback.print_exc()
+                # Continue with other models even if one fails
+                continue
+        
+        print(f"DEBUG: Final results: {results}")
+        return ResultsResponse(
+            results=results,
+            test_type=test_type,
+            metric=metric
+        )
+
+    def _calculate_metric(self, test_type: str, metric_name: str, data_df, parameter_values: dict) -> float:
+        """Calculate a specific metric for the given data using DSL executor."""
+        # Load the metric configuration
+        test_dir = self.tests_dir / test_type
+        format_file = test_dir / "csv_format.json"
+        
+        if not format_file.exists():
+            raise Exception(f"No format configuration found for test type: {test_type}")
+        
+        format_config = self.dsl_executor.load_format_config(format_file)
+        
+        # Find the metric definition
+        metric_def = None
+        if format_config.metrics:
+            for metric in format_config.metrics:
+                if metric.name == metric_name:
+                    metric_def = metric
+                    break
+        
+        if metric_def is None:
+            raise Exception(f"Metric '{metric_name}' not found in test type '{test_type}'")
+        
+        # Execute the metric using DSL executor
+        try:
+            result = self.dsl_executor.execute_metric(data_df, metric_def, parameter_values)
+            
+            # The result should be a single numeric value
+            if isinstance(result, (int, float)):
+                return float(result)
+            elif hasattr(result, 'iloc') and len(result) > 0:
+                # If it's a pandas Series/DataFrame, get the first value
+                return float(result.iloc[0] if hasattr(result, 'iloc') else result[0])
+            else:
+                # Try to convert to float
+                return float(result)
+                
+        except Exception as e:
+            raise Exception(f"Error executing metric '{metric_name}': {str(e)}")
 
 
 # Global instance

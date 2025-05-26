@@ -129,29 +129,29 @@ class DSLExecutor:
     
     def _execute_operation(self, op: DSLOperation) -> None:
         """Execute a single DSL operation."""
-        
         if op.op == "sum":
-            result = self.df[op.col].sum()
+            col_data = self._get_value(op.col)
+            result = col_data.sum() if hasattr(col_data, 'sum') else sum(col_data)
             if op.as_:
                 self.variables[op.as_] = result
-        
         elif op.op == "avg":
-            result = self.df[op.col].mean()
+            col_data = self._get_value(op.col)
+            result = col_data.mean() if hasattr(col_data, 'mean') else sum(col_data) / len(col_data)
             if op.as_:
                 self.variables[op.as_] = result
         
         elif op.op == "count":
-            if op.col in self.df.columns:
-                result = len(self.df[op.col].dropna())
-            else:
-                # Assume it's a variable name
-                var_data = self.variables.get(op.col)
-                if isinstance(var_data, pd.Series):
-                    result = len(var_data)
-                elif isinstance(var_data, pd.DataFrame):
-                    result = len(var_data)
+            try:
+                col_data = self._get_value(op.col)
+                if isinstance(col_data, pd.Series):
+                    result = len(col_data.dropna())
+                elif isinstance(col_data, pd.DataFrame):
+                    result = len(col_data)
                 else:
-                    result = 1 if var_data is not None else 0
+                    result = 1 if col_data is not None else 0
+            except ValueError:
+                # If identifier not found, return 0
+                result = 0
             if op.as_:
                 self.variables[op.as_] = result
         
@@ -251,10 +251,15 @@ class DSLExecutor:
             result = col_data.max() if hasattr(col_data, 'max') else max(col_data)
             if op.as_:
                 self.variables[op.as_] = result
-        
         elif op.op == "min":
             col_data = self._get_value(op.col)
             result = col_data.min() if hasattr(col_data, 'min') else min(col_data)
+            if op.as_:
+                self.variables[op.as_] = result
+        
+        elif op.op == "stddev":
+            col_data = self._get_value(op.col)
+            result = col_data.std() if hasattr(col_data, 'std') else np.std(col_data)
             if op.as_:
                 self.variables[op.as_] = result
         

@@ -249,3 +249,33 @@ class FilteredDataRequest(BaseModel):
     
     class Config:
         extra = "forbid"
+
+
+# Results Request/Response Models
+class ResultsRequest(BaseModel):
+    """Request for filtered results with metric calculation."""
+    selected_models: List[str] = Field(..., description="List of model names to include")
+    selected_filters: Dict[str, List[str]] = Field(default_factory=dict, description="Filter name to selected values mapping")
+    parameter_values: Dict[str, Union[str, int, float, bool]] = Field(default_factory=dict, description="Parameter name to value mapping")
+
+    class Config:
+        extra = "forbid"
+
+
+class ModelResult(BaseModel):
+    """Result for a single model."""
+    metric_value: float = Field(..., description="Calculated metric value")
+    sample_count: int = Field(..., description="Number of samples used in calculation")
+    
+    class Config:
+        extra = "forbid"
+
+
+class ResultsResponse(BaseModel):
+    """Response containing results grouped by model."""
+    results: Dict[str, ModelResult] = Field(..., description="Model name to result mapping")
+    test_type: str = Field(..., description="Test type used")
+    metric: str = Field(..., description="Metric calculated")
+    
+    class Config:
+        extra = "forbid"

@@ -207,15 +207,10 @@ class DataService:
         if request.selected_models:
             if 'model' not in df.columns:
                 raise Exception("Results file missing 'model' column")
-            print(f"DEBUG: Filtering by models: {request.selected_models}")
             df = df[df['model'].isin(request.selected_models)]
-            print(f"DEBUG: After model filtering: {len(df)} rows")
-          # Apply filter selections
+
         for filter_name, selected_values in request.selected_filters.items():
             if selected_values and filter_name in df.columns:
-                print(f"DEBUG: Filtering by {filter_name}: {selected_values}")
-                print(f"DEBUG: Column {filter_name} dtype: {df[filter_name].dtype}")
-                print(f"DEBUG: Sample values from column: {df[filter_name].head().tolist()}")
                 
                 # Convert filter values to match column data type
                 converted_values = []
@@ -232,9 +227,7 @@ class DataService:
                         # If conversion fails, keep as string
                         converted_values.append(str(value))
                 
-                print(f"DEBUG: Converted filter values: {converted_values}")
                 df = df[df[filter_name].isin(converted_values)]
-                print(f"DEBUG: After {filter_name} filtering: {len(df)} rows")
         
         # Group by model and calculate metrics
         results = {}
@@ -243,27 +236,21 @@ class DataService:
             raise Exception("Results file missing 'model' column")
             
         unique_models = df['model'].unique()
-        print(f"DEBUG: Unique models in filtered data: {list(unique_models)}")
             
         for model_name in unique_models:
             model_data = df[df['model'] == model_name]
-            print(f"DEBUG: Processing model {model_name} with {len(model_data)} rows")
             
             if len(model_data) == 0:
                 continue
                 
             # Calculate metric using DSL executor
             try:
-                print(f"DEBUG: Calculating metric {metric} for {model_name}")
                 metric_value = self._calculate_metric(test_type, metric, model_data, request.parameter_values)
-                print(f"DEBUG: Metric value for {model_name}: {metric_value}")
-                
                 results[model_name] = ModelResult(
                     metric_value=metric_value,
                     sample_count=len(model_data)
                 )
             except Exception as e:
-                print(f"Error calculating metric for {model_name}: {e}")
                 import traceback
                 traceback.print_exc()
                 # Continue with other models even if one fails

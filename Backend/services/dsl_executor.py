@@ -134,6 +134,7 @@ class DSLExecutor:
             result = col_data.sum() if hasattr(col_data, 'sum') else sum(col_data)
             if op.as_:
                 self.variables[op.as_] = result
+        
         elif op.op == "avg":
             col_data = self._get_value(op.col)
             result = col_data.mean() if hasattr(col_data, 'mean') else sum(col_data) / len(col_data)
@@ -251,6 +252,7 @@ class DSLExecutor:
             result = col_data.max() if hasattr(col_data, 'max') else max(col_data)
             if op.as_:
                 self.variables[op.as_] = result
+        
         elif op.op == "min":
             col_data = self._get_value(op.col)
             result = col_data.min() if hasattr(col_data, 'min') else min(col_data)

@@ -1,47 +1,58 @@
 """
-FastAPI backend for LLM Eye Test data visualization.
-Provides dynamic data analysis endpoints for the frontend.
+FastAPI application for benchmark data analysis using DSL.
 """
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routes import data
-import uvicorn
 
-# Initialize FastAPI app
 app = FastAPI(
-    title="LLM Eye Test API",
-    description="Backend API for visualizing LLM performance on eye test benchmarks",
-    version="1.0.0"
+    title="Benchmark Data API",
+    description="API for analyzing LLM benchmark results using Domain Specific Language (DSL)",
+    version="2.0.0"
 )
 
-# Configure CORS for frontend integration
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],  # Vite default + common React ports
+    allow_origins=["*"],  # Configure this appropriately for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include API routes
-app.include_router(data.router, prefix="/api", tags=["data"])
+# Include DSL-based data routes
+app.include_router(data.router, prefix="/api/data", tags=["data"])
 
 @app.get("/")
 async def root():
-    """Root endpoint for API health check."""
-    return {"message": "LLM Eye Test API is running!", "status": "healthy"}
+    """Root endpoint providing API information."""
+    return {
+        "message": "Benchmark Data API with DSL Support",
+        "version": "2.0.0",
+        "features": [
+            "Dynamic test type support",
+            "DSL-based metric calculations", 
+            "Configurable data filtering",
+            "Multi-test-type support"
+        ],
+        "endpoints": {
+            "/api/data/test-types": "Get available test types",
+            "/api/data/models/{test_type}": "Get model results for a test type",
+            "/api/data/tests/{test_type}": "Get individual test results",
+            "/api/data/compare/{test_type}": "Compare models on a test type",
+            "/api/data/metrics/execute": "Execute DSL metrics",
+            "/api/data/metrics/available/{test_type}": "Get available metrics",
+            "/api/data/filters/{test_type}": "Get filter options",
+            "/api/data/config/{test_type}": "Get test configuration"
+        }
+    }
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
-    return {"status": "healthy", "api": "LLM Eye Test API", "version": "1.0.0"}
+    return {"status": "healthy", "service": "benchmark-api"}
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
-    )
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

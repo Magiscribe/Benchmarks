@@ -6,6 +6,7 @@ import pandas as pd
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
+from dataclasses import asdict
 from services.dsl_executor import DSLExecutor, DSLFormat
 from services.filter_service import filter_service
 from api.models.schemas import (
@@ -227,7 +228,7 @@ class DataService:
             if df is None or format_config is None:
                 return None
             
-            return filter_service.get_filter_capabilities(df, format_config.dict())
+            return filter_service.get_filter_capabilities(df, asdict(format_config))
         except Exception:
             return None
     

@@ -4,6 +4,7 @@ API routes for benchmark data operations using DSL.
 
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
+from dataclasses import asdict
 from ..models.schemas import (
     ModelResult, TestResult, ModelComparison, TestTypeInfo,
     DSLExecutionRequest, DSLExecutionResponse, MetricExecutionResult,
@@ -212,7 +213,7 @@ async def get_test_config(test_type: str):
         if not format_config:
             raise HTTPException(status_code=404, detail=f"No configuration found for test type: {test_type}")
         
-        return format_config.dict()
+        return asdict(format_config)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

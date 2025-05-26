@@ -4,9 +4,9 @@ Minimal data service for test type discovery.
 
 import json
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 from services.dsl_executor import DSLExecutor
-from api.models.schemas import TestTypeInfo, ResultsRequest, ResultsResponse, ModelResult
+from api.models.schemas import TestTypeInfo, ResultsRequest, ResultsResponse, ModelResult, GroupedResult
 
 
 class DataService:
@@ -184,7 +184,7 @@ class DataService:
             print(f"Error loading parameters for {test_type}.{metric_name}: {e}")
             return []    
         
-    def get_results(self, test_type: str, metric: str, request: ResultsRequest) -> ResultsResponse:
+    def get_results(self, test_type: str, metric: str, request: ResultsRequest, group_by: Optional[List[str]] = None) -> ResultsResponse:
         """Get filtered results grouped by model with metric calculation."""
         try:
             import pandas as pd
@@ -230,37 +230,81 @@ class DataService:
                 df = df[df[filter_name].isin(converted_values)]
         
         # Group by model and calculate metrics
-        results = {}
+        results = []
         
         if 'model' not in df.columns:
             raise Exception("Results file missing 'model' column")
             
-        unique_models = df['model'].unique()
+        if group_by:
+            # Verify all group_by columns exist
+            missing_cols = [col for col in group_by if col not in df.columns]
+            if missing_cols:
+                raise Exception(f"Group by columns not found in data: {missing_cols}")
             
-        for model_name in unique_models:
-            model_data = df[df['model'] == model_name]
+            # Group by both model and additional columns
+            group_cols = ['model'] + group_by
+            grouped = df.groupby(group_cols)
             
-            if len(model_data) == 0:
-                continue
+            for group_key, group_data in grouped:
+                # Create a composite key for the results dictionary
+                if isinstance(group_key, tuple):
+                    model_name = group_key[0]
+                    group_values = group_key[1:]
+                    # Create group values dictionary
+                    group_dict = {col: str(val) for col, val in zip(group_by, group_values)}
+                else:
+                    model_name = group_key
+                    group_dict = {}
                 
-            # Calculate metric using DSL executor
-            try:
-                metric_value = self._calculate_metric(test_type, metric, model_data, request.parameter_values)
-                results[model_name] = ModelResult(
-                    metric_value=metric_value,
-                    sample_count=len(model_data)
-                )
-            except Exception as e:
-                import traceback
-                traceback.print_exc()
-                # Continue with other models even if one fails
-                continue
+                # Calculate metric using DSL executor
+                try:
+                    metric_value = self._calculate_metric(test_type, metric, group_data, request.parameter_values)
+                    results.append(GroupedResult(
+                        model=model_name,
+                        group_values=group_dict,
+                        data=ModelResult(
+                            metric_value=metric_value,
+                            sample_count=len(group_data)
+                        )
+                    ))
+                except Exception as e:
+                    import traceback
+                    traceback.print_exc()
+                    # Continue with other groups even if one fails
+                    continue
+        else:
+            # Original behavior - group only by model
+            unique_models = df['model'].unique()
+            
+            for model_name in unique_models:
+                model_data = df[df['model'] == model_name]
+                
+                if len(model_data) == 0:
+                    continue
+                    
+                # Calculate metric using DSL executor
+                try:
+                    metric_value = self._calculate_metric(test_type, metric, model_data, request.parameter_values)
+                    results.append(GroupedResult(
+                        model=model_name,
+                        group_values={},
+                        data=ModelResult(
+                            metric_value=metric_value,
+                            sample_count=len(model_data)
+                        )
+                    ))
+                except Exception as e:
+                    import traceback
+                    traceback.print_exc()
+                    # Continue with other models even if one fails
+                    continue
         
         print(f"DEBUG: Final results: {results}")
         return ResultsResponse(
             results=results,
             test_type=test_type,
-            metric=metric
+            metric=metric,
+            group_by=group_by
         )
 
     def _calculate_metric(self, test_type: str, metric_name: str, data_df, parameter_values: dict) -> float:

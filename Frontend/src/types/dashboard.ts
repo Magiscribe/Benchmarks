@@ -30,10 +30,17 @@ export interface ModelResult {
   sample_count: number;
 }
 
+export interface GroupedResult {
+  model: string;
+  group_values: Record<string, string>;
+  data: ModelResult;
+}
+
 export interface ResultsResponse {
-  results: Record<string, ModelResult>;
+  results: GroupedResult[];
   test_type: string;
   metric: string;
+  group_by?: string[];
 }
 
 export interface MultiMetricResults {

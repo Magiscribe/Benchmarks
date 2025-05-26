@@ -22,22 +22,45 @@ export default function ResultsTable({
   const getSortedResults = () => {
     if (!results || selectedMetrics.length === 0) return [];
     
-    // Get all models from the first metric's results
+    // Get all models and their group values from the first metric's results
     const firstMetric = selectedMetrics[0];
-    const models = Object.keys(results[firstMetric]?.results || {});
+    const firstMetricResults = results[firstMetric]?.results || [];
     
-    const resultEntries = models.map(model => {
-      const modelData: any = { model };
+    // Create a map of unique model+group combinations
+    const modelGroups = new Map<string, any>();
+    
+    firstMetricResults.forEach(result => {
+      const groupKey = JSON.stringify(result.group_values);
+      const modelKey = `${result.model}${groupKey}`;
       
-      // Add metric values for each selected metric
-      selectedMetrics.forEach(metric => {
-        const metricResult = results[metric]?.results[model];
-        modelData[`${metric}_value`] = metricResult?.metric_value || 0;
-        modelData[`${metric}_count`] = metricResult?.sample_count || 0;
-      });
-      
-      return modelData;
+      if (!modelGroups.has(modelKey)) {
+        modelGroups.set(modelKey, {
+          model: result.model,
+          group_values: result.group_values,
+          ...Object.fromEntries(selectedMetrics.map(metric => [
+            `${metric}_value`, 0,
+            `${metric}_count`, 0
+          ]))
+        });
+      }
     });
+    
+    // Fill in metric values for each model+group combination
+    selectedMetrics.forEach(metric => {
+      const metricResults = results[metric]?.results || [];
+      metricResults.forEach(result => {
+        const groupKey = JSON.stringify(result.group_values);
+        const modelKey = `${result.model}${groupKey}`;
+        const modelData = modelGroups.get(modelKey);
+        
+        if (modelData) {
+          modelData[`${metric}_value`] = result.data.metric_value;
+          modelData[`${metric}_count`] = result.data.sample_count;
+        }
+      });
+    });
+
+    const resultEntries = Array.from(modelGroups.values());
 
     return resultEntries.sort((a, b) => {
       let aValue, bValue;
@@ -82,6 +105,12 @@ export default function ResultsTable({
   }
 
   const sortedResults = getSortedResults();
+  const hasGroupValues = sortedResults.some(r => Object.keys(r.group_values).length > 0);
+  
+  // Get all unique group keys from the results
+  const groupKeys = hasGroupValues 
+    ? Array.from(new Set(sortedResults.flatMap(r => Object.keys(r.group_values))))
+    : [];
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
@@ -94,64 +123,83 @@ export default function ResultsTable({
         </p>
       </div>
       
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-700">
-            <tr>
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead className="bg-gray-50 dark:bg-gray-700">
+          <tr>
+            <th 
+              onClick={() => onSort('model')}
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+            >
+              <div className="flex items-center space-x-1">
+                <span>Model</span>
+                {sortField === 'model' && (
+                  <span className="text-blue-500">
+                    {sortDirection === 'asc' ? '↑' : '↓'}
+                  </span>
+                )}
+              </div>
+            </th>
+            {groupKeys.map(groupKey => (
               <th 
-                onClick={() => onSort('model')}
+                key={groupKey}
+                onClick={() => onSort(groupKey)}
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
               >
                 <div className="flex items-center space-x-1">
-                  <span>Model</span>
-                  {sortField === 'model' && (
+                  <span>{groupKey}</span>
+                  {sortField === groupKey && (
                     <span className="text-blue-500">
                       {sortDirection === 'asc' ? '↑' : '↓'}
                     </span>
                   )}
                 </div>
               </th>
+            ))}
+            {selectedMetrics.map((metricName) => (
+              <th 
+                key={metricName}
+                onClick={() => onSort(`${metricName}_value`)}
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+              >
+                <div className="flex items-center space-x-1">
+                  <span>{metricName}</span>
+                  {sortField === `${metricName}_value` && (
+                    <span className="text-blue-500">
+                      {sortDirection === 'asc' ? '↑' : '↓'}
+                    </span>
+                  )}
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+          {sortedResults.map((result) => (
+            <tr key={`${result.model}${JSON.stringify(result.group_values)}`} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                {result.model}
+              </td>
+              {groupKeys.map(groupKey => (
+                <td key={groupKey} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  {result.group_values[groupKey] || '-'}
+                </td>
+              ))}
               {selectedMetrics.map((metricName) => (
-                <th 
-                  key={metricName}
-                  onClick={() => onSort(`${metricName}_value`)}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-                >
-                  <div className="flex items-center space-x-1">
-                    <span>{metricName}</span>
-                    {sortField === `${metricName}_value` && (
-                      <span className="text-blue-500">
-                        {sortDirection === 'asc' ? '↑' : '↓'}
-                      </span>
-                    )}
+                <td key={metricName} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                  <div>
+                    <div className="font-medium">
+                      {result[`${metricName}_value`]?.toFixed(4) || 'N/A'}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      ({result[`${metricName}_count`] || 0} samples)
+                    </div>
                   </div>
-                </th>
+                </td>
               ))}
             </tr>
-          </thead>
-          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-            {sortedResults.map((result) => (
-              <tr key={result.model} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                  {result.model}
-                </td>
-                {selectedMetrics.map((metricName) => (
-                  <td key={metricName} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                    <div>
-                      <div className="font-medium">
-                        {result[`${metricName}_value`]?.toFixed(4) || 'N/A'}
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                        ({result[`${metricName}_count`] || 0} samples)
-                      </div>
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

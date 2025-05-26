@@ -71,3 +71,14 @@ async def get_results(test_type: str, metric: str, request: ResultsRequest):
         return data_service.get_results(test_type, metric, request)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/results/{test_type}/{metric}/group-by/{group_by}", response_model=ResultsResponse)
+async def get_grouped_results(test_type: str, metric: str, group_by: str, request: ResultsRequest):
+    """Get filtered results grouped by model and additional columns with metric calculation."""
+    try:
+        # Split group_by string into list of columns
+        group_by_columns = [col.strip() for col in group_by.split(',')]
+        return data_service.get_results(test_type, metric, request, group_by=group_by_columns)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

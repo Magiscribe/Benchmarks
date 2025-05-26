@@ -5,12 +5,14 @@ import TestSelector from '@/components/dashboard/TestSelector';
 import MetricSelector from '@/components/dashboard/MetricSelector';
 import ModelSelector from '@/components/dashboard/ModelSelector';
 import FilterSelector from '@/components/dashboard/FilterSelector';
+import GroupBySelector from '@/components/dashboard/GroupBySelector';
 import ResultsTable from '@/components/dashboard/ResultsTable';
 import DebugInfo from '@/components/dashboard/DebugInfo';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { useModels } from '@/hooks/useModels';
 import { useMetrics } from '@/hooks/useMetrics';
 import { useFilters } from '@/hooks/useFilters';
+import { useGroupBy } from '@/hooks/useGroupBy';
 import { useResults } from '@/hooks/useResults';
 
 export default function Dashboard() {
@@ -57,6 +59,15 @@ export default function Dashboard() {
     selectNoFilterValues
   } = useFilters(selectedTestType);
 
+  // Group By
+  const {
+    availableGroupBy,
+    selectedGroupBy,
+    handleGroupBySelect,
+    selectAllGroupBy,
+    selectNoGroupBy
+  } = useGroupBy(selectedTestType);
+
   // Results
   const {
     results,
@@ -83,7 +94,8 @@ export default function Dashboard() {
         parameters: Object.fromEntries(
           selectedMetrics.map(metric => [metric, parameterValues[metric] || {}])
         )
-      }
+      },
+      selectedGroupBy
     );
   };
 
@@ -191,6 +203,15 @@ export default function Dashboard() {
             onSelectNoValues={selectNoFilterValues}
           />
 
+          {/* Group By Selection */}
+          <GroupBySelector
+            availableGroupBy={availableGroupBy}
+            selectedGroupBy={selectedGroupBy}
+            onGroupBySelect={handleGroupBySelect}
+            onSelectAll={selectAllGroupBy}
+            onSelectNone={selectNoGroupBy}
+          />
+
           {/* Results Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -281,6 +302,8 @@ export default function Dashboard() {
             availableFilters={availableFilters}
             selectedFilterValues={selectedFilterValues}
             filterValues={filterValues}
+            availableGroupBy={availableGroupBy}
+            selectedGroupBy={selectedGroupBy}
           />
         </div>
       </Section>

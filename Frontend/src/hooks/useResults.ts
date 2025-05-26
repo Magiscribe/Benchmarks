@@ -1,57 +1,66 @@
 import { useState } from 'react';
-import { MultiMetricResults, ResultsRequest } from '../types/dashboard';
+import { MultiMetricResults } from '../types/dashboard';
 
 const API_BASE = `${import.meta.env.VITE_API_URL}/api/data`;
 
 export const useResults = () => {
   const [results, setResults] = useState<MultiMetricResults | null>(null);
   const [resultsLoading, setResultsLoading] = useState(false);
-  const [sortField, setSortField] = useState<string>('model');
+  const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
   const fetchResults = async (
     testType: string,
-    selectedMetrics: string[],
-    request: ResultsRequest
+    metrics: string[],
+    request: {
+      models: string[];
+      filters: Record<string, string[]>;
+      parameters: Record<string, Record<string, any>>;
+    },
+    groupBy?: string[]
   ) => {
-    if (!testType || selectedMetrics.length === 0) return;
+    if (!testType || metrics.length === 0) return;
 
+    setResultsLoading(true);
     try {
-      setResultsLoading(true);
-      const multiMetricResults: MultiMetricResults = {};
+      // For each metric, fetch results
+      const resultsPromises = metrics.map(async (metric) => {
+        const endpoint = groupBy && groupBy.length > 0
+          ? `${API_BASE}/results/${testType}/${metric}/group-by/${groupBy.join(',')}`
+          : `${API_BASE}/results/${testType}/${metric}`;
 
-      // Fetch results for each selected metric
-      for (const metric of selectedMetrics) {
-        try {
-          // Get parameters specific to this metric
-          const metricParameters = request.parameters?.[metric] || {};
-          
-          const response = await fetch(`${API_BASE}/results/${testType}/${metric}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              selected_models: request.models,
-              selected_filters: request.filters || {},
-              parameter_values: metricParameters
-            }),
-          });
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            selected_models: request.models,
+            selected_filters: request.filters,
+            parameter_values: request.parameters[metric] || {}
+          }),
+        });
 
-          if (response.ok) {
-            const result = await response.json();
-            multiMetricResults[metric] = result;
-          } else {
-            console.error(`Error fetching results for metric ${metric}:`, response.statusText);
-          }
-        } catch (err) {
-          console.error(`Error fetching results for metric ${metric}:`, err);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      }
 
-      setResults(multiMetricResults);
-    } catch (err) {
-      console.error('Error fetching results:', err);
+        return response.json();
+      });
+
+      const results = await Promise.all(resultsPromises);
+      
+      // Combine results into a single object
+      const combinedResults: MultiMetricResults = {};
+      results.forEach((result, index) => {
+        const metric = metrics[index];
+        combinedResults[metric] = result;
+      });
+
+      setResults(combinedResults);
+    } catch (error) {
+      console.error('Error fetching results:', error);
+      setResults(null);
     } finally {
       setResultsLoading(false);
     }

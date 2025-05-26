@@ -35,11 +35,22 @@ class ModelResult(BaseModel):
         extra = "forbid"
 
 
+class GroupedResult(BaseModel):
+    """Result for a model with group values."""
+    model: str = Field(..., description="Model name")
+    group_values: Dict[str, str] = Field(..., description="Group column to value mapping")
+    data: ModelResult = Field(..., description="Metric result data")
+    
+    class Config:
+        extra = "forbid"
+
+
 class ResultsResponse(BaseModel):
     """Response containing results grouped by model."""
-    results: Dict[str, ModelResult] = Field(..., description="Model name to result mapping")
+    results: List[GroupedResult] = Field(..., description="List of model results with group values")
     test_type: str = Field(..., description="Test type used")
     metric: str = Field(..., description="Metric calculated")
+    group_by: Optional[List[str]] = Field(default=None, description="List of columns used for grouping")
     
     class Config:
         extra = "forbid"

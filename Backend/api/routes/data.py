@@ -7,7 +7,7 @@ from typing import List, Optional
 from ..models.schemas import (
     ModelResult, TestResult, ModelComparison, TestTypeInfo,
     DSLExecutionRequest, DSLExecutionResponse, MetricExecutionResult,
-    FilterOptions, TestDataRequest, ErrorResponse
+    FilterOptions, FilterCapabilities, FilteredDataRequest, AdvancedFilter
 )
 from services.data_service import data_service
 import time
@@ -78,7 +78,7 @@ async def execute_metrics(request: DSLExecutionRequest):
         
         original_rows = len(df)
         
-        # Apply data filters if provided
+        # Apply legacy data filters if provided (for backward compatibility)
         if request.data_filters:
             for column, values in request.data_filters.items():
                 if column in df.columns:
@@ -207,11 +207,135 @@ async def get_filter_options(test_type: str):
 @router.get("/config/{test_type}")
 async def get_test_config(test_type: str):
     """Get the complete configuration for a test type."""
-    try:
+    try:        
         format_config = data_service.load_format_config(test_type)
         if not format_config:
             raise HTTPException(status_code=404, detail=f"No configuration found for test type: {test_type}")
         
         return format_config.dict()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# New Advanced Filtering Endpoints
+
+@router.get("/filter-capabilities/{test_type}", response_model=FilterCapabilities)
+async def get_filter_capabilities(test_type: str):
+    """Get comprehensive filter capabilities for a test type."""
+    try:
+        capabilities = data_service.get_filter_capabilities(test_type)
+        if not capabilities:
+            raise HTTPException(status_code=404, detail=f"No filter capabilities found for test type: {test_type}")
+        
+        return capabilities
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/data/filtered", response_model=DSLExecutionResponse)
+async def get_filtered_data_with_metrics(request: FilteredDataRequest):
+    """Get filtered data with DSL metrics execution. Filtering happens BEFORE DSL execution."""
+    try:
+        start_time = time.time()
+        
+        # Step 1: Load raw data
+        df = data_service.load_test_results(request.test_type)
+        if df is None:
+            raise HTTPException(status_code=404, detail=f"No data found for test type: {request.test_type}")
+        
+        original_rows = len(df)
+        
+        # Step 2: Apply filters as preprocessing (completely separate from DSL)
+        if request.filters:
+            df = data_service.apply_filters(df, request.filters)
+        
+        filtered_rows = len(df)
+        
+        # Step 3: Load format config for DSL execution
+        format_config = data_service.load_format_config(request.test_type)
+        if not format_config:
+            raise HTTPException(status_code=404, detail=f"No configuration found for test type: {request.test_type}")
+        
+        # Step 4: Execute DSL metrics on the filtered data
+        metrics_to_execute = format_config.metrics
+        if request.metrics:
+            metrics_to_execute = [m for m in format_config.metrics if m.name in request.metrics]
+        
+        metric_results = {}
+        for metric in metrics_to_execute:
+            try:
+                # Get parameters for this metric
+                params = {}
+                if request.metric_parameters and metric.name in request.metric_parameters:
+                    params = request.metric_parameters[metric.name]
+                
+                # Execute the metric on filtered data (DSL knows nothing about filtering)
+                result = data_service.dsl_executor.execute_metric(df, metric, params)
+                
+                metric_results[metric.name] = MetricExecutionResult(
+                    name=metric.name,
+                    displayName=metric.displayName,
+                    description=metric.description,
+                    value=result
+                )
+            except Exception as e:
+                metric_results[metric.name] = MetricExecutionResult(
+                    name=metric.name,
+                    displayName=metric.displayName,
+                    description=metric.description,
+                    error=str(e)
+                )
+        
+        execution_time = (time.time() - start_time) * 1000  # Convert to milliseconds
+        
+        return DSLExecutionResponse(
+            test_type=request.test_type,
+            total_rows=original_rows,
+            filtered_rows=filtered_rows,
+            metrics=metric_results,
+            execution_time_ms=execution_time
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/data/preview")
+async def preview_filtered_data(request: FilteredDataRequest):
+    """Preview filtered data without executing metrics."""
+    try:
+        # Load raw data
+        df = data_service.load_test_results(request.test_type)
+        if df is None:
+            raise HTTPException(status_code=404, detail=f"No data found for test type: {request.test_type}")
+        
+        original_rows = len(df)
+        
+        # Apply filters
+        if request.filters:
+            df = data_service.apply_filters(df, request.filters)
+        
+        filtered_rows = len(df)
+        
+        # Apply limit/offset for preview
+        if request.offset:
+            df = df.iloc[request.offset:]
+        if request.limit:
+            df = df.head(request.limit)
+        
+        # Convert to dict for JSON response
+        preview_data = df.to_dict('records')
+        
+        return {
+            "test_type": request.test_type,
+            "total_rows": original_rows,
+            "filtered_rows": filtered_rows,
+            "preview_rows": len(preview_data),
+            "data": preview_data,
+            "columns": list(df.columns)
+        }
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

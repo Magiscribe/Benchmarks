@@ -180,3 +180,72 @@ class AccuracyData(BaseModel):
     accuracy: float
     total_correct: int
     total_attempts: int
+
+
+# Enhanced Filter Models
+class FilterCondition(BaseModel):
+    """Represents a single filter condition."""
+    column: str
+    operator: str  # 'eq', 'in', 'gt', 'gte', 'lt', 'lte', 'between', 'contains', 'not_in'
+    value: Union[str, int, float, List[Any], Dict[str, Any]]
+    
+    class Config:
+        extra = "forbid"
+
+
+class FilterGroup(BaseModel):
+    """Represents a group of filter conditions with logical operator."""
+    operator: str = "AND"  # 'AND', 'OR'
+    conditions: List[FilterCondition]
+    
+    class Config:
+        extra = "forbid"
+
+
+class AdvancedFilter(BaseModel):
+    """Advanced filtering with support for complex conditions."""
+    groups: List[FilterGroup] = []
+    
+    def is_empty(self) -> bool:
+        """Check if filter has any conditions."""
+        return not any(group.conditions for group in self.groups)
+    
+    class Config:
+        extra = "forbid"
+
+
+class FilterMetadata(BaseModel):
+    """Metadata about filterable columns for a test type."""
+    column: str
+    type: str  # 'entity', 'categorical', 'identifier', 'quantitative'
+    displayName: str
+    description: str
+    operators: List[str]  # Available operators for this column type
+    values: Optional[List[Any]] = None  # Available values for categorical/entity columns
+    range: Optional[Dict[str, float]] = None  # Min/max for quantitative columns
+    
+    class Config:
+        extra = "forbid"
+
+
+class FilterCapabilities(BaseModel):
+    """Complete filter capabilities for a test type."""
+    test_type: str
+    columns: List[FilterMetadata]
+    
+    class Config:
+        extra = "forbid"
+
+
+class FilteredDataRequest(BaseModel):
+    """Request for data with advanced filtering."""
+    test_type: str
+    filters: Optional[AdvancedFilter] = None
+    group_by: Optional[List[str]] = None  # Columns to group by
+    metrics: Optional[List[str]] = None  # Metrics to calculate
+    metric_parameters: Optional[Dict[str, Dict[str, Any]]] = None
+    limit: Optional[int] = None
+    offset: Optional[int] = None
+    
+    class Config:
+        extra = "forbid"

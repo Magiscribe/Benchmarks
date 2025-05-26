@@ -7,9 +7,11 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from services.dsl_executor import DSLExecutor, DSLFormat
+from services.filter_service import filter_service
 from api.models.schemas import (
     ModelResult, TestResult, DataPoint, MetricResult,
-    ModelComparison, TestTypeInfo, ErrorResponse
+    ModelComparison, TestTypeInfo, ErrorResponse, AdvancedFilter,
+    FilterCapabilities
 )
 
 
@@ -213,6 +215,41 @@ class DataService:
             metrics=metrics,
             summary=summary
         )
+    
+    # Filter-related methods
+    def get_filter_capabilities(self, test_type: str) -> Optional[FilterCapabilities]:
+        """Get filter capabilities for a test type."""
+        try:
+            # Load data and format config
+            df = self.load_test_results(test_type)
+            format_config = self.load_format_config(test_type)
+            
+            if df is None or format_config is None:
+                return None
+            
+            return filter_service.get_filter_capabilities(df, format_config.dict())
+        except Exception:
+            return None
+    
+    def apply_filters(self, df: pd.DataFrame, filters: Optional[AdvancedFilter]) -> pd.DataFrame:
+        """Apply filters to a dataframe as preprocessing step."""
+        if filters is None or filters.is_empty():
+            return df
+        
+        return filter_service.apply_filters(df, filters)
+    
+    def load_filtered_data(self, test_type: str, filters: Optional[AdvancedFilter] = None) -> Optional[pd.DataFrame]:
+        """Load test data and apply filters as preprocessing step."""
+        # Load raw data
+        df = self.load_test_results(test_type)
+        if df is None:
+            return None
+        
+        # Apply filters if provided
+        if filters is not None:
+            df = self.apply_filters(df, filters)
+        
+        return df
 
 
 # Global instance

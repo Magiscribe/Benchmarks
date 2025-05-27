@@ -81,11 +81,10 @@ export default function MetricChart({ data, chartType, metricKey, title }: Metri
         tension: chartType === 'line' ? 0.4 : undefined,
       },
     ],
-  };
-
-  const options = {
+  };  const options = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: false as const, // Disable all animations for instant rendering
     plugins: {
       legend: {
         position: 'top' as const,

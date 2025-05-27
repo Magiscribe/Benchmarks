@@ -68,9 +68,14 @@ export default function ResultsTable({
       if (sortField === 'model') {
         aValue = a.model;
         bValue = b.model;
-      } else {
+      } else if (sortField.includes('_value')) {
+        // Handle metric value sorting
         aValue = a[sortField] || 0;
         bValue = b[sortField] || 0;
+      } else {
+        // Handle group value sorting
+        aValue = a.group_values[sortField] || '';
+        bValue = b.group_values[sortField] || '';
       }
       
       if (typeof aValue === 'string' && typeof bValue === 'string') {

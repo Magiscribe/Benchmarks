@@ -7,7 +7,8 @@ import ModelSelector from '@/components/dashboard/ModelSelector';
 import FilterSelector from '@/components/dashboard/FilterSelector';
 import GroupBySelector from '@/components/dashboard/GroupBySelector';
 import ResultsTable from '@/components/dashboard/ResultsTable';
-import DebugInfo from '@/components/dashboard/DebugInfo';
+// import DebugInfo from '@/components/dashboard/DebugInfo';
+import { ChartSection } from '@/components/charts/ChartSection';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { useModels } from '@/hooks/useModels';
 import { useMetrics } from '@/hooks/useMetrics';
@@ -25,15 +26,13 @@ export default function Dashboard() {
     error,
     refetch: refetchTestTypes
   } = useDashboardData();
-
   // Models
   const {
     availableModels,
     selectedModels,
     handleModelSelection,
     selectAllModels,
-    selectNoModels,
-    setSelectedModels
+    selectNoModels
   } = useModels(selectedTestType);
 
   // Metrics and parameters
@@ -45,8 +44,7 @@ export default function Dashboard() {
     handleMetricSelection,
     selectAllMetrics,
     selectNoMetrics,
-    handleParameterValueChange,
-    setSelectedMetrics
+    handleParameterValueChange
   } = useMetrics(selectedTestType);
 
   // Filters
@@ -148,28 +146,25 @@ export default function Dashboard() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               Test Configuration
-            </h2>
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Test Type Dropdown */}
-                <TestSelector
-                  testTypes={testTypes}
-                  selectedTestType={selectedTestType}
-                  onSelectTestType={setSelectedTestType}
-                  loading={loading}
-                />
-                {/* Metrics Selection */}
-                <MetricSelector
-                  availableMetrics={availableMetrics}
-                  selectedMetrics={selectedMetrics}
-                  availableParameters={availableParameters}
-                  parameterValues={parameterValues}
-                  onMetricSelect={handleMetricSelection}
-                  onSelectAll={selectAllMetrics}
-                  onSelectNone={selectNoMetrics}
-                  onParameterChange={handleParameterValueChange}
-                />
-              </div>
+            </h2>            <div className="space-y-4">
+              {/* Test Type Dropdown */}
+              <TestSelector
+                testTypes={testTypes}
+                selectedTestType={selectedTestType}
+                onSelectTestType={setSelectedTestType}
+                loading={loading}
+              />
+              {/* Metrics Selection */}
+              <MetricSelector
+                availableMetrics={availableMetrics}
+                selectedMetrics={selectedMetrics}
+                availableParameters={availableParameters}
+                parameterValues={parameterValues}
+                onMetricSelect={handleMetricSelection}
+                onSelectAll={selectAllMetrics}
+                onSelectNone={selectNoMetrics}
+                onParameterChange={handleParameterValueChange}
+              />
               {/* Selected Test Description */}
               {selectedTest && (
                 <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -223,8 +218,7 @@ export default function Dashboard() {
               >
                 {resultsLoading ? 'Loading...' : `Get Results (${selectedMetrics.length} metrics)`}
               </button>
-            </div>
-            <ResultsTable
+            </div>            <ResultsTable
               results={results}
               selectedMetrics={selectedMetrics}
               selectedTestType={selectedTestType}
@@ -232,7 +226,13 @@ export default function Dashboard() {
               sortDirection={sortDirection}
               onSort={handleSort}
               loading={resultsLoading}
-            />
+            />            {/* Chart Visualization Section */}
+            {results && Object.keys(results).length > 0 && (
+              <div className="mt-8">
+                <ChartSection results={results} />
+              </div>
+            )}
+
             {/* No Results Message */}
             {!results && !resultsLoading && canFetchResults && (
               <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center">
@@ -287,10 +287,8 @@ export default function Dashboard() {
                   ))}
               </div>
             </div>
-          )}
-
-          {/* Debug Info */}
-          <DebugInfo
+          )}          {/* Debug Info */}
+          {/* <DebugInfo
             selectedTestType={selectedTestType}
             testTypes={testTypes}
             availableModels={availableModels}
@@ -304,7 +302,7 @@ export default function Dashboard() {
             filterValues={filterValues}
             availableGroupBy={availableGroupBy}
             selectedGroupBy={selectedGroupBy}
-          />
+          /> */}
         </div>
       </Section>
     </Container>

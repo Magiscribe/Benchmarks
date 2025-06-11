@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TestType, Metric, FilterColumn, MetricParameter, MultiMetricResults } from '../types/dashboard';
+import { TestType } from '../types/dashboard';
 
 const API_BASE = `${import.meta.env.VITE_API_URL}/api/data`;
 

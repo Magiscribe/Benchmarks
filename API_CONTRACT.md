@@ -203,12 +203,15 @@ interface MetricParameter {
 ---
 
 ### 7. Get Results (Basic)
-**Endpoint**: `POST /results/{test_type}/{metric}`  
+**Endpoint**: `POST /results/{test_type}/{metric}?group_by=categorical_factor`  
 **Description**: Retrieves filtered results grouped by model with metric calculation.
 
 **Path Parameters**:
 - `test_type` (string): The test type name
 - `metric` (string): The metric name to calculate
+
+**Query Parameters**
+- `group_by` (string) Categorical variable to group by
 
 **Request Body**:
 ```json
@@ -260,50 +263,6 @@ interface ResultsRequest {
   "test_type": "Eye_Test",
   "metric": "accuracy",
   "group_by": null
-}
-```
-
----
-
-### 8. Get Results (Grouped)
-**Endpoint**: `POST /results/{test_type}/{metric}/group-by/{group_by}`  
-**Description**: Retrieves filtered results grouped by model and additional columns with metric calculation.
-
-**Path Parameters**:
-- `test_type` (string): The test type name
-- `metric` (string): The metric name to calculate
-- `group_by` (string): Comma-separated list of columns to group by
-
-**Request Body**: Same as basic results endpoint
-
-**Response**:
-```json
-{
-  "results": [
-    {
-      "model": "claude-3-5-haiku",
-      "group_values": {
-        "font": "Arial"
-      },
-      "data": {
-        "metric_value": 0.8234,
-        "sample_count": 312
-      }
-    },
-    {
-      "model": "claude-3-5-haiku", 
-      "group_values": {
-        "font": "Times New Roman"
-      },
-      "data": {
-        "metric_value": 0.7456,
-        "sample_count": 298
-      }
-    }
-  ],
-  "test_type": "Eye_Test",
-  "metric": "accuracy",
-  "group_by": ["font"]
 }
 ```
 

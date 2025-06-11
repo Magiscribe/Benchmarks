@@ -16,7 +16,7 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
     selectedFilters: Record<string, string[]>;
   }>({ selectedModels: [], selectedFilters: {} });
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const {
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});  const {
     availableMetrics,
     availableFilters,
     availableModels,
@@ -24,8 +24,9 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
     results,
     loading,
     error,
-    createChart
-  } = useChartFirstData(selectedTestType);  // Auto-select all models when they become available
+    createChart,
+    fetchParametersForMetric
+  } = useChartFirstData(selectedTestType);// Auto-select all models when they become available
   React.useEffect(() => {
     if (availableModels.length > 0 && advancedFilters.selectedModels.length === 0) {
       setAdvancedFilters(prev => ({
@@ -129,15 +130,15 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
                 {testTypes.find(t => t.name === selectedTestType)?.description}
               </p>
             )}
-          </div>
-
-          {/* Chart Configuration */}
+          </div>          {/* Chart Configuration */}
           {selectedTestType && (
             <ChartConfigurationFirst
               availableMetrics={availableMetrics}
               availableCategories={availableFilters}
               config={chartConfig}
               onConfigChange={setChartConfig}
+              onFetchParameters={fetchParametersForMetric}
+              selectedTestType={selectedTestType}
             />
           )}
 
@@ -158,13 +159,23 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>              {showAdvanced && (
-                <div className="mt-4 space-y-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                  {/* Model Selection */}
+                <div className="mt-4 space-y-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">                  {/* Model Selection */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">
-                        Models
-                      </label>
+                      <button
+                        onClick={() => setExpandedSections(prev => ({ ...prev, models: !prev.models }))}
+                        className="flex items-center text-sm font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400"
+                      >
+                        <span>Models</span>
+                        <svg
+                          className={`ml-2 h-4 w-4 transform transition-transform ${expandedSections.models ? 'rotate-180' : ''}`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
                       <button
                         onClick={() => {
                           const allSelected = advancedFilters.selectedModels.length === availableModels.length;
@@ -178,53 +189,66 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
                         {advancedFilters.selectedModels.length === availableModels.length ? 'Deselect All' : 'Select All'}
                       </button>
                     </div>
-                    <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded p-2">
-                      {availableModels.map((model: string) => (
-                        <label key={model} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={advancedFilters.selectedModels.includes(model)}
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setAdvancedFilters(prev => ({
-                                  ...prev,
-                                  selectedModels: [...prev.selectedModels, model]
-                                }));
-                              } else {
-                                setAdvancedFilters(prev => ({
-                                  ...prev,
-                                  selectedModels: prev.selectedModels.filter(m => m !== model)
-                                }));
-                              }
-                            }}
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{model}</span>
-                        </label>
-                      ))}
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      {advancedFilters.selectedModels.length} of {availableModels.length} models selected
-                    </div>
+                    {expandedSections.models && (
+                      <>
+                        <div className="border border-gray-200 dark:border-gray-600 rounded p-3 bg-white dark:bg-gray-800">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-1 max-h-32 overflow-y-auto">
+                            {availableModels.map((model: string) => (
+                              <label key={model} className="flex items-center text-sm">
+                                <input
+                                  type="checkbox"
+                                  checked={advancedFilters.selectedModels.includes(model)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setAdvancedFilters(prev => ({
+                                        ...prev,
+                                        selectedModels: [...prev.selectedModels, model]
+                                      }));
+                                    } else {
+                                      setAdvancedFilters(prev => ({
+                                        ...prev,
+                                        selectedModels: prev.selectedModels.filter(m => m !== model)
+                                      }));
+                                    }
+                                  }}
+                                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2 flex-shrink-0"
+                                />
+                                <span className="text-gray-700 dark:text-gray-300 truncate" title={model}>
+                                  {model}
+                                </span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          {advancedFilters.selectedModels.length} of {availableModels.length} models selected
+                        </div>
+                      </>
+                    )}
                   </div>                  {/* Filter Selection */}
                   {availableFilters.map((filter: any) => {
                     const values = filterValues[filter.name] || [];
                     const selectedValues = advancedFilters.selectedFilters[filter.name] || [];
                     const allSelected = selectedValues.length === values.length;
-                    
-                    // Organize values into columns (max 5 columns)
-                    const itemsPerColumn = Math.ceil(values.length / 5);
-                    const columns = [];
-                    for (let i = 0; i < values.length; i += itemsPerColumn) {
-                      columns.push(values.slice(i, i + itemsPerColumn));
-                    }
+                    const isExpanded = expandedSections[`filter-${filter.name}`];
 
                     return (
                       <div key={filter.name}>
                         <div className="flex items-center justify-between mb-2">
-                          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">
-                            {filter.name}
-                          </label>
+                          <button
+                            onClick={() => setExpandedSections(prev => ({ ...prev, [`filter-${filter.name}`]: !prev[`filter-${filter.name}`] }))}
+                            className="flex items-center text-sm font-medium text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400"
+                          >
+                            <span>{filter.name}</span>
+                            <svg
+                              className={`ml-2 h-4 w-4 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
                           <button
                             onClick={() => {
                               setAdvancedFilters(prev => ({
@@ -240,52 +264,56 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
                             {allSelected ? 'Deselect All' : 'Select All'}
                           </button>
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                          {filter.description}
-                        </div>
-                        
-                        {values.length > 0 ? (
-                          <div className="border border-gray-200 dark:border-gray-600 rounded p-3 bg-white dark:bg-gray-800">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-1 max-h-32 overflow-y-auto">
-                              {values.map((value: string) => (
-                                <label key={value} className="flex items-center text-sm">
-                                  <input
-                                    type="checkbox"
-                                    checked={selectedValues.includes(value)}
-                                    onChange={(e) => {
-                                      setAdvancedFilters(prev => {
-                                        const currentValues = prev.selectedFilters[filter.name] || [];
-                                        const newValues = e.target.checked
-                                          ? [...currentValues, value]
-                                          : currentValues.filter(v => v !== value);
-                                        
-                                        return {
-                                          ...prev,
-                                          selectedFilters: {
-                                            ...prev.selectedFilters,
-                                            [filter.name]: newValues
-                                          }
-                                        };
-                                      });
-                                    }}
-                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2 flex-shrink-0"
-                                  />
-                                  <span className="text-gray-700 dark:text-gray-300 truncate" title={value}>
-                                    {value}
-                                  </span>
-                                </label>
-                              ))}
+                        {isExpanded && (
+                          <>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                              {filter.description}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                              {selectedValues.length} of {values.length} values selected
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="p-3 border border-gray-200 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-800">
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              Loading filter values...
-                            </p>
-                          </div>
+                            
+                            {values.length > 0 ? (
+                              <div className="border border-gray-200 dark:border-gray-600 rounded p-3 bg-white dark:bg-gray-800">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-1 max-h-32 overflow-y-auto">
+                                  {values.map((value: string) => (
+                                    <label key={value} className="flex items-center text-sm">
+                                      <input
+                                        type="checkbox"
+                                        checked={selectedValues.includes(value)}
+                                        onChange={(e) => {
+                                          setAdvancedFilters(prev => {
+                                            const currentValues = prev.selectedFilters[filter.name] || [];
+                                            const newValues = e.target.checked
+                                              ? [...currentValues, value]
+                                              : currentValues.filter(v => v !== value);
+                                            
+                                            return {
+                                              ...prev,
+                                              selectedFilters: {
+                                                ...prev.selectedFilters,
+                                                [filter.name]: newValues
+                                              }
+                                            };
+                                          });
+                                        }}
+                                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2 flex-shrink-0"
+                                      />
+                                      <span className="text-gray-700 dark:text-gray-300 truncate" title={value}>
+                                        {value}
+                                      </span>
+                                    </label>
+                                  ))}
+                                </div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                  {selectedValues.length} of {values.length} values selected
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="p-3 border border-gray-200 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-800">
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  Loading filter values...
+                                </p>
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
                     );

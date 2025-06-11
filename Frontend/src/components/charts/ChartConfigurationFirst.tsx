@@ -1,20 +1,152 @@
 import React from 'react';
 import { ChartConfiguration, ChartType } from '../../types/charts';
-import { Metric, FilterColumn } from '../../types/dashboard';
+import { Metric, FilterColumn, MetricParameter } from '../../types/dashboard';
 
 interface ChartConfigurationFirstProps {
   availableMetrics: Metric[];
   availableCategories: FilterColumn[];
   config: ChartConfiguration;
   onConfigChange: (config: ChartConfiguration) => void;
+  onFetchParameters?: (testType: string, metricName: string) => Promise<MetricParameter[]>;
+  selectedTestType?: string;
 }
 
 export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = ({
   availableMetrics,
   availableCategories,
   config,
-  onConfigChange
-}) => {  // Auto-select first metric for bar chart when metrics become available
+  onConfigChange,
+  onFetchParameters,
+  selectedTestType
+}) => {
+  const [parametersState, setParametersState] = React.useState<Record<string, MetricParameter[]>>({});
+  const [editingInputs, setEditingInputs] = React.useState<Record<string, string>>({});  // Fetch parameters for a metric when needed
+  const fetchParametersForMetric = async (metricName: string) => {
+    if (!onFetchParameters || !selectedTestType || parametersState[metricName]) {
+      return;
+    }
+    
+    try {
+      const parameters = await onFetchParameters(selectedTestType, metricName);
+      setParametersState(prev => ({ ...prev, [metricName]: parameters }));
+      
+      // Initialize parameter values with defaults
+      if (parameters.length > 0) {
+        const currentValues = config.parameterValues || {};
+        const metricDefaults: Record<string, any> = {};
+        parameters.forEach(param => {
+          metricDefaults[param.name] = param.default;
+        });
+        
+        onConfigChange({
+          ...config,
+          parameterValues: {
+            ...currentValues,
+            [metricName]: { ...metricDefaults, ...currentValues[metricName] }
+          }
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching parameters for ${metricName}:`, error);
+    }
+  };
+
+  // Handle parameter value changes
+  const handleParameterChange = (metricName: string, paramName: string, value: any) => {
+    const currentValues = config.parameterValues || {};
+    onConfigChange({
+      ...config,
+      parameterValues: {
+        ...currentValues,
+        [metricName]: {
+          ...currentValues[metricName],
+          [paramName]: value
+        }
+      }
+    });
+  };
+
+  // Component to render parameter inputs for a given metric
+  const renderParameterInputs = (metricName: string | undefined) => {
+    if (!metricName) return null;
+    
+    const parameters = parametersState[metricName] || [];
+    if (parameters.length === 0) return null;
+
+    return (
+      <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-md">
+        <div className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
+          Parameters for {availableMetrics.find(m => m.name === metricName)?.displayName}:
+        </div>
+        {parameters.map((param) => (
+          <div key={param.name} className="space-y-1">
+            <label className="block text-xs text-gray-600 dark:text-gray-400">
+              {param.description}
+            </label>
+            <input
+              type={param.type === 'number' ? 'number' : 'text'}
+              value={
+                param.type === 'number' 
+                  ? editingInputs[`${metricName}-${param.name}`] ?? 
+                    (config.parameterValues?.[metricName]?.[param.name]?.toString() ?? param.default.toString())
+                  : config.parameterValues?.[metricName]?.[param.name] ?? param.default
+              }
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                if (param.type === 'number') {
+                  const inputKey = `${metricName}-${param.name}`;
+                  setEditingInputs(prev => ({ 
+                    ...prev, 
+                    [inputKey]: inputValue 
+                  }));
+                  
+                  if (inputValue === '' || inputValue === '.' || /^-?\d*\.?\d*$/.test(inputValue)) {
+                    handleParameterChange(metricName, param.name, inputValue);
+                  }
+                } else {
+                  handleParameterChange(metricName, param.name, inputValue);
+                }
+              }}
+              onBlur={(e) => {
+                if (param.type === 'number') {
+                  const inputValue = e.target.value;
+                  const inputKey = `${metricName}-${param.name}`;
+                  
+                  setEditingInputs(prev => {
+                    const { [inputKey]: _, ...rest } = prev;
+                    return rest;
+                  });
+                  
+                  if (inputValue === '' || inputValue === '.') {
+                    handleParameterChange(metricName, param.name, param.default);
+                  } else {
+                    const numValue = parseFloat(inputValue);
+                    const finalValue = isNaN(numValue) ? param.default : numValue;
+                    handleParameterChange(metricName, param.name, finalValue);
+                  }
+                }
+              }}
+              onFocus={() => {
+                if (param.type === 'number') {
+                  const inputKey = `${metricName}-${param.name}`;
+                  const currentValue = config.parameterValues?.[metricName]?.[param.name];
+                  setEditingInputs(prev => ({ 
+                    ...prev, 
+                    [inputKey]: currentValue?.toString() ?? param.default.toString()
+                  }));
+                }
+              }}
+              className="w-full px-2 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
+              placeholder={`Default: ${param.default}`}
+              step="any"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Auto-select first metric for bar chart when metrics become available
   React.useEffect(() => {
     if (config.chartType === 'bar' && !config.metric1 && availableMetrics.length > 0) {
       onConfigChange({ ...config, metric1: availableMetrics[0].name });
@@ -86,7 +218,12 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
           Primary Metric <span className="text-red-500">*</span>
         </label>        <select
           value={config.metric1 || ''}
-          onChange={(e) => updateConfig({ metric1: e.target.value })}
+          onChange={(e) => {
+            updateConfig({ metric1: e.target.value });
+            if (e.target.value) {
+              fetchParametersForMetric(e.target.value);
+            }
+          }}
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
         >
           {availableMetrics.map((metric) => (
@@ -100,14 +237,20 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
             {availableMetrics.find(m => m.name === config.metric1)?.description}
           </p>
         )}
+        {renderParameterInputs(config.metric1)}
       </div>
       <div>
         <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100">
           Secondary Metric (Optional)
-        </label>
-        <select
+        </label>        <select
           value={config.metric2 || ''}
-          onChange={(e) => updateConfig({ metric2: e.target.value || undefined })}
+          onChange={(e) => {
+            const value = e.target.value || undefined;
+            updateConfig({ metric2: value });
+            if (value) {
+              fetchParametersForMetric(value);
+            }
+          }}
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
         >
           <option value="">None</option>
@@ -124,6 +267,7 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
             {availableMetrics.find(m => m.name === config.metric2)?.description}
           </p>
         )}
+        {renderParameterInputs(config.metric2)}
       </div>
     </div>
   );
@@ -133,10 +277,14 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
       <div>
         <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100">
           X-Axis Metric <span className="text-red-500">*</span>
-        </label>
-        <select
+        </label>        <select
           value={config.xMetric || ''}
-          onChange={(e) => updateConfig({ xMetric: e.target.value })}
+          onChange={(e) => {
+            updateConfig({ xMetric: e.target.value });
+            if (e.target.value) {
+              fetchParametersForMetric(e.target.value);
+            }
+          }}
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
         >
           <option value="">Select metric...</option>
@@ -151,14 +299,19 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
             {availableMetrics.find(m => m.name === config.xMetric)?.description}
           </p>
         )}
+        {renderParameterInputs(config.xMetric)}
       </div>
       <div>
         <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100">
           Y-Axis Metric <span className="text-red-500">*</span>
-        </label>
-        <select
+        </label>        <select
           value={config.yMetric || ''}
-          onChange={(e) => updateConfig({ yMetric: e.target.value })}
+          onChange={(e) => {
+            updateConfig({ yMetric: e.target.value });
+            if (e.target.value) {
+              fetchParametersForMetric(e.target.value);
+            }
+          }}
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
         >
           <option value="">Select metric...</option>
@@ -175,6 +328,7 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
             {availableMetrics.find(m => m.name === config.yMetric)?.description}
           </p>
         )}
+        {renderParameterInputs(config.yMetric)}
       </div>
     </div>
   );
@@ -206,10 +360,14 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
       <div>
         <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-gray-100">
           Metric <span className="text-red-500">*</span>
-        </label>
-        <select
+        </label>        <select
           value={config.lineMetric || ''}
-          onChange={(e) => updateConfig({ lineMetric: e.target.value })}
+          onChange={(e) => {
+            updateConfig({ lineMetric: e.target.value });
+            if (e.target.value) {
+              fetchParametersForMetric(e.target.value);
+            }
+          }}
           className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
         >
           <option value="">Select metric...</option>
@@ -224,6 +382,7 @@ export const ChartConfigurationFirst: React.FC<ChartConfigurationFirstProps> = (
             {availableMetrics.find(m => m.name === config.lineMetric)?.description}
           </p>
         )}
+        {renderParameterInputs(config.lineMetric)}
       </div>
     </div>
   );

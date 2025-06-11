@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Metric, FilterColumn, MultiMetricResults } from '../types/dashboard';
+import { Metric, FilterColumn, MultiMetricResults, MetricParameter } from '../types/dashboard';
 import { ChartConfiguration } from '../types/charts';
 
 const API_BASE = `${import.meta.env.VITE_API_URL}/api/data`;
@@ -69,10 +69,22 @@ export const useChartFirstData = (testType: string) => {
         setAvailableModels([]);
         setFilterValues({});
       }
-    };
-
-    fetchOptions();
+    };    fetchOptions();
   }, [testType]);
+
+  // Helper function to fetch parameters for a specific metric
+  const fetchParametersForMetric = async (testType: string, metricName: string): Promise<MetricParameter[]> => {
+    try {
+      const response = await fetch(`${API_BASE}/available-parameters/${testType}/${metricName}`);
+      if (response.ok) {
+        return await response.json();
+      }
+      return [];
+    } catch (err) {
+      console.error(`Error fetching parameters for metric ${metricName}:`, err);
+      return [];
+    }
+  };
 
   const createChart = async (
     config: ChartConfiguration,
@@ -91,16 +103,22 @@ export const useChartFirstData = (testType: string) => {
       
       if (requiredMetrics.length === 0) {
         throw new Error('No metrics specified for chart');
-      }
-
-      // Determine if we need grouping
+      }      // Determine if we need grouping
       const groupBy = config.categorical ? [config.categorical] : undefined;
+
+      // Flatten parameter values: from {metricName: {paramName: value}} to {paramName: value}
+      const flattenedParameters: Record<string, any> = {};
+      if (config.parameterValues) {
+        Object.values(config.parameterValues).forEach(metricParams => {
+          Object.assign(flattenedParameters, metricParams);
+        });
+      }
 
       // Prepare the request payload
       const requestPayload = {
         selected_models: selectedModels.length > 0 ? selectedModels : availableModels,
         selected_filters: selectedFilters,
-        parameter_values: {} // TODO: Add parameter support if needed
+        parameter_values: flattenedParameters
       };
 
       // Fetch data for each required metric
@@ -139,8 +157,7 @@ export const useChartFirstData = (testType: string) => {
     } finally {
       setLoading(false);
     }
-  };
-  return {
+  };  return {
     availableMetrics,
     availableFilters,
     availableModels,
@@ -148,7 +165,8 @@ export const useChartFirstData = (testType: string) => {
     results,
     loading,
     error,
-    createChart
+    createChart,
+    fetchParametersForMetric
   };
 };
 

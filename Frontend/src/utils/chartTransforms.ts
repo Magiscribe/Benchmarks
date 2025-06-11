@@ -65,7 +65,15 @@ const transformForBar = (
     return { datasets: [], labels: [] };
   }
 
-  const models = Array.from(new Set(results.map(r => r.model))).sort();
+  // Sort models by their primary metric values (ascending order)
+  const modelsWithValues = results
+    .map(r => ({
+      model: r.model,
+      value: r.metrics[config.metric1!] || 0
+    }))
+    .sort((a, b) => a.value - b.value); // Sort by value ascending
+  
+  const models = modelsWithValues.map(item => item.model);
   const datasets: ChartDataset[] = [];
 
   // Primary metric dataset

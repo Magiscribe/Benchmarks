@@ -119,7 +119,7 @@ export const useChartFirstData = (testType: string) => {
         selected_models: selectedModels.length > 0 ? selectedModels : availableModels,
         selected_filters: selectedFilters,
         parameter_values: flattenedParameters
-      };      // Fetch data for each required metric
+        
       const metricPromises = requiredMetrics.map(async (metric) => {
         let endpoint = `${API_BASE}/results/${testType}/${metric}`;
         

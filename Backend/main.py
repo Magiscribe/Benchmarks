@@ -37,15 +37,15 @@ async def root():
             "Multi-test-type support"
         ],        
         "endpoints": {
-            "/data/available-tests": "Get all available test types with configurations",
-            "/data/available-models/{test_type}": "Get all available models for a test type",
-            "/data/available-assets/{test_type}": "Get available asset IDs for a test type",
-            "/data/available-filters/{test_type}": "Get available filters for a test type",
-            "/data/available-filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
-            "/data/available-metrics/{test_type}": "Get available metrics for a test type",
-            "/data/available-parameters/{test_type}/{metric_name}": "Get parameters for a metric",
-            "/data/results/{test_type}/{metric}": "Get filtered results with metric calculation",
-            "/data/visualizations/{test_type}/{model}/{asset_id}": "Get visualization overlay for specific test asset"
+            "/benchmarks": "Get all benchmarks",
+            "/models/{test_type}": "Get all available models for a benchmark type", # /eye_test/models
+            "/assets/{test_type}": "Get available asset IDs for a benchmark type",
+            "/filters/{test_type}": "Get available filters for a benchmark type",
+            "/filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
+            "/metrics/{test_type}": "Get available metrics for a benchmark type",
+            "/parameters/{test_type}/{metric_name}": "Get parameters for a metric",
+            "/results/{test_type}/{metric}": "Get filtered results with metric calculation",
+            "/visualizations/{test_type}/{model}/{asset_id}": "Get visualization overlay for specific benchmark asset"
         }
     }
 

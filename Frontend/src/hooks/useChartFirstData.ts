@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Metric, FilterColumn, MultiMetricResults, MetricParameter } from '../types/dashboard';
 import { ChartConfiguration } from '../types/charts';
 
-const API_BASE = `${import.meta.env.VITE_API_URL}/api/data`;
+const API_BASE = `${import.meta.env.VITE_API_URL}/data`;
 
 export const useChartFirstData = (testType: string) => {
   const [availableMetrics, setAvailableMetrics] = useState<Metric[]>([]);
@@ -119,13 +119,14 @@ export const useChartFirstData = (testType: string) => {
         selected_models: selectedModels.length > 0 ? selectedModels : availableModels,
         selected_filters: selectedFilters,
         parameter_values: flattenedParameters
-      };
-
-      // Fetch data for each required metric
+        
       const metricPromises = requiredMetrics.map(async (metric) => {
-        const endpoint = groupBy && groupBy.length > 0
-          ? `${API_BASE}/results/${testType}/${metric}/group-by/${groupBy.join(',')}`
-          : `${API_BASE}/results/${testType}/${metric}`;
+        let endpoint = `${API_BASE}/results/${testType}/${metric}`;
+        
+        // Add group_by as query parameter if needed
+        if (groupBy && groupBy.length > 0) {
+          endpoint += `?group_by=${groupBy.join(',')}`;
+        }
 
         const response = await fetch(endpoint, {
           method: 'POST',

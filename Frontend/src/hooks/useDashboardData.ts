@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TestType } from '../types/dashboard';
 
-const API_BASE = `${import.meta.env.VITE_API_URL}/api/data`;
+const API_BASE = `${import.meta.env.VITE_API_URL}/data`;
 
 export const useDashboardData = () => {
   const [testTypes, setTestTypes] = useState<TestType[]>([]);

@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 # Include DSL-based data routes
-app.include_router(data.router, prefix="/api/data", tags=["data"])
+app.include_router(data.router, prefix="/data", tags=["data"])
 
 @app.get("/")
 async def root():
@@ -37,14 +37,14 @@ async def root():
             "Multi-test-type support"
         ],
         "endpoints": {
-            "/api/data/test-types": "Get available test types",
-            "/api/data/models/{test_type}": "Get model results for a test type",
-            "/api/data/tests/{test_type}": "Get individual test results",
-            "/api/data/compare/{test_type}": "Compare models on a test type",
-            "/api/data/metrics/execute": "Execute DSL metrics",
-            "/api/data/metrics/available/{test_type}": "Get available metrics",
-            "/api/data/filters/{test_type}": "Get filter options",
-            "/api/data/config/{test_type}": "Get test configuration"
+            "/data/test-types": "Get available test types",
+            "/data/models/{test_type}": "Get model results for a test type",
+            "/data/tests/{test_type}": "Get individual test results",
+            "/data/compare/{test_type}": "Compare models on a test type",
+            "/data/metrics/execute": "Execute DSL metrics",
+            "/data/metrics/available/{test_type}": "Get available metrics",
+            "/data/filters/{test_type}": "Get filter options",
+            "/data/config/{test_type}": "Get test configuration"
         }
     }
 

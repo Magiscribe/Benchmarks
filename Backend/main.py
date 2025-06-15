@@ -42,7 +42,8 @@ async def root():
             "/data/available-filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
             "/data/available-metrics/{test_type}": "Get available metrics for a test type",
             "/data/available-parameters/{test_type}/{metric_name}": "Get parameters for a metric",
-            "/data/results/{test_type}/{metric}": "Get filtered results with metric calculation"
+            "/data/results/{test_type}/{metric}": "Get filtered results with metric calculation",
+            "/data/visualizations/{test_type}/{model}/{asset_id}": "Get visualization overlay for specific test asset"
         }
     }
 

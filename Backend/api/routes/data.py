@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from ..models.schemas import TestTypeInfo, ResultsRequest, ResultsResponse
 from services.data_service import data_service
+from services.visualization_service import visualization_service
 
 router = APIRouter()
 
@@ -73,6 +74,15 @@ async def get_results(test_type: str, metric: str, request: ResultsRequest, grou
         if group_by:
             group_by_columns = [col.strip() for col in group_by.split(',')]
         return data_service.get_results(test_type, metric, request, group_by=group_by_columns)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/visualizations/{test_type}/{model}/{asset_id}")
+async def get_visualization(test_type: str, model: str, asset_id: str):
+    """Generate visualization overlay for a specific test, model, and asset."""
+    try:
+        return visualization_service.generate_visualization(test_type, model, asset_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

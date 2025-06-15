@@ -35,9 +35,11 @@ async def root():
             "DSL-based metric calculations", 
             "Configurable data filtering",
             "Multi-test-type support"
-        ],        "endpoints": {
+        ],        
+        "endpoints": {
             "/data/available-tests": "Get all available test types with configurations",
             "/data/available-models/{test_type}": "Get all available models for a test type",
+            "/data/available-assets/{test_type}": "Get available asset IDs for a test type",
             "/data/available-filters/{test_type}": "Get available filters for a test type",
             "/data/available-filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
             "/data/available-metrics/{test_type}": "Get available metrics for a test type",

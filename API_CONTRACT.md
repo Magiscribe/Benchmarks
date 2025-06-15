@@ -202,7 +202,35 @@ interface MetricParameter {
 
 ---
 
-### 7. Get Results (Basic)
+### 7. Get Available Assets
+**Endpoint**: `GET /available-assets/{test_type}`  
+**Description**: Retrieves all available asset IDs for a specific test type by scanning the assets directory.
+
+**Path Parameters**:
+- `test_type` (string): The test type name (e.g., "Eye_Test", "Coordinate_Grid")
+
+**Response**:
+```json
+[
+  "1001",
+  "1002", 
+  "1003",
+  "1004",
+  "1005"
+]
+```
+
+**Response Schema**: `string[]`
+
+**Notes**:
+- Returns asset IDs extracted from PNG filenames in the `{test_type}/assets/` directory
+- Asset IDs are sorted numerically for consistent ordering
+- Used by the Overview tab to populate asset selection dropdown
+- Returns empty array if no assets found or directory doesn't exist
+
+---
+
+### 8. Get Results (Basic)
 **Endpoint**: `POST /results/{test_type}/{metric}?group_by=categorical_factor`  
 **Description**: Retrieves filtered results grouped by model with metric calculation.
 

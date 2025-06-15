@@ -112,13 +112,12 @@ export const useChartFirstData = (testType: string) => {
         Object.values(config.parameterValues).forEach(metricParams => {
           Object.assign(flattenedParameters, metricParams);
         });
-      }
-
-      // Prepare the request payload
+      }      // Prepare the request payload
       const requestPayload = {
         selected_models: selectedModels.length > 0 ? selectedModels : availableModels,
         selected_filters: selectedFilters,
         parameter_values: flattenedParameters
+      };
         
       const metricPromises = requiredMetrics.map(async (metric) => {
         let endpoint = `${API_BASE}/results/${testType}/${metric}`;

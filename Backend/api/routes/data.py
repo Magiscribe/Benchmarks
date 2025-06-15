@@ -87,3 +87,12 @@ async def get_visualization(test_type: str, model: str, asset_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/available-assets/{test_type}")
+async def get_available_assets(test_type: str):
+    """Get all available asset IDs for a specific test type."""
+    try:
+        return data_service.get_available_assets(test_type)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+

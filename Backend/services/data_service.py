@@ -346,6 +346,26 @@ class DataService:
         except Exception as e:
             raise Exception(f"Error executing metric '{metric_name}': {str(e)}")
 
+    def get_available_assets(self, test_type: str) -> List[str]:
+        """Get list of available asset IDs for a specific test type from the assets directory."""
+        test_dir = self.tests_dir / test_type / "assets"
+        
+        if not test_dir.exists():
+            return []
+        
+        try:
+            assets = []
+            # Look for PNG files in the assets directory
+            for asset_file in test_dir.glob("*.png"):
+                # Remove the .png extension to get the asset ID
+                asset_id = asset_file.stem
+                assets.append(asset_id)
+            
+            return sorted(assets)
+        except Exception as e:
+            print(f"Error loading assets for {test_type}: {e}")
+            return []
+
 
 # Global instance
 data_service = DataService()

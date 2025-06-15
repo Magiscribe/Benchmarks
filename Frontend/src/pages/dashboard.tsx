@@ -1,10 +1,16 @@
 import Container from '@/components/layouts/Container';
 import Section from '@/components/Section';
 import Loading from '@/components/Loading';
-import { ChartFirstDashboard } from '@/components/charts/ChartFirstDashboard';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { TabNavigation, TabType } from '@/components/common/TabNavigation';
+import { OverviewTab } from '@/components/overview/OverviewTab';
+import { ChartsTab } from '@/components/charts/ChartsTab';
+import { LeaderboardTab } from '@/components/leaderboard/LeaderboardTab';
+import { useState } from 'react';
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState<TabType>('overview');
+  
   // Dashboard data (test types, loading, error)
   const {
     testTypes,
@@ -44,6 +50,19 @@ export default function Dashboard() {
     );
   }
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'overview':
+        return <OverviewTab testTypes={testTypes} />;
+      case 'charts':
+        return <ChartsTab testTypes={testTypes} />;
+      case 'leaderboard':
+        return <LeaderboardTab />;
+      default:
+        return <OverviewTab testTypes={testTypes} />;
+    }
+  };
+
   return (
     <Container>
       <div className="space-y-6">
@@ -53,12 +72,15 @@ export default function Dashboard() {
             Benchmark Dashboard
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Create charts by selecting chart type first, then configure your data
+            Comprehensive analysis and visualization of LLM benchmark results
           </p>
         </div>
 
-        {/* Chart-First Dashboard */}
-        <ChartFirstDashboard testTypes={testTypes} />
+        {/* Tab Navigation */}
+        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+
+        {/* Tab Content */}
+        {renderTabContent()}
 
         {/* Unavailable Tests */}
         {testTypes.some(t => !t.available) && (

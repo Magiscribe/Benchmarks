@@ -35,16 +35,14 @@ async def root():
             "DSL-based metric calculations", 
             "Configurable data filtering",
             "Multi-test-type support"
-        ],
-        "endpoints": {
-            "/data/test-types": "Get available test types",
-            "/data/models/{test_type}": "Get model results for a test type",
-            "/data/tests/{test_type}": "Get individual test results",
-            "/data/compare/{test_type}": "Compare models on a test type",
-            "/data/metrics/execute": "Execute DSL metrics",
-            "/data/metrics/available/{test_type}": "Get available metrics",
-            "/data/filters/{test_type}": "Get filter options",
-            "/data/config/{test_type}": "Get test configuration"
+        ],        "endpoints": {
+            "/data/available-tests": "Get all available test types with configurations",
+            "/data/available-models/{test_type}": "Get all available models for a test type",
+            "/data/available-filters/{test_type}": "Get available filters for a test type",
+            "/data/available-filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
+            "/data/available-metrics/{test_type}": "Get available metrics for a test type",
+            "/data/available-parameters/{test_type}/{metric_name}": "Get parameters for a metric",
+            "/data/results/{test_type}/{metric}": "Get filtered results with metric calculation"
         }
     }
 

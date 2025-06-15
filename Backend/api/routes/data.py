@@ -2,8 +2,8 @@
 Minimal API routes for test type selection.
 """
 
-from fastapi import APIRouter, HTTPException
-from typing import List
+from fastapi import APIRouter, HTTPException, Query
+from typing import List, Optional
 from ..models.schemas import TestTypeInfo, ResultsRequest, ResultsResponse
 from services.data_service import data_service
 
@@ -65,20 +65,15 @@ async def get_available_parameters(test_type: str, metric_name: str):
 
 
 @router.post("/results/{test_type}/{metric}", response_model=ResultsResponse)
-async def get_results(test_type: str, metric: str, request: ResultsRequest):
+async def get_results(test_type: str, metric: str, request: ResultsRequest, group_by: Optional[str] = Query(None)):
     """Get filtered results grouped by model with metric calculation."""
     try:
-        return data_service.get_results(test_type, metric, request)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.post("/results/{test_type}/{metric}/group-by/{group_by}", response_model=ResultsResponse)
-async def get_grouped_results(test_type: str, metric: str, group_by: str, request: ResultsRequest):
-    """Get filtered results grouped by model and additional columns with metric calculation."""
-    try:
-        # Split group_by string into list of columns
-        group_by_columns = [col.strip() for col in group_by.split(',')]
+        # Parse group_by query parameter if provided
+        group_by_columns = None
+        if group_by:
+            group_by_columns = [col.strip() for col in group_by.split(',')]
         return data_service.get_results(test_type, metric, request, group_by=group_by_columns)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+

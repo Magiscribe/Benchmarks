@@ -3,7 +3,7 @@
 ## Overview
 This API contract documents the REST API endpoints for the Magiscribe Benchmarks system. The backend is built with FastAPI and provides endpoints for test configuration, model data, and metric calculations using a Domain Specific Language (DSL) for dynamic metric execution.
 
-**Base URL**: `http://localhost:8000/api/data`  
+**Base URL**: `http://localhost:8000/data`  
 **Content-Type**: `application/json`  
 **CORS**: Enabled for all origins
 

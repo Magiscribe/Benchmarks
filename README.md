@@ -104,10 +104,10 @@ python main.py --evaluate --model gpt-4o
 ## Benchmarks
 
 ### Eye Test
-Vision benchmark that evaluates text recognition capabilities across different fonts. Models are shown images containing text in various typefaces (Arial, Times New Roman, Comic Sans, Courier, Verdana) and must accurately transcribe the displayed text.
+Tests vision models' ability to read progressively smaller text across five fonts, from 24pt down to 8pt font. Models are shown synthetic eye charts containing random uppercase and lowercase letters in Arial, Times New Roman, Comic Sans, Courier, and Verdana fonts.
 
 ### Coordinate Grid
-Spatial reasoning benchmark that tests coordinate system understanding. Models analyze images containing black squares on white backgrounds and must identify the precise coordinates of each square using a bottom-left origin coordinate system.
+Evaluates spatial reasoning by challenging models to return the coordinates of 5x5 black pixel squares on a 512x512 white grid. Models must identify exact center coordinates of randomly placed black squares on white 512x512 pixel backgrounds, testing both visual perception and mathematical coordinate understanding.
 
 ## Benchmark Structure
 

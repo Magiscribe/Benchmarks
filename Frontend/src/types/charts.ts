@@ -13,8 +13,6 @@ export interface ChartConfiguration {
   // Line chart: Categorical on X, Metric on Y (per model)
   categorical?: string;
   lineMetric?: string;
-  // Parameter values for metrics
-  parameterValues?: Record<string, Record<string, any>>;
 }
 
 export interface ChartValidation {
@@ -42,5 +40,5 @@ export interface ChartDataset {
 export interface FlatResult {
   model: string;
   metrics: Record<string, number>;
-  groupValues?: Record<string, string>;
+  groupings?: string[];
 }

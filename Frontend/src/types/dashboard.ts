@@ -1,9 +1,8 @@
-// Dashboard-specific types
-export interface TestType {
+// Backend benchmark format
+export interface Benchmark {
+  id: string;
   name: string;
-  displayName?: string;
   description: string;
-  available: boolean;
 }
 
 export interface FilterColumn {
@@ -13,34 +12,23 @@ export interface FilterColumn {
 }
 
 export interface Metric {
+  id: string;
   name: string;
-  displayName: string;
   description: string;
 }
 
-export interface MetricParameter {
-  name: string;
-  type: string;
-  default: any;
-  description: string;
-}
 
-export interface ModelResult {
-  metric_value: number;
-  sample_count: number;
-}
 
-export interface GroupedResult {
+// Results data structures matching backend API contract
+export interface ResultItem {
   model: string;
-  group_values: Record<string, string>;
-  data: ModelResult;
+  groupings: string[];
+  value: number;
 }
 
 export interface ResultsResponse {
-  results: GroupedResult[];
-  test_type: string;
+  results: ResultItem[];
   metric: string;
-  group_by?: string[];
 }
 
 export interface MultiMetricResults {
@@ -50,5 +38,4 @@ export interface MultiMetricResults {
 export interface ResultsRequest {
   models: string[];
   filters?: Record<string, string[]>;
-  parameters?: Record<string, any>;
 }

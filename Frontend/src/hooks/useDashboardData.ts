@@ -1,50 +1,47 @@
 import { useState, useEffect } from 'react';
-import { TestType } from '../types/dashboard';
+import { Benchmark } from '../types/dashboard';
 
-const API_BASE = `${import.meta.env.VITE_API_URL}/data`;
+const API_BASE = `${import.meta.env.VITE_API_URL}`;
 
 export const useDashboardData = () => {
-  const [testTypes, setTestTypes] = useState<TestType[]>([]);
-  const [selectedTestType, setSelectedTestType] = useState<string>('');
+  const [benchmarks, setbenchmarks] = useState<Benchmark[]>([]);
+  const [selectedBenchmark, setselectedBenchmark] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTestTypes = async () => {
+  const fetchbenchmarks = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/available-tests`);
+      const response = await fetch(`${API_BASE}/benchmarks`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      }      const data: Benchmark[] = await response.json();
+      setbenchmarks(data);
       
-      const data: TestType[] = await response.json();
-      setTestTypes(data);
-      
-      // Auto-select first available test type
-      const firstAvailable = data.find(t => t.available);
-      if (firstAvailable) {
-        setSelectedTestType(firstAvailable.name);
+      // Auto-select first benchmark
+      if (data.length > 0) {
+        setselectedBenchmark(data[0].id);
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      setError(`Failed to load test types: ${errorMessage}`);
-      console.error('Error fetching test types:', err);
+      setError(`Failed to load Benchmarks: ${errorMessage}`);
+      console.error('Error fetching benchmarks:', err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchTestTypes();
+    fetchbenchmarks();
   }, []);
 
   return {
-    testTypes,
-    selectedTestType,
-    setSelectedTestType,
+    benchmarks,
+    selectedBenchmark,
+    setselectedBenchmark,
     loading,
     error,
-    refetch: fetchTestTypes
+    refetch: fetchbenchmarks
   };
 };

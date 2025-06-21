@@ -1,26 +1,25 @@
 import React from 'react';
 import { Benchmark } from '../../types/dashboard';
-import { ChartFirstDashboard } from '../charts/ChartFirstDashboard';
+import { ChartBuilder } from './ChartBuilder';
 
 interface ChartsTabProps {
   benchmarks: Benchmark[];
+  selectedBenchmark?: string;
+  onBenchmarkChange?: (benchmarkId: string) => void;
 }
 
-export const ChartsTab: React.FC<ChartsTabProps> = ({ benchmarks }) => {
-  return (
+export const ChartsTab: React.FC<ChartsTabProps> = ({ 
+  benchmarks, 
+  selectedBenchmark, 
+  onBenchmarkChange 
+}) => {  return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          📊 Chart Builder
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          Create interactive charts and visualizations from your benchmark data. 
-          Configure chart types, select metrics, and apply filters to analyze model performance.
-        </p>
-      </div>
-
-      {/* Existing Chart Dashboard */}
-      <ChartFirstDashboard benchmarks={benchmarks} />
+      {/* Chart Builder Interface */}
+      <ChartBuilder 
+        benchmarks={benchmarks} 
+        selectedBenchmark={selectedBenchmark}
+        onBenchmarkChange={onBenchmarkChange}
+      />
     </div>
   );
 };

@@ -7,11 +7,10 @@ interface TabNavigationProps {
   onTabChange: (tab: TabType) => void;
 }
 
-export const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange }) => {
-  const tabs = [
+export const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange }) => {  const tabs = [
     { id: 'overview' as TabType, label: 'Overview', icon: '🎯' },
-    { id: 'charts' as TabType, label: 'Charts', icon: '📊' },
-    { id: 'leaderboard' as TabType, label: 'Leaderboard', icon: '🏆' }
+    { id: 'leaderboard' as TabType, label: 'Leaderboard', icon: '🏆' },
+    { id: 'charts' as TabType, label: 'Charts', icon: '📊' }
   ];
 
   return (

@@ -31,7 +31,7 @@ async def root():
         "message": "Benchmark Data API with DSL Support",
         "version": "2.0.0",
         "features": [
-            "Dynamic test type support",
+            "Dynamic benchmark support",
             "DSL-based metric calculations", 
             "Configurable data filtering",
             "Multi-test-type support"

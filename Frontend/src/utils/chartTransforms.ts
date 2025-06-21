@@ -167,25 +167,37 @@ const transformForLineFromOriginal = (
   const metricResults = results[config.lineMetric];
   if (!metricResults || !metricResults.results || metricResults.results.length === 0) {
     return { datasets: [], labels: [] };  }
-  
-  // For line charts, we need access to grouping data from the raw results
+    // For line charts, we need access to grouping data from the raw results
   // Since the new backend structure uses groupings as an array, we'll need to handle this differently
   // For now, we'll assume categorical grouping is the first element in the groupings array
   const categoryValues = Array.from(new Set(
     metricResults.results
       .filter(result => result.groupings && result.groupings.length > 0)
       .map(result => result.groupings[0])
-  )).sort();
+  ));
+  // Sort category values - handle numeric vs alphabetic sorting
+  const sortedCategoryValues = categoryValues.sort((a, b) => {
+    // Try to parse as numbers first
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+    
+    // If both are valid numbers, sort numerically
+    if (!isNaN(numA) && !isNaN(numB)) {
+      return numA - numB;
+    }
+    
+    // Otherwise, sort alphabetically
+    return a.localeCompare(b);
+  });
 
-  if (categoryValues.length === 0) {
+  if (sortedCategoryValues.length === 0) {
     return { datasets: [], labels: [] };
   }
 
   // Get all unique models
   const models = Array.from(new Set(metricResults.results.map(r => r.model))).sort();
-
   const datasets: ChartDataset[] = models.map((model, index) => {
-    const data: ChartDataPoint[] = categoryValues.map(category => {
+    const data: ChartDataPoint[] = sortedCategoryValues.map(category => {
       // Find the data point for this model and category
       const dataPoint = metricResults.results.find(result => 
         result.model === model && 
@@ -212,10 +224,9 @@ const transformForLineFromOriginal = (
       fill: false
     };
   });
-
   return {
     datasets,
-    labels: categoryValues
+    labels: sortedCategoryValues
   };
 };
 

@@ -12,8 +12,8 @@ export interface FilterColumn {
 }
 
 export interface Metric {
+  id: string;
   name: string;
-  displayName: string;
   description: string;
 }
 

@@ -19,14 +19,14 @@ export const useDashboardData = () => {
       }      const data: Benchmark[] = await response.json();
       setbenchmarks(data);
       
-      // Auto-select first test type
+      // Auto-select first benchmark
       if (data.length > 0) {
         setselectedBenchmark(data[0].id);
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      setError(`Failed to load test types: ${errorMessage}`);
-      console.error('Error fetching test types:', err);
+      setError(`Failed to load Benchmarks: ${errorMessage}`);
+      console.error('Error fetching benchmarks:', err);
     } finally {
       setLoading(false);
     }

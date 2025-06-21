@@ -1,5 +1,5 @@
 """
-Minimal data service for test type discovery.
+Minimal data service for benchmark discovery.
 """
 
 import json
@@ -10,7 +10,7 @@ from api.models.schemas import ResultsRequest, ResultsResponse, ResultItem
 
 
 class DataService:
-    """Minimal service for handling test type discovery."""
+    """Minimal service for handling benchmark discovery."""
     
     def __init__(self, tests_dir: Path = None):
         """Initialize the data service with directory paths."""
@@ -21,7 +21,7 @@ class DataService:
         self.dsl_executor = DSLExecutor()
     
     def get_available_models(self, benchmark_id: str) -> List[str]:
-        """Get list of available models for a specific test type from the results CSV."""
+        """Get list of available models for a specific benchmark from the results CSV."""
         # First check if we need to import pandas
         try:
             import pandas as pd
@@ -51,7 +51,7 @@ class DataService:
         format_file = test_dir / "csv_format.json"
         
         if not format_file.exists():
-            raise Exception(f"No format configuration found for test type: {benchmark_id}")
+            raise Exception(f"No format configuration found for benchmark: {benchmark_id}")
         
         format_config = self.dsl_executor.load_format_config(format_file)
           # Find the metric definition
@@ -63,7 +63,7 @@ class DataService:
                     break
         
         if metric_def is None:
-            raise Exception(f"Metric '{metric_name}' not found in test type '{benchmark_id}'")
+            raise Exception(f"Metric '{metric_name}' not found in benchmark '{benchmark_id}'")
         
         # Execute the metric using DSL executor
         try:
@@ -83,7 +83,7 @@ class DataService:
             raise Exception(f"Error executing metric '{metric_name}': {str(e)}")
 
     def get_available_assets(self, benchmark_id: str) -> List[str]:
-        """Get list of available asset IDs for a specific test type from the assets directory."""
+        """Get list of available asset IDs for a specific benchmark from the assets directory."""
         test_dir = self.tests_dir / benchmark_id / "assets"
         
         if not test_dir.exists():
@@ -180,17 +180,27 @@ class DataService:
             df = pd.read_csv(results_file)
             
             filters = {}
-            
-            # Process each column that can be filtered
+              # Process each column that can be filtered
             for column in format_config.columns:
                 column_type = column['type']
                 column_name = column['name']
-                
-                # Only include categorical and identifier columns (not quantitative or entity)
-                if column_type in ['categorical', 'identifier'] and column_name in df.columns:
-                    # Get unique values, sort them, and convert to strings
-                    unique_values = sorted(df[column_name].dropna().unique().tolist())
-                    filters[column_name] = [str(val) for val in unique_values]
+                  # Only include categorical, identifier, and numeric columns (not quantitative or entity)
+                if column_type in ['categorical', 'identifier', 'numeric'] and column_name in df.columns:
+                    # Get unique values and sort them
+                    unique_values = df[column_name].dropna().unique().tolist()
+                    
+                    if column_type == 'numeric':
+                        # For numeric columns, sort numerically but return as strings for API compatibility
+                        try:
+                            unique_values = sorted([float(val) for val in unique_values])
+                            # Convert back to strings, but keep integers as integers
+                            filters[column_name] = [str(int(val)) if val.is_integer() else str(val) for val in unique_values]
+                        except (ValueError, TypeError):
+                            # Fallback to string sorting if conversion fails
+                            filters[column_name] = sorted([str(val) for val in unique_values])
+                    else:
+                        # For categorical and identifier columns, convert to strings and sort alphabetically
+                        filters[column_name] = sorted([str(val) for val in unique_values])
             
             return filters
             

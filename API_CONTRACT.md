@@ -8,16 +8,15 @@
 
 **Response**:
 ```json
-[
-  {
+[  {
     "id": "Eye_Test",
     "name": "Eye Test",
-    "description": "LLM performance on character recognition at different font sizes",
+    "description": "Tests vision models' ability to read progressively smaller text across five fonts, from 24pt down to 8pt font.",
   },
   {
     "id": "Coordinate_Grid", 
     "name": "Coordinate Grid",
-    "description": "LLM performance on identifying coordinates in a grid",
+    "description": "Evaluates spatial reasoning by challenging models to return the coordinates of 5x5 black pixel squares on a 512x512 white grid.",
   }
 ]
 ```

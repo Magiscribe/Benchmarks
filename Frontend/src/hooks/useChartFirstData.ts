@@ -13,7 +13,7 @@ export const useChartFirstData = (benchmark: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch all available options when test type changes
+  // Fetch all available options when benchmark changes
   useEffect(() => {    if (!benchmark) {
       setAvailableMetrics([]);
       setAvailableFilters([]);

@@ -1,5 +1,5 @@
 """
-Minimal API routes for test type selection.
+Minimal API routes for benchmark selection.
 """
 
 from fastapi import APIRouter, HTTPException, Query

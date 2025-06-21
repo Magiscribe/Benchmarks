@@ -4,14 +4,15 @@ import Loading from '@/components/Loading';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { TabNavigation, TabType } from '@/components/common/TabNavigation';
 import { OverviewTab } from '@/components/overview/OverviewTab';
-import { ChartsTab } from '@/components/charts/ChartsTab';
+import { ChartBuilder } from '@/components/charts/ChartBuilder';
 import { LeaderboardTab } from '@/components/leaderboard/LeaderboardTab';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
+  const [selectedBenchmark, setSelectedBenchmark] = useState<string>('');
   
-  // Dashboard data (test types, loading, error)
+  // Dashboard data (benchmarks, loading, error)
   const {
     benchmarks,
     loading,
@@ -19,13 +20,20 @@ export default function Dashboard() {
     refetch: refetchbenchmarks
   } = useDashboardData();
 
+  // Auto-select first benchmark when benchmarks are loaded
+  useEffect(() => {
+    if (benchmarks.length > 0 && !selectedBenchmark) {
+      setSelectedBenchmark(benchmarks[0].id);
+    }
+  }, [benchmarks, selectedBenchmark]);
+
   if (loading) {
     return (
       <Container>
         <Section title="Loading">
           <div className="flex items-center justify-center py-12">
             <Loading className="w-8 h-8 mr-3" />
-            <div className="text-lg">Loading test types...</div>
+            <div className="text-lg">Loading Benchmarks...</div>
           </div>
         </Section>
       </Container>
@@ -49,17 +57,34 @@ export default function Dashboard() {
       </Container>
     );
   }
-
   const renderTabContent = () => {
     switch (activeTab) {
       case 'overview':
-        return <OverviewTab benchmarks={benchmarks} />;
-      case 'charts':
-        return <ChartsTab benchmarks={benchmarks} />;
-      case 'leaderboard':
-        return <LeaderboardTab />;
+        return <OverviewTab 
+          benchmarks={benchmarks} 
+          selectedBenchmark={selectedBenchmark}
+          onBenchmarkChange={setSelectedBenchmark}
+        />;      case 'charts':
+        return (
+          <div className="space-y-6">
+            <ChartBuilder 
+              benchmarks={benchmarks}
+              selectedBenchmark={selectedBenchmark}
+              onBenchmarkChange={setSelectedBenchmark}
+            />
+          </div>
+        );case 'leaderboard':
+        return <LeaderboardTab 
+          benchmarks={benchmarks}
+          selectedBenchmark={selectedBenchmark}
+          onBenchmarkChange={setSelectedBenchmark}
+        />;
       default:
-        return <OverviewTab benchmarks={benchmarks} />;
+        return <OverviewTab 
+          benchmarks={benchmarks}
+          selectedBenchmark={selectedBenchmark}
+          onBenchmarkChange={setSelectedBenchmark}
+        />;
     }
   };
 
@@ -72,7 +97,7 @@ export default function Dashboard() {
             Benchmark Dashboard
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Comprehensive analysis and visualization of LLM benchmark results
+            Comprehensive analysis and visualization of LLM Benchmark results
           </p>
         </div>
 

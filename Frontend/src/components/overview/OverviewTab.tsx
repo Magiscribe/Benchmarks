@@ -108,7 +108,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE}/visualizations/${selectedTestType}/${selectedModel}/${selectedAssetId}`);
+      const response = await fetch(`${API_BASE}/benchmarks/${selectedTestType}/visualizations/${selectedModel}/${selectedAssetId}`);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);

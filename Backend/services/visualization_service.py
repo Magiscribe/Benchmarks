@@ -16,12 +16,12 @@ class VisualizationService:
     def __init__(self):
         self.tests_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "Tests")
     
-    def generate_visualization(self, test_type: str, model: str, asset_id: str) -> Dict[str, Any]:
+    def generate_visualization(self, benchmark_id: str, model: str, asset_id: str) -> Dict[str, Any]:
         """
-        Generate visualization overlay for a specific test, model, and asset.
+        Generate visualization overlay for a specific benchmark, model, and asset.
         
         Args:
-            test_type: The test type (e.g., "Coordinate_Grid", "Eye_Test")
+            benchmark_id: The benchmark ID (e.g., "Coordinate_Grid", "Eye_Test")
             model: The model name (e.g., "claude-3-5-haiku")
             asset_id: The asset identifier (e.g., "coordinate_grid_1748135594214")
             
@@ -29,20 +29,19 @@ class VisualizationService:
             Dict containing base64 encoded visualization and metadata
         """
         try:
-            if test_type == "Coordinate_Grid":
-                return self._generate_coordinate_grid_visualization(model, asset_id)
-            elif test_type == "Eye_Test":
-                return self._generate_eye_test_visualization(model, asset_id)
+            if benchmark_id == "Coordinate_Grid":
+                return self._generate_coordinate_grid_visualization(benchmark_id, model, asset_id)
+            elif benchmark_id == "Eye_Test":                return self._generate_eye_test_visualization(benchmark_id, model, asset_id)
             else:
-                raise ValueError(f"Unsupported test type: {test_type}")
+                raise ValueError(f"Unsupported benchmark: {benchmark_id}")
                 
         except Exception as e:
             logger.error(f"Error generating visualization: {e}")
             raise
     
-    def _generate_coordinate_grid_visualization(self, model: str, asset_id: str) -> Dict[str, Any]:
-        """Generate visualization for Coordinate_Grid test."""
-        test_dir = os.path.join(self.tests_dir, "Coordinate_Grid")
+    def _generate_coordinate_grid_visualization(self, benchmark_id: str, model: str, asset_id: str) -> Dict[str, Any]:
+        """Generate visualization for Coordinate_Grid benchmark."""
+        test_dir = os.path.join(self.tests_dir, benchmark_id)
         
         # Load original image
         image_path = os.path.join(test_dir, "assets", f"{asset_id}.png")
@@ -102,9 +101,8 @@ class VisualizationService:
         buffer = BytesIO()
         image.save(buffer, format='PNG')
         image_b64 = base64.b64encode(buffer.getvalue()).decode()
-        
         return {
-            "test_type": "Coordinate_Grid",
+            "benchmark_id": benchmark_id,
             "model": model,
             "asset_id": asset_id,
             "visualization_image": image_b64,
@@ -115,9 +113,9 @@ class VisualizationService:
             }
         }
     
-    def _generate_eye_test_visualization(self, model: str, asset_id: str) -> Dict[str, Any]:
-        """Generate visualization for Eye_Test test with character-level highlighting."""
-        test_dir = os.path.join(self.tests_dir, "Eye_Test")
+    def _generate_eye_test_visualization(self, benchmark_id: str, model: str, asset_id: str) -> Dict[str, Any]:
+        """Generate visualization for Eye_Test benchmark with character-level highlighting."""
+        test_dir = os.path.join(self.tests_dir, benchmark_id)
         
         # Load original image
         image_path = os.path.join(test_dir, "assets", f"{asset_id}.png")
@@ -253,9 +251,8 @@ class VisualizationService:
         buffer = BytesIO()
         final_image.save(buffer, format='PNG')
         image_b64 = base64.b64encode(buffer.getvalue()).decode()
-        
         return {
-            "test_type": "Eye_Test",
+            "benchmark_id": benchmark_id,
             "model": model,
             "asset_id": asset_id,
             "visualization_image": image_b64,

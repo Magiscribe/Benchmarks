@@ -145,8 +145,31 @@
       "groupings": ["Times New Roman"],
       "value": 0.423,
     },
-  ],
-  "metric": "accuracy"
+  ],  "metric": "accuracy"
+}
+```
+---
+### 7. Get Visualization Overlay
+**Endpoint**: `GET /benchmarks/{benchmark_id}/visualizations/{model}/{asset_id}`  
+**Description**: Generates a visualization overlay showing model predictions on the original benchmark asset image.
+
+**Path Parameters**:
+- `benchmark_id` (string): The benchmark id (e.g., "Eye_Test", "Coordinate_Grid")
+- `model` (string): The model name (e.g., "claude-3-5-haiku", "gpt-4o")
+- `asset_id` (string): The asset ID (e.g., "1001", "1002")
+
+**Response**:
+```json
+{
+  "benchmark_id": "Eye_Test",
+  "model": "claude-3-5-haiku",
+  "asset_id": "1001",
+  "visualization_image": "iVBORw0KGgoAAAANSUhEUgAA...",
+  "metadata": {
+    "ground_truth": "A",
+    "predictions": [{"character": "A", "confidence": 0.95}],
+    "image_dimensions": {"width": 400, "height": 300}
+  }
 }
 ```
 ---
@@ -174,4 +197,7 @@
 
 ### Results Endpoints
 - `POST /benchmarks/{benchmark_id}/metrics/{metric_id}?group_by={categorical_variable}` - Get metric results with filtering and grouping (group_by is optional)
+
+### Visualization Endpoints  
+- `GET /benchmarks/{benchmark_id}/visualizations/{model}/{asset_id}` - Get visualization overlay showing model predictions on asset
 ---

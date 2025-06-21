@@ -26,11 +26,10 @@ class DSLOperation:
 @dataclass
 class DSLMetric:
     """Represents a metric definition from csv_format.json."""
+    id: str
     name: str
-    displayName: str
     description: str
     steps: List[DSLOperation]
-    parameters: Optional[List[Dict[str, Any]]] = None
 
 
 @dataclass
@@ -82,14 +81,12 @@ class DSLExecutor:
                     exp=step_data.get('exp'),
                     value=step_data.get('value')
                 )
-                steps.append(step)
-            
+                steps.append(step)            
             metric = DSLMetric(
+                id=metric_data['id'],
                 name=metric_data['name'],
-                displayName=metric_data['displayName'],
                 description=metric_data['description'],
-                steps=steps,
-                parameters=metric_data.get('parameters')
+                steps=steps
             )
             metrics.append(metric)
         
@@ -100,26 +97,20 @@ class DSLExecutor:
             metrics=metrics
         )
     
-    def execute_metric(self, df: pd.DataFrame, metric: DSLMetric, parameters: Optional[Dict[str, Any]] = None) -> Any:
+    def execute_metric(self, df: pd.DataFrame, metric: DSLMetric) -> Any:
         """
         Execute a single metric calculation on a DataFrame.
         
         Args:
             df: Input DataFrame
             metric: Metric definition to execute
-            parameters: Optional parameters for parameterized metrics
             
         Returns:
             Any: Calculated metric value
         """
         self.df = df.copy()
         self.variables = {}
-        
-        # Set parameters if provided
-        if parameters:
-            for key, value in parameters.items():
-                self.variables[f"${key}"] = value
-        
+
         # Execute each step
         for step in metric.steps:
             self._execute_operation(step)
@@ -176,13 +167,8 @@ class DSLExecutor:
                 self.variables[op.as_] = result
         
         elif op.op == "filter":
-            # Parse condition
+            # Parse condition - no parameter support anymore
             condition_str = op.condition
-            
-            # Replace parameter placeholders
-            for var_name, var_value in self.variables.items():
-                if var_name.startswith('$'):
-                    condition_str = condition_str.replace(var_name, str(var_value))
             
             # Get the column data
             col_data = self._get_value(op.col)
@@ -270,8 +256,7 @@ class DSLExecutor:
             pass
         
         else:
-            raise ValueError(f"Unsupported operation: {op.op}")
-    
+            raise ValueError(f"Unsupported operation: {op.op}")    
     def _get_value(self, identifier: str) -> Any:
         """Get value from either DataFrame column or variables."""
         if identifier in self.df.columns:
@@ -281,15 +266,13 @@ class DSLExecutor:
         else:
             raise ValueError(f"Unknown identifier: {identifier}")
     
-    def execute_all_metrics(self, df: pd.DataFrame, format_config: DSLFormat, 
-                          metric_parameters: Optional[Dict[str, Dict[str, Any]]] = None) -> Dict[str, Any]:
+    def execute_all_metrics(self, df: pd.DataFrame, format_config: DSLFormat) -> Dict[str, Any]:
         """
         Execute all metrics defined in a format configuration.
         
         Args:
             df: Input DataFrame
             format_config: Complete format configuration
-            metric_parameters: Optional parameters for specific metrics
             
         Returns:
             Dict[str, Any]: Results for all metrics
@@ -298,26 +281,16 @@ class DSLExecutor:
         
         for metric in format_config.metrics:
             try:
-                # Get parameters for this specific metric
-                params = metric_parameters.get(metric.name, {}) if metric_parameters else {}
-                
-                # Set default parameters if defined in metric
-                if metric.parameters:
-                    for param_def in metric.parameters:
-                        param_name = param_def['name']
-                        if param_name not in params:
-                            params[param_name] = param_def.get('default')
-                
-                result = self.execute_metric(df, metric, params)
-                results[metric.name] = {
+                result = self.execute_metric(df, metric)
+                results[metric.id] = {
                     'value': result,
-                    'displayName': metric.displayName,
+                    'name': metric.name,
                     'description': metric.description
                 }
             except Exception as e:
-                results[metric.name] = {
+                results[metric.id] = {
                     'error': str(e),
-                    'displayName': metric.displayName,
+                    'name': metric.name,
                     'description': metric.description
                 }
         

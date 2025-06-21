@@ -21,8 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include DSL-based data routes
-app.include_router(data.router, prefix="/data", tags=["data"])
+# Include benchmark routes
+app.include_router(data.router, tags=["benchmarks"])
 
 @app.get("/")
 async def root():
@@ -35,17 +35,14 @@ async def root():
             "DSL-based metric calculations", 
             "Configurable data filtering",
             "Multi-test-type support"
-        ],        
-        "endpoints": {
+        ],        "endpoints": {
             "/benchmarks": "Get all benchmarks",
-            "/models/{test_type}": "Get all available models for a benchmark type", # /eye_test/models
-            "/assets/{test_type}": "Get available asset IDs for a benchmark type",
-            "/filters/{test_type}": "Get available filters for a benchmark type",
-            "/filter-values/{test_type}/{filter_name}": "Get unique values for a filter",
-            "/metrics/{test_type}": "Get available metrics for a benchmark type",
-            "/parameters/{test_type}/{metric_name}": "Get parameters for a metric",
-            "/results/{test_type}/{metric}": "Get filtered results with metric calculation",
-            "/visualizations/{test_type}/{model}/{asset_id}": "Get visualization overlay for specific benchmark asset"
+            "/benchmarks/{benchmark_id}/models": "Get all available models for a benchmark",
+            "/benchmarks/{benchmark_id}/assets": "Get available asset IDs for a benchmark",
+            "/benchmarks/{benchmark_id}/metrics": "Get available metrics for a benchmark",
+            "/benchmarks/{benchmark_id}/filters": "Get available filters for a benchmark",
+            "/benchmarks/{benchmark_id}/metrics/{metric_id}": "Get filtered results with metric calculation",
+            "/benchmarks/{benchmark_id}/visualizations/{model}/{asset_id}": "Get visualization overlay for specific benchmark asset"
         }
     }
 

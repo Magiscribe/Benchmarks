@@ -1,12 +1,12 @@
 import React from 'react';
-import { TestType } from '../../types/dashboard';
+import { Benchmark } from '../../types/dashboard';
 import { ChartFirstDashboard } from '../charts/ChartFirstDashboard';
 
 interface ChartsTabProps {
-  testTypes: TestType[];
+  benchmarks: Benchmark[];
 }
 
-export const ChartsTab: React.FC<ChartsTabProps> = ({ testTypes }) => {
+export const ChartsTab: React.FC<ChartsTabProps> = ({ benchmarks }) => {
   return (
     <div className="space-y-6">
       <div>
@@ -20,7 +20,7 @@ export const ChartsTab: React.FC<ChartsTabProps> = ({ testTypes }) => {
       </div>
 
       {/* Existing Chart Dashboard */}
-      <ChartFirstDashboard testTypes={testTypes} />
+      <ChartFirstDashboard benchmarks={benchmarks} />
     </div>
   );
 };

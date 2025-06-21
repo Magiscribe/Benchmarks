@@ -35,7 +35,7 @@ class DSLMetric:
 @dataclass
 class DSLFormat:
     """Represents the complete csv_format.json structure."""
-    testType: str
+    benchmark: str
     description: str
     columns: List[Dict[str, Any]]
     metrics: List[DSLMetric]
@@ -91,7 +91,7 @@ class DSLExecutor:
             metrics.append(metric)
         
         return DSLFormat(
-            testType=config_data['testType'],
+            benchmark=config_data['benchmark'],
             description=config_data['description'],
             columns=config_data['columns'],
             metrics=metrics

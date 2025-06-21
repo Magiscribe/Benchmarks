@@ -1,5 +1,5 @@
 {
-  "testType": "Coordinate_Grid",
+  "benchmark": "Coordinate_Grid",
   "description": "LLM performance on identifying coordinates in a grid",
   "columns": [
     {

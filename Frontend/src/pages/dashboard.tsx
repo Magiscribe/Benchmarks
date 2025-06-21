@@ -13,10 +13,10 @@ export default function Dashboard() {
   
   // Dashboard data (test types, loading, error)
   const {
-    testTypes,
+    benchmarks,
     loading,
     error,
-    refetch: refetchTestTypes
+    refetch: refetchbenchmarks
   } = useDashboardData();
 
   if (loading) {
@@ -39,7 +39,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-center py-12">
             <div className="text-red-500">Error: {error}</div>
             <button
-              onClick={refetchTestTypes}
+              onClick={refetchbenchmarks}
               className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
               Retry
@@ -53,13 +53,13 @@ export default function Dashboard() {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'overview':
-        return <OverviewTab testTypes={testTypes} />;
+        return <OverviewTab benchmarks={benchmarks} />;
       case 'charts':
-        return <ChartsTab testTypes={testTypes} />;
+        return <ChartsTab benchmarks={benchmarks} />;
       case 'leaderboard':
         return <LeaderboardTab />;
       default:
-        return <OverviewTab testTypes={testTypes} />;
+        return <OverviewTab benchmarks={benchmarks} />;
     }
   };
 
@@ -77,33 +77,8 @@ export default function Dashboard() {
         </div>
 
         {/* Tab Navigation */}
-        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-
-        {/* Tab Content */}
+        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />        {/* Tab Content */}
         {renderTabContent()}
-
-        {/* Unavailable Tests */}
-        {testTypes.some(t => !t.available) && (
-          <Section title="Unavailable Tests">
-            <div className="space-y-2">
-              {testTypes
-                .filter(test => !test.available)
-                .map((test) => (
-                  <div
-                    key={test.name}
-                    className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg opacity-60"
-                  >
-                    <h3 className="font-medium text-gray-700 dark:text-gray-300">
-                      {test.displayName || test.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {test.description}
-                    </p>
-                  </div>
-                ))}
-            </div>
-          </Section>
-        )}
       </div>
     </Container>
   );

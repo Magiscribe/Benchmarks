@@ -1,5 +1,5 @@
 {
-  "testType": "Eye_Test",
+  "benchmark": "Eye_Test",
   "description": "LLM performance on character recognition at different font sizes",
   "columns": [
     {

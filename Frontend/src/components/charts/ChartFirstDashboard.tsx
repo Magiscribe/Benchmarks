@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { TestType } from '../../types/dashboard';
+import { Benchmark } from '../../types/dashboard';
 import { ChartConfiguration } from '../../types/charts';
 import { ChartConfigurationFirst } from './ChartConfigurationFirst';
 import { DynamicChart } from './DynamicChart';
 import { useChartFirstData } from '../../hooks/useChartFirstData';
 
 interface ChartFirstDashboardProps {
-  testTypes: TestType[];
+  benchmarks: Benchmark[];
 }
 
-export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTypes }) => {  const [selectedTestType, setSelectedTestType] = useState<string>('');
+export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ benchmarks }) => {  const [selectedBenchmark, setselectedBenchmark] = useState<string>('');
   const [chartConfig, setChartConfig] = useState<ChartConfiguration>({ chartType: 'bar' });
   const [advancedFilters, setAdvancedFilters] = useState<{
     selectedModels: string[];
@@ -24,9 +24,8 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
     results,
     loading,
     error,
-    createChart,
-    fetchParametersForMetric
-  } = useChartFirstData(selectedTestType);// Auto-select all models when they become available
+    createChart
+  } = useChartFirstData(selectedBenchmark);// Auto-select all models when they become available
   React.useEffect(() => {
     if (availableModels.length > 0 && advancedFilters.selectedModels.length === 0) {
       setAdvancedFilters(prev => ({
@@ -61,10 +60,10 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
       selectedModels: [],
       selectedFilters: {}
     });
-  }, [selectedTestType]);
+  }, [selectedBenchmark]);
 
   const canCreateChart = useMemo(() => {
-    if (!selectedTestType) return false;
+    if (!selectedBenchmark) return false;
     
     switch (chartConfig.chartType) {
       case 'bar':
@@ -76,7 +75,7 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
       default:
         return false;
     }
-  }, [selectedTestType, chartConfig]);
+  }, [selectedBenchmark, chartConfig]);
   const handleCreateChart = async () => {
     if (!canCreateChart) return;
 
@@ -114,36 +113,33 @@ export const ChartFirstDashboard: React.FC<ChartFirstDashboardProps> = ({ testTy
               Test Type <span className="text-red-500">*</span>
             </label>
             <select
-              value={selectedTestType}
-              onChange={(e) => setSelectedTestType(e.target.value)}
+              value={selectedBenchmark}
+              onChange={(e) => setselectedBenchmark(e.target.value)}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
             >
-              <option value="">Select a test type...</option>
-              {testTypes.filter(t => t.available).map(testType => (
-                <option key={testType.name} value={testType.name}>
-                  {testType.displayName || testType.name}
+              <option value="">Select a test type...</option>              {benchmarks.map(benchmark => (
+                <option key={benchmark.id} value={benchmark.id}>
+                  {benchmark.name}
                 </option>
               ))}
             </select>
-            {selectedTestType && (
+            {selectedBenchmark && (
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                {testTypes.find(t => t.name === selectedTestType)?.description}
+                {benchmarks.find(t => t.id === selectedBenchmark)?.description}
               </p>
             )}
           </div>          {/* Chart Configuration */}
-          {selectedTestType && (
-            <ChartConfigurationFirst
+          {selectedBenchmark && (            <ChartConfigurationFirst
               availableMetrics={availableMetrics}
               availableCategories={availableFilters}
               config={chartConfig}
               onConfigChange={setChartConfig}
-              onFetchParameters={fetchParametersForMetric}
-              selectedTestType={selectedTestType}
+              selectedBenchmark={selectedBenchmark}
             />
           )}
 
           {/* Advanced Filters Toggle */}
-          {selectedTestType && (
+          {selectedBenchmark && (
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <button
                 onClick={() => setShowAdvanced(!showAdvanced)}

@@ -20,7 +20,7 @@ class DataService:
         self.tests_dir = tests_dir
         self.dsl_executor = DSLExecutor()
     
-    def get_available_models(self, test_type: str) -> List[str]:
+    def get_available_models(self, benchmark_id: str) -> List[str]:
         """Get list of available models for a specific test type from the results CSV."""
         # First check if we need to import pandas
         try:
@@ -28,7 +28,7 @@ class DataService:
         except ImportError:
             return []
             
-        results_file = Path(__file__).parent.parent.parent / "Results" / f"{test_type}_model_results.csv"
+        results_file = Path(__file__).parent.parent.parent / "Results" / f"{benchmark_id}_model_results.csv"
         
         if not results_file.exists():
             return []
@@ -41,17 +41,17 @@ class DataService:
             else:
                 return []
         except Exception as e:
-            print(f"Error loading models for {test_type}: {e}")
+            print(f"Error loading models for {benchmark_id}: {e}")
             return []
 
-    def _calculate_metric(self, test_type: str, metric_name: str, data_df) -> float:
+    def _calculate_metric(self, benchmark_id: str, metric_name: str, data_df) -> float:
         """Calculate a specific metric for the given data using DSL executor."""
         # Load the metric configuration
-        test_dir = self.tests_dir / test_type
+        test_dir = self.tests_dir / benchmark_id
         format_file = test_dir / "csv_format.json"
         
         if not format_file.exists():
-            raise Exception(f"No format configuration found for test type: {test_type}")
+            raise Exception(f"No format configuration found for test type: {benchmark_id}")
         
         format_config = self.dsl_executor.load_format_config(format_file)
           # Find the metric definition
@@ -63,7 +63,7 @@ class DataService:
                     break
         
         if metric_def is None:
-            raise Exception(f"Metric '{metric_name}' not found in test type '{test_type}'")
+            raise Exception(f"Metric '{metric_name}' not found in test type '{benchmark_id}'")
         
         # Execute the metric using DSL executor
         try:
@@ -82,9 +82,9 @@ class DataService:
         except Exception as e:
             raise Exception(f"Error executing metric '{metric_name}': {str(e)}")
 
-    def get_available_assets(self, test_type: str) -> List[str]:
+    def get_available_assets(self, benchmark_id: str) -> List[str]:
         """Get list of available asset IDs for a specific test type from the assets directory."""
-        test_dir = self.tests_dir / test_type / "assets"
+        test_dir = self.tests_dir / benchmark_id / "assets"
         
         if not test_dir.exists():
             return []
@@ -99,7 +99,7 @@ class DataService:
             
             return sorted(assets)
         except Exception as e:
-            print(f"Error loading assets for {test_type}: {e}")
+            print(f"Error loading assets for {benchmark_id}: {e}")
             return []
 
     def get_benchmarks(self) -> List[dict]:
@@ -116,7 +116,7 @@ class DataService:
                         
                         benchmarks.append({
                             "id": test_dir.name,
-                            "name": format_config.testType,
+                            "name": format_config.benchmark,
                             "description": format_config.description
                         })
                     except Exception as e:

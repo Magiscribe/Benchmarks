@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { TestType } from '../../types/dashboard';
+import { Benchmark } from '../../types/dashboard';
 
 interface OverviewTabProps {
-  testTypes: TestType[];
+  benchmarks: Benchmark[];
 }
 
 interface VisualizationData {
-  test_type: string;
+  benchmark_id: string;
   model: string;
   asset_id: string;
   visualization_image: string;
@@ -20,10 +20,10 @@ interface VisualizationData {
   };
 }
 
-const API_BASE = `${import.meta.env.VITE_API_URL}/data`;
+const API_BASE = `${import.meta.env.VITE_API_URL}`;
 
-export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
-  const [selectedTestType, setSelectedTestType] = useState<string>('');
+export const OverviewTab: React.FC<OverviewTabProps> = ({ benchmarks }) => {
+  const [selectedBenchmark, setselectedBenchmark] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [selectedAssetId, setSelectedAssetId] = useState<string>('');
   const [availableModels, setAvailableModels] = useState<string[]>([]);
@@ -42,9 +42,9 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
 
   // Fetch available models when test type changes
   useEffect(() => {
-    if (selectedTestType) {
-      fetchAvailableModels(selectedTestType);
-      fetchAvailableAssets(selectedTestType);
+    if (selectedBenchmark) {
+      fetchAvailableModels(selectedBenchmark);
+      fetchAvailableAssets(selectedBenchmark);
     } else {
       setAvailableModels([]);
       setAvailableAssets([]);
@@ -52,11 +52,11 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
     setSelectedModel('');
     setSelectedAssetId('');
     setVisualization(null);
-  }, [selectedTestType]);
+  }, [selectedBenchmark]);
 
-  const fetchAvailableModels = async (testType: string) => {
+  const fetchAvailableModels = async (benchmark: string) => {
     try {
-      const response = await fetch(`${API_BASE}/available-models/${testType}`);
+      const response = await fetch(`${API_BASE}/benchmarks/${benchmark}/models`);
       if (response.ok) {
         const data = await response.json();
         setAvailableModels(data);
@@ -73,9 +73,9 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
     }
   };
 
-  const fetchAvailableAssets = async (testType: string) => {
+  const fetchAvailableAssets = async (benchmark: string) => {
     try {
-      const response = await fetch(`${API_BASE}/available-assets/${testType}`);
+      const response = await fetch(`${API_BASE}/benchmarks/${benchmark}/assets`);
       if (response.ok) {
         const data = await response.json();
         setAvailableAssets(data);
@@ -99,7 +99,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
   };
 
   const generateVisualization = async () => {
-    if (!selectedTestType || !selectedModel || !selectedAssetId) {
+    if (!selectedBenchmark || !selectedModel || !selectedAssetId) {
       setError('Please select test type, model, and asset ID');
       return;
     }
@@ -108,7 +108,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE}/benchmarks/${selectedTestType}/visualizations/${selectedModel}/${selectedAssetId}`);
+      const response = await fetch(`${API_BASE}/benchmarks/${selectedBenchmark}/visualizations/${selectedModel}/${selectedAssetId}`);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -127,10 +127,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
 
   // Auto-generate when all selections are made
   useEffect(() => {
-    if (selectedTestType && selectedModel && selectedAssetId) {
+    if (selectedBenchmark && selectedModel && selectedAssetId) {
       generateVisualization();
     }
-  }, [selectedTestType, selectedModel, selectedAssetId]);
+  }, [selectedBenchmark, selectedModel, selectedAssetId]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -153,14 +153,13 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
               Test Type <span className="text-red-500">*</span>
             </label>
             <select
-              value={selectedTestType}
-              onChange={(e) => setSelectedTestType(e.target.value)}
+              value={selectedBenchmark}
+              onChange={(e) => setselectedBenchmark(e.target.value)}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none"
             >
-              <option value="">Select test type...</option>
-              {testTypes.filter(t => t.available).map(testType => (
-                <option key={testType.name} value={testType.name}>
-                  {testType.displayName || testType.name}
+              <option value="">Select test type...</option>              {benchmarks.map(benchmark => (
+                <option key={benchmark.id} value={benchmark.id}>
+                  {benchmark.name}
                 </option>
               ))}
             </select>
@@ -173,7 +172,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
             <select
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              disabled={!selectedTestType}
+              disabled={!selectedBenchmark}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none disabled:opacity-50"
             >
               <option value="">Select model...</option>
@@ -192,7 +191,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ testTypes }) => {
             <select
               value={selectedAssetId}
               onChange={(e) => setSelectedAssetId(e.target.value)}
-              disabled={!selectedTestType}
+              disabled={!selectedBenchmark}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none disabled:opacity-50"
             >
               <option value="">Select asset...</option>

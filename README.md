@@ -6,50 +6,50 @@ A scalable benchmark suite for evaluating Large Language Models across multiple 
 
 ```
 Benchmarks/
-├── requirements.txt          # Shared dependencies
+├── requirements.txt          # Shared Python dependencies
+├── .env.template            # Environment variable template
+├── Backend/                 # FastAPI server for benchmark management
+│   ├── main.py             # Server entry point
+│   ├── api/                # API routes and models
+│   │   ├── routes/
+│   │   └── models/
+│   └── services/           # Business logic
+│       ├── data_service.py
+│       ├── dsl_executor.py
+│       └── visualization_service.py
+├── Frontend/                # React UI for benchmark visualization
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── src/
+│   │   ├── components/     # UI components
+│   │   ├── pages/          # Page components
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── contexts/       # React contexts
+│   │   └── utils/          # Frontend utilities
+│   └── public/             # Static assets
 ├── Inference/               # Shared inference engine
 │   ├── available_models.py  # Model definitions and registry
 │   ├── config.py           # Configuration settings
 │   ├── model_runner.py     # Core model execution
-│   └── providers.py        # LLM provider implementations
-├── Results/                 # Centralized benchmark results
+│   └── providers.py        # LLM provider implementations (Anthropic, OpenAI, Google, Groq, Grok)
+├── Results/                 # Centralized benchmark results (CSV exports)
 │   ├── Eye_Test_model_results.csv
 │   └── Coordinate_Grid_model_results.csv
 └── Tests/                   # Individual benchmark implementations
     ├── TEMPLATE_README.md   # Guide for creating new benchmarks
-    ├── Eye_Test/           # Vision benchmark for text recognition
-    │   ├── main.py
-    │   ├── test_config.py
-    │   ├── dataset.json
-    │   ├── responses/      # Model response files
-    │   ├── assets/         # Generated test images
-    │   ├── system_messages/
-    │   └── utils/          # Benchmark-specific utilities
-    │       ├── dataset_creator.py
-    │       ├── asset_generator.py
-    │       ├── model_evaluator.py
-    │       └── synthesize_model_results.py
-    └── Coordinate_Grid/     # Vision benchmark for spatial reasoning
-        ├── main.py
-        ├── test_config.py
-        ├── dataset.json
-        ├── responses/      # Model response files
-        ├── assets/         # Generated test images
-        ├── system_messages/
-        └── utils/          # Benchmark-specific utilities
-            ├── dataset_creator.py
-            ├── asset_generator.py
-            ├── model_evaluator.py
-            └── synthesize_model_results.py
+    ├── Eye_Test/           # Vision: Text recognition at varying sizes
+    ├── Coordinate_Grid/     # Vision: Spatial reasoning with grids
+    └── AITA_Conversation/   # Text: Multi-agent persuasion debates
 ```
 
 ## Features
 
 - **🔄 Shared Infrastructure**: Reusable model execution across benchmarks
-- **🎯 Multiple Providers**: Support for Anthropic, OpenAI, Google, Groq
-- **📊 Centralized Results**: Standardized CSV exports for analysis
+- **🎯 Multiple Providers**: Support for Anthropic, OpenAI, Google, Groq, Grok
+- **� Multi-Agent Conversations**: Multi-turn debates between 3+ models with strategic positioning
+- **�📊 Centralized Results**: Standardized CSV exports for analysis
 - **🎛️ Flexible Configuration**: Environment-based and benchmark-specific settings
-- **💬 Custom Prompts**: Benchmark-specific system messages
+- **�️ Vision Support**: Image-based benchmarks across all vision-capable models
 - **🔁 Resume Capability**: Re-run vs analyze existing results
 
 ## Quick Start
@@ -74,7 +74,7 @@ cd Tests/Eye_Test
 python main.py --generate
 
 # Evaluate a model
-python main.py --evaluate --model claude-3-5-sonnet
+python main.py --evaluate --model claude-4-5-sonnet
 
 # Raw responses will be saved to ./responses 
 # Synthesized results will be saved to ../../Results/Eye_Test_model_results.csv
@@ -147,10 +147,21 @@ Tests persuasion and argumentation through competitive multi-agent debates on r/
 ## Benchmark Structure
 
 Each benchmark follows a consistent 4-file utility pattern:
-- `dataset_creator.py` - Generates test datasets and metadata
-- `asset_generator.py` - Creates benchmark-specific test images  
-- `model_evaluator.py` - Evaluates model responses against ground truth
-- `synthesize_model_results.py` - Exports results to centralized CSV files
+
+```
+Tests/Coordinate_Grid/
+├── main.py                 # Entry point with CLI
+├── test_config.py         # Benchmark-specific configuration
+├── dataset.json           # Ground truth data
+├── responses/             # Model response files
+├── assets/                # Generated test images
+├── system_messages/       # Custom prompts for models
+└── utils/                 # Benchmark-specific utilities
+    ├── dataset_creator.py          # Generates test datasets and metadata
+    ├── asset_generator.py          # Creates benchmark-specific test images  
+    ├── model_evaluator.py          # Evaluates model responses against ground truth
+    └── synthesize_model_results.py # Exports results to centralized CSV files
+```
 
 ## Creating New Benchmarks
 
@@ -158,4 +169,4 @@ See `Tests/TEMPLATE_README.md` for a complete guide on implementing new benchmar
 
 ## Results Format
 
-All benchmarks export standardized CSV files to the `Results/` directory with benchmark-specific schemas optimized for analysis and comparison.
+All benchmarks export standardized CSV files to the `Results/` directory with benchmark-specific schemas optimized for analysis and comparison. AITA does not yet have enough data to be included... coming soon

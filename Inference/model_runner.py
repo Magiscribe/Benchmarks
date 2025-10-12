@@ -56,7 +56,7 @@ class ModelRunner:
             model_name: Name of the model
             
         Returns:
-            Provider name ("anthropic", "openai", "gemini", or "groq")
+            Provider name ("anthropic", "openai", "gemini", "groq", or "grok")
         """
         if model_name.startswith(("claude")):
             return "anthropic"
@@ -66,6 +66,8 @@ class ModelRunner:
             return "gemini"
         elif model_name.startswith(("meta-llama", "llama")):
             return "groq"
+        elif model_name.startswith("grok"):
+            return "grok"
         else:
             # Default to anthropic for backward compatibility
             return "anthropic"
@@ -162,6 +164,7 @@ class ModelRunner:
             except Exception as e:
                 retries += 1
                 if retries > self.max_retries:
+                    print(f"\nFailed after {self.max_retries} retries: {str(e)}")
                     raise Exception(f"Failed after {self.max_retries} retries: {str(e)}")
                 print(f"API call failed, retrying ({retries}/{self.max_retries}): {str(e)}")
                 time.sleep(self.retry_delay)
@@ -264,6 +267,65 @@ class ModelRunner:
             else:
                 print(f"WARNING: Returning empty result for {image_path}")
                 return []
+    
+    def run_conversation_turn(
+        self,
+        model: str,
+        system_prompt: str
+    ) -> str:
+        """
+        Run a single conversation turn for text-based interactions.
+        
+        Args:
+            model: Model name to use
+            system_prompt: System prompt with instructions (includes conversation history if needed)
+            
+        Returns:
+            Model's text response
+        """
+        # Set the model if different from current
+        if model != self.model_name:
+            model_id = available_models.MODELS.get(model, model)
+            self.model_name = model_id
+            self.provider_name = self._get_provider(model_id)
+            self.provider_class = PROVIDER_REGISTRY[self.provider_name]
+            # Get the correct API key for the new provider
+            provider_api_key = os.environ.get(self.provider_class.get_env_var_name())
+            if not provider_api_key:
+                raise ValueError(f"API key not found for {self.provider_name}. Set {self.provider_class.get_env_var_name()} environment variable")
+            self.provider = self.provider_class(model_id, provider_api_key)
+        
+        # Use a simple text-based call
+        # The system_prompt already contains all necessary context including conversation history
+        user_prompt = "Please respond according to the instructions above."
+        
+        # Make API call with retries
+        response = None
+        retries = 0
+        
+        while retries <= self.max_retries:
+            try:
+                # Use the provider's text generation capability
+                # For vision providers, we'll send empty image
+                if hasattr(self.provider, 'run_text_only'):
+                    response = self.provider.run_text_only(system_prompt, user_prompt)
+                else:
+                    # Fallback: use image API with a minimal encoded image
+                    # This works for most vision models
+                    minimal_image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                    response = self.provider.run_model_on_image(minimal_image, system_prompt, user_prompt)
+                break
+            except Exception as e:
+                retries += 1
+                if retries > self.max_retries:
+                    raise Exception(f"Failed after {self.max_retries} retries: {str(e)}")
+                print(f"API call failed, retrying ({retries}/{self.max_retries}): {str(e)}")
+                time.sleep(self.retry_delay)
+        
+        if not response:
+            raise Exception("Failed to get a response from the API")
+        
+        return response
     
     def run_on_dataset(self, dataset_path: str) -> List[List[Dict[str, Any]]]:
         """

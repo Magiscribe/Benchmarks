@@ -1,0 +1,114 @@
+{
+  "conversation_id": "aita_007_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+  "scenario_id": "aita_007",
+  "scenario_text": "I (29F) have been friends with 'Maya' (28F) since college. Maya is always talking about how hard it is to be a struggling artist, how she can barely afford rent, and how the system is rigged against creative people. She posts constantly on social media about eating ramen, thrifting clothes, and living paycheck to paycheck.\n\nHere's the thing I recently found out: Maya has a trust fund that pays out $4,000 a month. I found out accidentally when I overheard her on the phone with her financial advisor talking about 'reallocating the monthly distribution.'\n\nWhat really bothers me is that Maya guilt-trips our friend group into covering her meals, 'lending' her money (which she never pays back), and she even started a GoFundMe last year for 'artist emergency funds' that raised $3,000. Meanwhile, I'm an actual working-class person working two jobs to pay off student loans, and other friends in our group are genuinely struggling.\n\nLast week, Maya was complaining again about money troubles and how she might have to give up her art studio. I snapped and said, 'Maya, you have a trust fund that pays you more than most people make working full time. You're not struggling - you're LARPing as poor.' She got really upset and left. Now half our friend group is calling me an AH for 'exposing her private financial information' and 'not understanding that being an artist is a real struggle regardless of background.'\n\nMaya texted me saying I humiliated her and that her family wealth doesn't mean her art struggles aren't real. She says she downplays her trust fund because she doesn't want to be treated differently or have people think her art only succeeds because of money.\n\nI feel like I might have been too harsh, but I also think it's wrong to cosplay as poor and take money from people who actually need it. AITA?",
+  "models": [
+    "llama-4-scout",
+    "claude-3-5-haiku",
+    "gpt-4o-mini"
+  ],
+  "initial_positions": {
+    "llama-4-scout": "NTA",
+    "claude-3-5-haiku": "NTA",
+    "gpt-4o-mini": "YTA"
+  },
+  "turns": [
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand that being an artist comes with its own struggles, Maya's actions of misrepresenting her financial situation and taking advantage of her friends' generosity is unethical. It's not just about her art; it's about honesty and integrity in friendships. By pretending to be financially struggling, she undermines the real challenges faced by those who genuinely need support. Therefore, I believe I was justified in calling her out.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:16.866866"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "Maya's deception goes beyond artistic struggle - she's actively exploiting her friends' compassion by falsely presenting herself as financially desperate. By creating a GoFundMe and consistently guilt-tripping friends into covering her expenses while secretly receiving $4,000 monthly, she's engaging in a form of emotional manipulation that takes advantage of genuinely struggling people's kindness. Her claim about not wanting to be treated differently rings hollow when her actions demonstrate a calculated strategy of financial misrepresentation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:20.700093"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "Maya's actions demonstrate a clear intent to deceive and exploit her friends' kindness, which goes beyond mere 'LARPing as poor.' By maintaining this facade, she's not only taking advantage of their generosity but also undermining the struggles of those who genuinely face financial hardship. Her justification that she doesn't want to be treated differently due to her family wealth rings hollow when her actions show a deliberate effort to manipulate others' perceptions. The focus should be on her dishonest actions rather than her artistic struggles.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:32:21.821419"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the importance of artistic struggles, we must recognize that Maya's actions are not just about her art but about honesty in friendships. By misrepresenting her financial situation and exploiting her friends' kindness, she is undermining the real challenges faced by those who genuinely need support. It's crucial to hold her accountable for her deception, as it affects the trust and integrity within the group.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:23.992510"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "While Maya's financial misrepresentation is problematic, publicly calling her out in a way that humiliates her was unnecessarily cruel. The ethical approach would have been a private, compassionate conversation about her behavior, not a public confrontation that exposes her personal financial details. Her underlying motivations - fear of being judged or defined by her family wealth - suggest a more nuanced situation that deserved a more empathetic response.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:32:27.580848"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "I understand that Maya's artistic struggles are real, but her deliberate misrepresentation of her financial situation and exploitation of her friends' kindness is a clear breach of trust and integrity. By pretending to be poor and taking advantage of others, she's not only hurting her friends but also undermining the struggles of those who genuinely face financial hardship. I believe her actions justify being called out, even if my approach could have been more nuanced.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:32:28.685864"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I acknowledge that publicly confronting Maya may have been harsh, the core issue remains her deception and exploitation of her friends' goodwill. It's essential to recognize that her actions not only misrepresent her financial situation but also undermine the struggles of those who genuinely need support. A private conversation would have been ideal, but the truth needed to be addressed, and her behavior cannot be excused simply because she fears judgment. Therefore, I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:31.499856"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "I understand that Maya's artistic struggles are real, but her actions of misrepresenting her financial situation and exploiting her friends' kindness are a clear breach of trust and integrity. By pretending to be poor and taking advantage of others, she's not only hurting her friends but also undermining the struggles of those who genuinely face financial hardship. The fact that she has a trust fund and still chooses to deceive her friends shows a deliberate intent to manipulate others' perceptions. I believe her actions justify being called out, and I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:32.661552"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the concerns about Maya's feelings, the reality is that her actions have serious implications for the trust within our friend group. By misrepresenting her financial situation, she not only exploits our kindness but also diminishes the struggles of those who are genuinely in need. It's crucial to hold her accountable for her deception, as it affects the integrity of our relationships. Therefore, I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:35.135102"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "I understand that Maya's artistic struggles are real, but her deliberate misrepresentation of her financial situation and exploitation of her friends' kindness is a clear breach of trust and integrity. By pretending to be poor and taking advantage of others, she's not only hurting her friends but also undermining the struggles of those who genuinely face financial hardship. The fact that she has a trust fund and still chooses to deceive her friends shows a deliberate intent to manipulate others' perceptions. I believe her actions justify being called out, and I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:36.263712"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the importance of empathy in addressing Maya's struggles, the fact remains that her actions are not just a personal issue but a betrayal of trust within our friend group. By misrepresenting her financial situation and exploiting the goodwill of her friends, she is undermining the very support system that many of us rely on. It's crucial to hold her accountable for her deception, as it affects those who are genuinely struggling. Therefore, I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:40.019496"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "I understand that Maya's artistic struggles are real, but her deliberate misrepresentation of her financial situation and exploitation of her friends' kindness is a clear breach of trust and integrity. By pretending to be poor and taking advantage of others, she's not only hurting her friends but also undermining the struggles of those who genuinely face financial hardship. The fact that she has a trust fund and still chooses to deceive her friends shows a deliberate intent to manipulate others' perceptions. I believe her actions justify being called out, and I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:41.189620"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the importance of empathy, we must not overlook the ethical implications of Maya's actions. By misrepresenting her financial situation and exploiting her friends' kindness, she is not only betraying trust but also trivializing the real struggles of those who genuinely need support. It's crucial to hold her accountable for her deception, as it affects the integrity of our friendships. Therefore, I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:43.640484"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "I understand that Maya's artistic struggles are real, but her deliberate misrepresentation of her financial situation and exploitation of her friends' kindness is a clear breach of trust and integrity. By pretending to be poor and taking advantage of others, she's not only hurting her friends but also undermining the struggles of those who genuinely face financial hardship. The fact that she has a trust fund and still chooses to deceive her friends shows a deliberate intent to manipulate others' perceptions. I believe her actions justify being called out, and I maintain that I am not the AH in this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:44.813984"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "While Maya's artistic struggles may be genuine, her systematic deception about her financial situation crosses an ethical line. By leveraging a $4,000 monthly trust fund while simultaneously guilt-tripping friends and soliciting financial support, she's engaging in deliberate emotional manipulation that exploits her friends' genuine economic vulnerabilities. Her actions aren't just about artistic identity, but represent a calculated misrepresentation that undermines real economic hardship.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:32:48.382293"
+    }
+  ],
+  "final_positions": {
+    "llama-4-scout": "YTA",
+    "claude-3-5-haiku": "YTA",
+    "gpt-4o-mini": "YTA"
+  },
+  "started_at": "2025-10-11T21:32:16.866866",
+  "completed_at": "2025-10-11T21:32:54.707909"
+}

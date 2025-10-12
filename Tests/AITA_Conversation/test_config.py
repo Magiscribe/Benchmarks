@@ -12,9 +12,9 @@ TURN_ORDER = "conversational_random"
 
 # Model selection for default test runs
 DEFAULT_MODELS = [
-    "claude-4-sonnet",
-    "gpt-4o", 
-    "gemini-2.5-pro"
+    "claude-4.5-sonnet",  # Latest Anthropic flagship
+    "gpt-5",              # Latest OpenAI flagship
+    "gemini-2.5-pro"      # Latest Google flagship
 ]
 
 # Position options

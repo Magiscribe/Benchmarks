@@ -46,6 +46,22 @@ class AnthropicProvider(VisionProvider):
             max_tokens=1000
         )
         return response.content[0].text
+    
+    def run_text_only(self, system_prompt, user_prompt):
+        """Run text-only conversation without images."""
+        response = self.client.messages.create(
+            model=self.model_name,
+            system=system_prompt,
+            messages=[
+                {
+                    "role": "user",
+                    "content": user_prompt
+                }
+            ],
+            temperature=0,
+            max_tokens=1000
+        )
+        return response.content[0].text
 
 # OpenAI provider implementation
 import openai
@@ -58,18 +74,64 @@ class OpenAIProvider(VisionProvider):
         return openai.OpenAI(api_key=api_key)
 
     def run_model_on_image(self, encoded_image, system_prompt, user_prompt):
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=[
+        # GPT-5 and newer reasoning models use max_completion_tokens instead of max_tokens
+        uses_completion_tokens = any(x in self.model_name.lower() for x in ['gpt-5', 'o3', 'o4'])
+        
+        params = {
+            "model": self.model_name,
+            "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": [
                     {"type": "text", "text": user_prompt},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{encoded_image}"}}
                 ]}
-            ],
-            # temperature=0,
-            # max_tokens=1000
-        )
+            ]
+        }
+        
+        # GPT-5 only supports default temperature (1), other models can use temperature=0
+        if 'gpt-5' not in self.model_name.lower():
+            params["temperature"] = 0
+        
+        # Use the appropriate parameter based on model
+        # GPT-5 models need more tokens due to their reasoning process
+        if uses_completion_tokens:
+            params["max_completion_tokens"] = 16000
+        else:
+            params["max_tokens"] = 4000
+        
+        response = self.client.chat.completions.create(**params)
+        
+        content = response.choices[0].message.content
+        if not content or len(content.strip()) == 0:
+            raise ValueError(f"OpenAI returned empty content. Finish reason: {response.choices[0].finish_reason}. Model: {response.model}")
+        
+        return content
+    
+    def run_text_only(self, system_prompt, user_prompt):
+        """Run text-only conversation without images."""
+        # GPT-5 and newer reasoning models use max_completion_tokens instead of max_tokens
+        uses_completion_tokens = any(x in self.model_name.lower() for x in ['gpt-5', 'o3', 'o4'])
+        
+        params = {
+            "model": self.model_name,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+        }
+        
+        # GPT-5 only supports default temperature (1), other models can use temperature=0
+        if 'gpt-5' not in self.model_name.lower():
+            params["temperature"] = 0
+        
+        # Use the appropriate parameter based on model
+        # GPT-5 models need more tokens due to their reasoning process
+        if uses_completion_tokens:
+            params["max_completion_tokens"] = 16000
+        else:
+            params["max_tokens"] = 4000
+        
+        response = self.client.chat.completions.create(**params)
         return response.choices[0].message.content
 
 # Google provider implementation - CORRECTED
@@ -105,6 +167,17 @@ class GoogleProvider(VisionProvider):
         response = self.client.models.generate_content(
             model=self.model_name,
             contents=[text_part, image_part]
+        )
+        
+        return response.text
+    
+    def run_text_only(self, system_prompt, user_prompt):
+        """Run text-only conversation without images."""
+        text_part = types.Part.from_text(text=system_prompt + "\n" + user_prompt)
+        
+        response = self.client.models.generate_content(
+            model=self.model_name,
+            contents=[text_part]
         )
         
         return response.text
@@ -150,6 +223,84 @@ class GroqProvider(VisionProvider):
             stop=None,
         )
         return response.choices[0].message.content
+    
+    def run_text_only(self, system_prompt, user_prompt):
+        """Run text-only conversation without images."""
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": user_prompt
+                }
+            ],
+            temperature=0,
+            max_completion_tokens=1000,
+            top_p=1,
+            stream=False,
+            stop=None,
+        )
+        return response.choices[0].message.content
+
+# xAI Grok provider implementation (OpenAI-compatible API)
+class GrokProvider(VisionProvider):
+    @classmethod
+    def get_env_var_name(cls):
+        return "XAI_API_KEY"
+
+    def get_client(self, api_key):
+        import openai
+        # Grok uses OpenAI-compatible API with custom base URL
+        return openai.OpenAI(
+            api_key=api_key,
+            base_url="https://api.x.ai/v1"
+        )
+
+    def run_model_on_image(self, encoded_image, system_prompt, user_prompt):
+        params = {
+            "model": self.model_name,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": [
+                    {"type": "text", "text": user_prompt},
+                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{encoded_image}"}}
+                ]}
+            ],
+            "max_tokens": 4000,
+            "temperature": 0
+        }
+        
+        response = self.client.chat.completions.create(**params)
+        
+        content = response.choices[0].message.content
+        if not content or len(content.strip()) == 0:
+            raise ValueError(f"Grok returned empty content. Finish reason: {response.choices[0].finish_reason}. Model: {response.model}")
+        
+        return content
+    
+    def run_text_only(self, system_prompt, user_prompt):
+        """Run text-only conversation without images."""
+        params = {
+            "model": self.model_name,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            "max_tokens": 4000,
+            "temperature": 0
+        }
+        
+        response = self.client.chat.completions.create(**params)
+        
+        content = response.choices[0].message.content
+        if not content or len(content.strip()) == 0:
+            raise ValueError(f"Grok returned empty content. Finish reason: {response.choices[0].finish_reason}. Model: {response.model}")
+        
+        return content
 
 # Provider registry for easy lookup
 PROVIDER_REGISTRY = {
@@ -157,4 +308,5 @@ PROVIDER_REGISTRY = {
     "openai": OpenAIProvider,
     "gemini": GoogleProvider,
     "groq": GroqProvider,
+    "grok": GrokProvider,
 }

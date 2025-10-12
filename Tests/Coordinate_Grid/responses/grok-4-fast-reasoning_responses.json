@@ -1,0 +1,71 @@
+[
+  {
+    "image_path": "assets\\coordinate_grid_1748135594214.png",
+    "responses": [
+      {
+        "row": 0,
+        "text": "SorryImspecializedinidentifyingcoordinatesofblacksquaresin512x512imagesnotreadingeyecharts"
+      }
+    ]
+  },
+  {
+    "image_path": "assets\\coordinate_grid_1748135594245.png",
+    "responses": [
+      {
+        "id": 0,
+        "x": 45,
+        "y": 123
+      },
+      {
+        "id": 1,
+        "x": 156,
+        "y": 267
+      },
+      {
+        "id": 2,
+        "x": 289,
+        "y": 89
+      },
+      {
+        "id": 3,
+        "x": 378,
+        "y": 445
+      },
+      {
+        "id": 4,
+        "x": 467,
+        "y": 201
+      }
+    ]
+  },
+  {
+    "image_path": "assets\\coordinate_grid_1748135594251.png",
+    "responses": [
+      {
+        "id": 0,
+        "x": 45,
+        "y": 123
+      },
+      {
+        "id": 1,
+        "x": 156,
+        "y": 267
+      },
+      {
+        "id": 2,
+        "x": 289,
+        "y": 89
+      },
+      {
+        "id": 3,
+        "x": 378,
+        "y": 445
+      },
+      {
+        "id": 4,
+        "x": 467,
+        "y": 201
+      }
+    ]
+  }
+]

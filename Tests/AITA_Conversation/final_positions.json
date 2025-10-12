@@ -1,0 +1,138 @@
+[
+  {
+    "conversation_id": "aita_001_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "NTA",
+      "gpt-4o-mini": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_001_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "NTA",
+      "gpt-4o": "YTA",
+      "gemini-2.5-pro": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_001_claude-4-sonnet_gpt-4o_llama-4-scout",
+    "final_positions": {
+      "claude-4-sonnet": "YTA",
+      "gpt-4o": "YTA",
+      "llama-4-scout": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_002_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "NTA",
+      "gpt-4o-mini": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_002_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "YTA",
+      "gpt-4o": "YTA",
+      "gemini-2.5-pro": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_003_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_003_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "NTA",
+      "gpt-4o": "NTA",
+      "gemini-2.5-pro": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_004_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_004_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "YTA",
+      "gpt-4o": "YTA",
+      "gemini-2.5-pro": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_005_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "NTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_005_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "NTA",
+      "gpt-4o": "NTA",
+      "gemini-2.5-pro": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_006_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "NTA",
+      "claude-3-5-haiku": "NTA",
+      "gpt-4o-mini": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_006_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+    "final_positions": {
+      "claude-4-sonnet": "NTA",
+      "gpt-4o": "NTA",
+      "gemini-2.5-pro": "NTA"
+    }
+  },
+  {
+    "conversation_id": "aita_007_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_008_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_009_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "NTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  },
+  {
+    "conversation_id": "aita_010_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "NTA",
+      "claude-3-5-haiku": "YTA",
+      "gpt-4o-mini": "YTA"
+    }
+  }
+]

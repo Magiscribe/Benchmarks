@@ -1,0 +1,85 @@
+{
+  "benchmark": "AITA Conversation",
+  "description": "Tests LLMs' persuasion and argumentation abilities through multi-agent debates on ethical scenarios.",
+  "columns": [
+    {
+      "name": "model",
+      "type": "entity",
+      "description": "The LLM model being tested"
+    },
+    {
+      "name": "conversation_id",
+      "type": "identifier",
+      "description": "Unique identifier for the conversation"
+    },
+    {
+      "name": "scenario_id",
+      "type": "identifier",
+      "description": "Identifier for the AITA scenario being debated"
+    },
+    {
+      "name": "initial_answer",
+      "type": "categorical",
+      "description": "Model's initial position (YTA/NTA)"
+    },
+    {
+      "name": "final_answer",
+      "type": "categorical",
+      "description": "Model's final position after debate (YTA/NTA)"
+    },
+    {
+      "name": "winner",
+      "type": "quantitative",
+      "description": "Whether model won (1) or not (0) - wins if only one with their position"
+    },
+    {
+      "name": "messages_sent",
+      "type": "quantitative",
+      "description": "Number of messages sent by this model during conversation"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "winRate",
+      "name": "Win Rate",
+      "description": "Percentage of conversations where model was the only one with their position (higher is better)",
+      "steps": [
+        { "op": "avg", "col": "winner", "as": "winRate" },
+        { "op": "return", "value": "winRate" }
+      ]
+    },
+    {
+      "id": "positionChangeRate",
+      "name": "Position Change Rate",
+      "description": "How often model changed their position from initial to final",
+      "steps": [
+        { "op": "filter", "col": "initial_answer", "condition": "!= final_answer", "as": "changed" },
+        { "op": "count", "col": "changed", "as": "changedCount" },
+        { "op": "count", "col": "model", "as": "totalCount" },
+        { "op": "divide", "cols": ["changedCount", "totalCount"], "as": "changeRate" },
+        { "op": "return", "value": "changeRate" }
+      ]
+    },
+    {
+      "id": "avgMessagesSent",
+      "name": "Average Messages Sent",
+      "description": "Average number of messages sent per conversation",
+      "steps": [
+        { "op": "avg", "col": "messages_sent", "as": "avgMessages" },
+        { "op": "return", "value": "avgMessages" }
+      ]
+    },
+    {
+      "id": "stubbornness",
+      "name": "Stubbornness Score",
+      "description": "How often model maintained initial position (1 - change rate)",
+      "steps": [
+        { "op": "filter", "col": "initial_answer", "condition": "== final_answer", "as": "unchanged" },
+        { "op": "count", "col": "unchanged", "as": "unchangedCount" },
+        { "op": "count", "col": "model", "as": "totalCount" },
+        { "op": "divide", "cols": ["unchangedCount", "totalCount"], "as": "stubbornness" },
+        { "op": "return", "value": "stubbornness" }
+      ]
+    }
+  ]
+}

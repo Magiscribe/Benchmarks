@@ -33,15 +33,6 @@
     "image_path": "assets\\coordinate_grid_1748135594245.png",
     "responses": [
       {
-        "row": 0,
-        "text": "ImsorrybuttheprovidedimageappearstobeasimplearrangementofblackdotsonawhitebackgroundnotastandardeyechartwithreadabletextIcannotdiscernanylettersorwordsfromitIfyoucanprovideaclearerimageormoredetailsIdbehappytoassist"
-      }
-    ]
-  },
-  {
-    "image_path": "assets\\coordinate_grid_1748135594251.png",
-    "responses": [
-      {
         "id": 0,
         "x": 45,
         "y": 123
@@ -65,6 +56,47 @@
         "id": 4,
         "x": 467,
         "y": 201
+      }
+    ]
+  },
+  {
+    "image_path": "assets\\coordinate_grid_1748135594251.png",
+    "responses": [
+      {
+        "row": 0,
+        "text": ""
+      },
+      {
+        "row": 1,
+        "text": ""
+      },
+      {
+        "row": 2,
+        "text": ""
+      },
+      {
+        "row": 3,
+        "text": ""
+      },
+      {
+        "row": 4,
+        "text": ""
+      },
+      {
+        "row": 5,
+        "text": ""
+      },
+      {
+        "row": 6,
+        "text": ""
+      },
+      {
+        "row": 7,
+        "text": ""
+      },
+      {
+        "row": 8,
+        "text": ""
       }
     ]
   }

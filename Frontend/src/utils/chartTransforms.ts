@@ -19,17 +19,17 @@ export const flattenResults = (results: MultiMetricResults): FlatResult[] => {
     const flatResult: FlatResult = {
       model,
       metrics: {},
-      groupValues: undefined
+      groupings: undefined
     };
 
     // Collect metric values for this model
     metricNames.forEach(metric => {
       const modelResult = results[metric].results.find(r => r.model === model);
       if (modelResult) {
-        flatResult.metrics[metric] = modelResult.data.metric_value;
-        // Use group values from the first metric that has them
-        if (!flatResult.groupValues && modelResult.group_values) {
-          flatResult.groupValues = modelResult.group_values;
+        flatResult.metrics[metric] = modelResult.value;
+        // Use groupings from the first metric that has them
+        if (!flatResult.groupings && modelResult.groupings && modelResult.groupings.length > 0) {
+          flatResult.groupings = modelResult.groupings;
         }
       }
     });
@@ -166,44 +166,47 @@ const transformForLineFromOriginal = (
   // Get the metric data from the original results
   const metricResults = results[config.lineMetric];
   if (!metricResults || !metricResults.results || metricResults.results.length === 0) {
-    return { datasets: [], labels: [] };
-  }
-  // Get all unique categorical values across all models
-  const rawCategoryValues = Array.from(new Set(
+    return { datasets: [], labels: [] };  }
+    // For line charts, we need access to grouping data from the raw results
+  // Since the new backend structure uses groupings as an array, we'll need to handle this differently
+  // For now, we'll assume categorical grouping is the first element in the groupings array
+  const categoryValues = Array.from(new Set(
     metricResults.results
-      .filter(result => result.group_values && result.group_values[config.categorical!])
-      .map(result => result.group_values![config.categorical!])
+      .filter(result => result.groupings && result.groupings.length > 0)
+      .map(result => result.groupings[0])
   ));
-
-  // Check if all categorical values can be converted to numbers
-  const canConvertToNumbers = rawCategoryValues.every(value => {
-    const num = Number(value);
-    return !isNaN(num) && isFinite(num);
+  // Sort category values - handle numeric vs alphabetic sorting
+  const sortedCategoryValues = categoryValues.sort((a, b) => {
+    // Try to parse as numbers first
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+    
+    // If both are valid numbers, sort numerically
+    if (!isNaN(numA) && !isNaN(numB)) {
+      return numA - numB;
+    }
+    
+    // Otherwise, sort alphabetically
+    return a.localeCompare(b);
   });
 
-  // Sort numerically if possible, otherwise sort alphabetically
-  const categoryValues = canConvertToNumbers 
-    ? rawCategoryValues.sort((a, b) => Number(a) - Number(b))
-    : rawCategoryValues.sort();
-
-  if (categoryValues.length === 0) {
+  if (sortedCategoryValues.length === 0) {
     return { datasets: [], labels: [] };
   }
 
   // Get all unique models
   const models = Array.from(new Set(metricResults.results.map(r => r.model))).sort();
-
   const datasets: ChartDataset[] = models.map((model, index) => {
-    const data: ChartDataPoint[] = categoryValues.map(category => {
+    const data: ChartDataPoint[] = sortedCategoryValues.map(category => {
       // Find the data point for this model and category
       const dataPoint = metricResults.results.find(result => 
         result.model === model && 
-        result.group_values?.[config.categorical!] === category
+        result.groupings && result.groupings[0] === category
       );
       
       return {
         x: category,
-        y: dataPoint?.data.metric_value || 0,
+        y: dataPoint?.value || 0,
         model,
         metric: config.lineMetric!
       };
@@ -221,10 +224,9 @@ const transformForLineFromOriginal = (
       fill: false
     };
   });
-
   return {
     datasets,
-    labels: categoryValues
+    labels: sortedCategoryValues
   };
 };
 

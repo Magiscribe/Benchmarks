@@ -1,0 +1,10 @@
+[
+  {
+    "conversation_id": "aita_001_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+    "final_positions": {
+      "llama-4-scout": "YTA",
+      "claude-3-5-haiku": "NTA",
+      "gpt-4o-mini": "NTA"
+    }
+  }
+]

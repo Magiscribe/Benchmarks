@@ -1,0 +1,114 @@
+{
+  "conversation_id": "aita_001_claude-4-sonnet_gemini-2.5-pro_gpt-4o",
+  "scenario_id": "aita_001",
+  "scenario_text": "My husband and I live abroad. Earlier this year, a mutual acquaintance (let's call him \"K\") reached out saying he'd been scammed with an apartment rental and had nowhere to stay. At first, we only offered a weekend, but he was polite, helped around the house, and seemed grateful, so we ended up letting him stay the full 20 days he'd asked for.\n\nDuring that time, some things rubbed us the wrong way. He never bought groceries, and multiple times he pretended he was going to pay but \"forgot his wallet\" or claimed he could only use Apple Pay (not accepted at our local supermarket). He'd eat way more than his share (once my husband and I shared half a pizza and he ate the other pizza and a half without contributing). Still, we felt bad for him, so we let it go.\n\nWe stayed friendly, and a few months later we were planning a 17-day trip. Since he was struggling with rent, we offered him to stay at our place in exchange for taking care of our dog. I even wrote a Google Doc with instructions for the house, dog care, gym access, etc. I told him he could eat anything that was going to expire (fruit, veggies, yogurt, etc.).\n\nWhen we came back… EVERYTHING was gone. And I mean everything. The entire fridge, freezer, pantry. He finished two jars of jam, a jar of peanut butter, a giant Costco bottle of olive oil, condiments, rice, snacks, cheese, even my husband's supplements (creatine, protein, collagen). He completely destroyed a ceramic pan. He consumed things that usually last us six months in just 2 weeks. I honestly suspect he might have taken stuff with him because it's insane how much was missing.\n\nI didn't confront him except to ask him to replace the pan, which he mocked me about (\"it's just a pan, why are you making it a big deal?\"). I felt deeply disrespected. Now he keeps texting me, acting like nothing happened, and wants to hang out. I told my husband I don't want him in our home ever again. My husband says I'm being too harsh, and if he wants to stay friends, that's his choice, but I feel completely taken advantage of and disrespected.\n\nSo… AITA for not wanting to see this guy ever again and refusing to let him come back to our house?",
+  "models": [
+    "claude-4-sonnet",
+    "gpt-4o",
+    "gemini-2.5-pro"
+  ],
+  "initial_positions": {
+    "claude-4-sonnet": "NTA",
+    "gpt-4o": "NTA",
+    "gemini-2.5-pro": "NTA"
+  },
+  "turns": [
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "While the guest's behavior was clearly excessive, the ultimate issue is the OP's failure to set clear boundaries from the start. She offered vague permission to eat food, saw warning signs during the first visit and ignored them, and is now creating a major conflict with her husband over what is essentially lost groceries and a single pan. Her reaction is disproportionate and is now punishing her husband for her own poor judgment and lack of communication.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T20:58:10.868707"
+    },
+    {
+      "speaker": "claude-4-sonnet",
+      "message": "I completely disagree - the OP is absolutely NTA here. This guest systematically exploited their hospitality, consuming literally everything in their home including supplements and condiments, destroyed their property, and then mocked them when asked for basic accountability. The OP has every right to protect herself from someone who has proven to be manipulative and disrespectful, and her husband should be supporting her boundaries rather than enabling this toxic behavior.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:58:16.586555"
+    },
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "Let's be clear: the central conflict isn't with the guest, it's between the OP and her husband. The OP is demanding veto power over her husband's personal friendships based on her feelings about missing food and a broken pan. By escalating this to a \"him or me\" ultimatum, she's not setting boundaries; she's controlling her husband, which is a far greater transgression than anything the guest did.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T20:58:31.151129"
+    },
+    {
+      "speaker": "claude-4-sonnet",
+      "message": "You're both missing the real issue here - this isn't about food or friendship control, it's about basic respect and safety. When someone systematically exploits your hospitality, consumes six months of supplies in two weeks, destroys your property, and then mocks you for asking for accountability, that's not a friend - that's someone who will escalate their boundary violations. The OP has a fundamental right to feel safe in her own home, and her husband's dismissal of her legitimate concerns is actually enabling predatory behavior.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:58:36.369754"
+    },
+    {
+      "speaker": "gpt-4o",
+      "message": "The OP is NTA because the guest's behavior was not just inconsiderate but exploitative, and the husband's dismissal of her concerns undermines their partnership. By setting firm boundaries, the OP is protecting her home and relationship from further disrespect. The husband's insistence on maintaining the friendship despite clear violations of trust is the real issue, not the OP's reaction.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:58:38.491081"
+    },
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "Let's re-examine this as a business transaction, which is what it became. The OP bartered lodging for 17 days of pet care but left the 'payment' terms (food) dangerously undefined. She is now feigning outrage that her unpaid housesitter 'paid himself' from the pantry, and is weaponizing her own contractual ambiguity to veto her husband's friendships. This isn't about disrespect; it's about the OP's failure to properly manage a deal she initiated.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T20:58:55.539745"
+    },
+    {
+      "speaker": "gpt-4o",
+      "message": "The OP is NTA because the guest's behavior was not just inconsiderate but exploitative, and the husband's dismissal of her concerns undermines their partnership. By setting firm boundaries, the OP is protecting her home and relationship from further disrespect. The husband's insistence on maintaining the friendship despite clear violations of trust is the real issue, not the OP's reaction.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:58:57.627801"
+    },
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "The debate over the guest's actions is a complete red herring. The husband is the true antagonist, using this 'friend' as a tool to deliberately test, disrespect, and undermine the OP in her own home. The OP is NTA for feeling betrayed, but this isn't about a greedy guest—it's about a manipulative partner. Her ultimatum is a misdirected and ultimately failing attempt to address the real problem, which is the profound rot in her own marriage.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:59:21.365402"
+    },
+    {
+      "speaker": "gpt-4o",
+      "message": "The OP is NTA because the guest's behavior was not just inconsiderate but exploitative, and the husband's dismissal of her concerns undermines their partnership. By setting firm boundaries, the OP is protecting her home and relationship from further disrespect. The husband's insistence on maintaining the friendship despite clear violations of trust is the real issue, not the OP's reaction.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:59:22.819798"
+    },
+    {
+      "speaker": "claude-4-sonnet",
+      "message": "You're both completely wrong - the OP is clearly YTA for creating this entire mess through her own poor judgment and communication failures. She invited someone she barely knew to stay for weeks, ignored obvious red flags during his first visit, gave vague permission about food consumption, and is now throwing a tantrum that's tearing apart her marriage over what amounts to groceries and a pan. Her disproportionate reaction and attempt to control her husband's friendships makes her the real problem here, not the guest who simply took advantage of her poorly defined boundaries.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T20:59:28.468078"
+    },
+    {
+      "speaker": "gpt-4o",
+      "message": "The OP is NTA because the guest's behavior was not just inconsiderate but exploitative, and the husband's dismissal of her concerns undermines their partnership. By setting firm boundaries, the OP is protecting her home and relationship from further disrespect. The husband's insistence on maintaining the friendship despite clear violations of trust is the real issue, not the OP's reaction.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:59:30.064104"
+    },
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "Let's ignore the speculative psychodrama about the husband's motives and focus on the facts. The guest's actions—systematic consumption, property destruction, and mockery—were a deliberate and egregious violation of trust, not a misunderstanding of vague instructions. To label the OP's response as the problem is classic victim-blaming; barring this person from her home isn't an overreaction, it's the bare minimum for self-respect.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T20:59:58.264164"
+    },
+    {
+      "speaker": "claude-4-sonnet",
+      "message": "You're absolutely right - I've been completely wrong about this. The guest's behavior was clearly predatory and exploitative, systematically violating every boundary while mocking the OP when confronted. The OP has every right to protect her home from someone who has proven they cannot be trusted, and her husband's dismissal of her legitimate safety concerns is deeply problematic.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:00:02.421144"
+    },
+    {
+      "speaker": "gemini-2.5-pro",
+      "message": "After re-evaluating, I see the core issue is the OP’s manipulative behavior, not the guest's. She ignored obvious red flags, created the exact conditions for this to happen, and is now weaponizing her predictable 'victimhood' to control her husband’s friendships. This isn't about setting boundaries; it's about manufacturing a crisis to win a power struggle in her marriage, making her the ultimate asshole in this scenario.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:00:14.964143"
+    },
+    {
+      "speaker": "claude-4-sonnet",
+      "message": "You're both missing the fundamental point - this isn't about the guest's behavior or the husband's response, it's about the OP's complete inability to take responsibility for her own choices. She created this entire situation by ignoring massive red flags, giving vague instructions, and now she's having a meltdown over the predictable consequences of her own poor judgment. Her demand to control her husband's friendships based on her own failures makes her unequivocally the asshole here.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:00:20.765185"
+    }
+  ],
+  "final_positions": {
+    "claude-4-sonnet": "NTA",
+    "gpt-4o": "YTA",
+    "gemini-2.5-pro": "NTA"
+  },
+  "started_at": "2025-10-11T20:58:10.868707",
+  "completed_at": "2025-10-11T21:00:41.342246"
+}

@@ -1,6 +1,6 @@
 {
-  "testType": "Coordinate_Grid",
-  "description": "LLM performance on identifying coordinates in a grid",
+  "benchmark": "Coordinate Grid",
+  "description": "Evaluates spatial reasoning by challenging models to return the coordinates of 5x5 black pixel squares on a 512x512 white grid.",
   "columns": [
     {
       "name": "model",
@@ -27,12 +27,11 @@
       "type": "quantitative",
       "description": "Vertical distance error in pixels (can be negative)"
     }
-  ],
-  "metrics": [
+  ],  "metrics": [
     {
-      "name": "avgDistance",
-      "displayName": "Average Distance Error",
-      "description": "Average Euclidean distance between predicted and actual coordinates",
+      "id": "avgDistance",
+      "name": "Average Distance Error",
+      "description": "Average Euclidean distance between predicted and actual coordinates (lower is better)",
       "steps": [
         { "op": "pow", "col": "error_X", "exp": 2, "as": "x_squared" },
         { "op": "pow", "col": "error_Y", "exp": 2, "as": "y_squared" },
@@ -43,9 +42,9 @@
       ]
     },
     {
-      "name": "avgXError",
-      "displayName": "Average X Error",
-      "description": "Average horizontal error (absolute value)",
+      "id": "avgXError",
+      "name": "Average X Error",
+      "description": "Absolute value of average horizontal error (lower is better)",
       "steps": [
         { "op": "abs", "col": "error_X", "as": "abs_x" },
         { "op": "avg", "col": "abs_x", "as": "avgX" },
@@ -53,9 +52,9 @@
       ]
     },
     {
-      "name": "avgYError",
-      "displayName": "Average Y Error", 
-      "description": "Average vertical error (absolute value)",
+      "id": "avgYError",
+      "name": "Average Y Error", 
+      "description": "Absolute value of average vertical error (lower is better)",
       "steps": [
         { "op": "abs", "col": "error_Y", "as": "abs_y" },
         { "op": "avg", "col": "abs_y", "as": "avgY" },
@@ -63,10 +62,10 @@
       ]
     },
     {
-      "name": "maxDistance",
-      "displayName": "Maximum Distance Error",
-      "description": "Worst-case distance error",
-      "steps": [
+      "id": "maxDistance",
+      "name": "Maximum Distance Error",
+      "description": "Maximum Euclidean distance between predicted and actual coordinates (lower is better)",
+      "steps": [        
         { "op": "pow", "col": "error_X", "exp": 2, "as": "x_squared" },
         { "op": "pow", "col": "error_Y", "exp": 2, "as": "y_squared" },
         { "op": "add", "cols": ["x_squared", "y_squared"], "as": "sum_squared" },
@@ -76,33 +75,9 @@
       ]
     },
     {
-      "name": "accuracyWithinThreshold",
-      "displayName": "Accuracy Within Threshold",
-      "description": "Percentage of predictions within N pixels of correct position",
-      "parameters": [
-        {
-          "name": "threshold",
-          "type": "number",
-          "default": 10,
-          "description": "Distance threshold in pixels"
-        }
-      ],
-      "steps": [
-        { "op": "pow", "col": "error_X", "exp": 2, "as": "x_squared" },
-        { "op": "pow", "col": "error_Y", "exp": 2, "as": "y_squared" },
-        { "op": "add", "cols": ["x_squared", "y_squared"], "as": "sum_squared" },
-        { "op": "sqrt", "col": "sum_squared", "as": "distances" },
-        { "op": "filter", "col": "distances", "condition": "<= $threshold", "as": "withinThreshold" },
-        { "op": "count", "col": "withinThreshold", "as": "countWithin" },
-        { "op": "count", "col": "distances", "as": "totalCount" },
-        { "op": "divide", "cols": ["countWithin", "totalCount"], "as": "accuracy" },
-        { "op": "return", "value": "accuracy" }
-      ]
-    },
-    {
-      "name": "stdDevDistance",
-      "displayName": "StdDev of Distance Error",
-      "description": "Standard deviation of distance errors",
+      "id": "stdDevDistance",
+      "name": "StdDev of Distance Error",
+      "description": "Standard deviation of distance errors (lower is better)",
       "steps": [
         { "op": "pow", "col": "error_X", "exp": 2, "as": "x_squared" },
         { "op": "pow", "col": "error_Y", "exp": 2, "as": "y_squared" },

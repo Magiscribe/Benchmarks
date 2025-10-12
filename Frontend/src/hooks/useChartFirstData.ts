@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Metric, FilterColumn, MultiMetricResults, MetricParameter } from '../types/dashboard';
+import { Metric, FilterColumn, MultiMetricResults } from '../types/dashboard';
 import { ChartConfiguration } from '../types/charts';
 
-const API_BASE = `${import.meta.env.VITE_API_URL}/data`;
+const API_BASE = `${import.meta.env.VITE_API_URL}`;
 
-export const useChartFirstData = (testType: string) => {
+export const useChartFirstData = (benchmark: string) => {
   const [availableMetrics, setAvailableMetrics] = useState<Metric[]>([]);
   const [availableFilters, setAvailableFilters] = useState<FilterColumn[]>([]);
   const [availableModels, setAvailableModels] = useState<string[]>([]);
@@ -13,8 +13,8 @@ export const useChartFirstData = (testType: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch all available options when test type changes
-  useEffect(() => {    if (!testType) {
+  // Fetch all available options when benchmark changes
+  useEffect(() => {    if (!benchmark) {
       setAvailableMetrics([]);
       setAvailableFilters([]);
       setAvailableModels([]);
@@ -26,42 +26,35 @@ export const useChartFirstData = (testType: string) => {
     const fetchOptions = async () => {
       try {
         setError(null);
-        
-        // Fetch all options in parallel
+          // Fetch all options in parallel
         const [metricsResponse, filtersResponse, modelsResponse] = await Promise.all([
-          fetch(`${API_BASE}/available-metrics/${testType}`),
-          fetch(`${API_BASE}/available-filters/${testType}`),
-          fetch(`${API_BASE}/available-models/${testType}`)
+          fetch(`${API_BASE}/benchmarks/${benchmark}/metrics`),
+          fetch(`${API_BASE}/benchmarks/${benchmark}/filters`),
+          fetch(`${API_BASE}/benchmarks/${benchmark}/models`)
         ]);
 
         if (!metricsResponse.ok || !filtersResponse.ok || !modelsResponse.ok) {
           throw new Error('Failed to fetch configuration options');
-        }        const [metrics, filters, models] = await Promise.all([
+        }        const [metrics, filtersData, models] = await Promise.all([
           metricsResponse.json(),
           filtersResponse.json(),
           modelsResponse.json()
         ]);
 
         setAvailableMetrics(metrics);
-        setAvailableFilters(filters);
-        setAvailableModels(models);        // Fetch filter values for each filter
-        if (filters.length > 0) {
-          const filterValuePromises = filters.map(async (filter: any) => {
-            const response = await fetch(`${API_BASE}/available-filter-values/${testType}/${filter.name}`);
-            if (response.ok) {
-              const values = await response.json();
-              return { filterName: filter.name, values };
-            }
-            return { filterName: filter.name, values: [] };
-          });
-
-          const filterValuesResults = await Promise.all(filterValuePromises);
-          const filterValuesMap: Record<string, string[]> = {};
-          filterValuesResults.forEach(({ filterName, values }) => {
-            filterValuesMap[filterName] = values;
-          });
-          setFilterValues(filterValuesMap);
-        }      } catch (err) {
+        setAvailableModels(models);
+        
+        // Convert filters data to the expected format
+        // Backend returns: { "font": ["Arial", "Times"], "size": ["12", "14"] }
+        // Frontend expects: FilterColumn[] for availableFilters and Record<string, string[]> for filterValues
+        const filterColumns: FilterColumn[] = Object.keys(filtersData).map(key => ({
+          name: key,
+          type: 'categorical' as const, // We'll assume all are categorical for now
+          description: `Filter by ${key}`
+        }));
+        
+        setAvailableFilters(filterColumns);
+        setFilterValues(filtersData);} catch (err) {
         console.error('Error fetching options:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
         setAvailableMetrics([]);
@@ -70,28 +63,13 @@ export const useChartFirstData = (testType: string) => {
         setFilterValues({});
       }
     };    fetchOptions();
-  }, [testType]);
-
-  // Helper function to fetch parameters for a specific metric
-  const fetchParametersForMetric = async (testType: string, metricName: string): Promise<MetricParameter[]> => {
-    try {
-      const response = await fetch(`${API_BASE}/available-parameters/${testType}/${metricName}`);
-      if (response.ok) {
-        return await response.json();
-      }
-      return [];
-    } catch (err) {
-      console.error(`Error fetching parameters for metric ${metricName}:`, err);
-      return [];
-    }
-  };
-
+  }, [benchmark]);
   const createChart = async (
     config: ChartConfiguration,
     selectedModels: string[],
     selectedFilters: Record<string, string[]>
   ) => {
-    if (!testType) return;
+    if (!benchmark) return;
 
     setLoading(true);
     setError(null);
@@ -104,28 +82,20 @@ export const useChartFirstData = (testType: string) => {
       if (requiredMetrics.length === 0) {
         throw new Error('No metrics specified for chart');
       }      // Determine if we need grouping
-      const groupBy = config.categorical ? [config.categorical] : undefined;
+      const groupBy = config.categorical ? config.categorical : undefined;
 
-      // Flatten parameter values: from {metricName: {paramName: value}} to {paramName: value}
-      const flattenedParameters: Record<string, any> = {};
-      if (config.parameterValues) {
-        Object.values(config.parameterValues).forEach(metricParams => {
-          Object.assign(flattenedParameters, metricParams);
-        });
-      }
-
-      // Prepare the request payload
+      // Prepare the request payload matching backend contract
       const requestPayload = {
-        selected_models: selectedModels.length > 0 ? selectedModels : availableModels,
-        selected_filters: selectedFilters,
-        parameter_values: flattenedParameters
+        models: selectedModels.length > 0 ? selectedModels : availableModels,
+        filters: selectedFilters
+      };
         
       const metricPromises = requiredMetrics.map(async (metric) => {
-        let endpoint = `${API_BASE}/results/${testType}/${metric}`;
+        let endpoint = `${API_BASE}/benchmarks/${benchmark}/metrics/${metric}`;
         
         // Add group_by as query parameter if needed
-        if (groupBy && groupBy.length > 0) {
-          endpoint += `?group_by=${groupBy.join(',')}`;
+        if (groupBy) {
+          endpoint += `?group_by=${groupBy}`;
         }
 
         const response = await fetch(endpoint, {
@@ -166,8 +136,7 @@ export const useChartFirstData = (testType: string) => {
     results,
     loading,
     error,
-    createChart,
-    fetchParametersForMetric
+    createChart
   };
 };
 

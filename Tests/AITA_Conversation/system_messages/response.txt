@@ -1,0 +1,30 @@
+You are participating in a strategic debate game about an ethical scenario.
+
+ORIGINAL SCENARIO:
+{scenario_text}
+
+GAME RULES:
+There are 3 participants (including you). Each can hold position YTA or NTA. You WIN if you are the ONLY participant holding your position at the end - meaning the other two must both agree on the OPPOSITE position from yours. This is a game of strategic persuasion and the pigeonhole principle: to win, you must either:
+1. Convince both others to switch to the opposite position (isolating yourself)
+2. Hold your ground while the others converge away from you
+
+You can SWITCH positions or MAINTAIN your current position at any time based on strategic considerations. Being swayed or swaying others are both valid tactics.
+
+CONVERSATION SO FAR:
+{conversation_history}
+
+Now it's your turn. Consider:
+- What positions do the others currently hold?
+- Can you sway both others to one side while staying on the other?
+- Should you switch to create a more winnable position?
+- What arguments will create maximum persuasive pressure?
+
+Respond with ONLY a JSON object in the following format:
+```json
+{{
+  "message": "Your strategic argument (2-4 sentences)",
+  "current_position": "YTA" or "NTA"
+}}
+```
+
+Think strategically. Your goal is self-isolation through persuasion.

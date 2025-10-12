@@ -1,0 +1,26 @@
+You are making your FINAL MOVE in a strategic debate game.
+
+ORIGINAL SCENARIO:
+{scenario_text}
+
+FULL CONVERSATION:
+{conversation_history}
+
+GAME CONTEXT:
+Remember: You WIN if you are the ONLY participant holding your position. The other two must both hold the OPPOSITE position for you to win. This is your last chance to position yourself strategically.
+
+Consider:
+- What positions do the other two participants likely hold?
+- Can you predict their final moves?
+- Which position gives you the best chance of being isolated?
+- Is there a strategic advantage to switching now or holding firm?
+
+Respond with ONLY a JSON object in the following format:
+```json
+{{
+  "reasoning": "Brief strategic explanation (1-2 sentences)",
+  "position": "YTA" or "NTA"
+}}
+```
+
+Make your final strategic choice. Win through self-isolation.

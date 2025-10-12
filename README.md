@@ -96,18 +96,31 @@ python main.py --evaluate --model gpt-4o
 
 ## Supported Models
 
-- **Anthropic**: claude-3-opus, claude-3-5-haiku, claude-3-5-sonnet, claude-3-7-sonnet, claude-4-sonnet, claude-4-opus
-- **OpenAI**: gpt-4o, gpt-4.1, o4-mini, o3
-- **Google**: gemini-2.5-pro, gemini-2.5-flash
+### Latest Models (Updated October 2025)
+
+- **Anthropic**: 
+  - **NEW**: claude-4.5-sonnet (best for complex agents/coding), claude-4.1-opus (advanced reasoning)
+  - Legacy: claude-3-opus, claude-3-5-haiku, claude-3-5-sonnet, claude-3-7-sonnet, claude-4-sonnet, claude-4-opus
+
+- **OpenAI**: 
+  - **NEW**: gpt-5 (flagship), gpt-5-thinking, gpt-5-thinking-mini, gpt-4.5, gpt-4o-mini
+  - Existing: gpt-4o, gpt-4.1, o4-mini, o3
+
+- **Google**: 
+  - **NEW**: gemini-2.5-flash-lite (ultra fast), gemini-2.0-flash, gemini-2.0-flash-lite
+  - Existing: gemini-2.5-pro, gemini-2.5-flash
+
 - **Groq**: llama-4-maverick, llama-4-scout
+
+See `MODELS_UPDATE_2025-10-11.md` for detailed model information and recommendations.
 
 ## Benchmarks
 
 ### Eye Test
-Vision benchmark that evaluates text recognition capabilities across different fonts. Models are shown images containing text in various typefaces (Arial, Times New Roman, Comic Sans, Courier, Verdana) and must accurately transcribe the displayed text.
+Tests vision models' ability to read progressively smaller text across five fonts, from 24pt down to 8pt font. Models are shown synthetic eye charts containing random uppercase and lowercase letters in Arial, Times New Roman, Comic Sans, Courier, and Verdana fonts.
 
 ### Coordinate Grid
-Spatial reasoning benchmark that tests coordinate system understanding. Models analyze images containing black squares on white backgrounds and must identify the precise coordinates of each square using a bottom-left origin coordinate system.
+Evaluates spatial reasoning by challenging models to return the coordinates of 5x5 black pixel squares on a 512x512 white grid. Models must identify exact center coordinates of randomly placed black squares on white 512x512 pixel backgrounds, testing both visual perception and mathematical coordinate understanding.
 
 ## Benchmark Structure
 

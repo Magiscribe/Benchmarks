@@ -1,6 +1,6 @@
 {
-  "testType": "Eye_Test",
-  "description": "LLM performance on character recognition at different font sizes",
+  "benchmark": "Eye Test",
+  "description": "Tests vision models' ability to read progressively smaller text across five fonts, from 24pt down to 8pt font.",
   "columns": [
     {
       "name": "model",
@@ -11,10 +11,10 @@
       "name": "font",
       "type": "categorical",
       "description": "Font family used for the character"
-    },
+    },    
     {
       "name": "size",
-      "type": "categorical",
+      "type": "numeric",
       "description": "Font size in points"
     },
     {
@@ -32,12 +32,11 @@
       "type": "quantitative",
       "description": "Total number of attempts"
     }
-  ],
-  "metrics": [
+  ],  "metrics": [
     {
-      "name": "accuracy",
-      "displayName": "Overall Accuracy",
-      "description": "Percentage of correct character recognitions",
+      "id": "accuracy",
+      "name": "Overall Accuracy",
+      "description": "Percentage of characters recognized correctly across all attempts (higher is better)",
       "steps": [
         { "op": "sum", "col": "correct", "as": "totalCorrect" },
         { "op": "sum", "col": "total", "as": "totalAttempts" },
@@ -46,18 +45,17 @@
       ]
     }, 
     {
-      "name": "attemptRate",
-      "displayName": "Attempt Rate",
+      "id": "attemptRate",
+      "name": "Attempt Rate",
       "description": "Average number of attempts per character",
       "steps": [
         { "op": "avg", "col": "total", "as": "avgAttempts" },
         { "op": "return", "value": "avgAttempts" }
-      ]
-    },
+      ]    },
     {
-      "name": "perfectCharacters",
-      "displayName": "Perfect Recognition Count",
-      "description": "Number of characters with 100% accuracy",
+      "id": "perfectCharacters",
+      "name": "Perfect Recognition Count",
+      "description": "Number of characters recognized perfectly (higher is better)",
       "steps": [
         { "op": "divide", "cols": ["correct", "total"], "as": "charAccuracy" },
         { "op": "filter", "col": "charAccuracy", "condition": "== 1", "as": "perfectChars" },
@@ -66,36 +64,15 @@
       ]
     },
     {
-      "name": "failureRate", 
-      "displayName": "Complete Failure Rate",
-      "description": "Percentage of characters never recognized correctly",
+      "id": "failureRate", 
+      "name": "Complete Failure Rate",
+      "description": "Percentage of characters never recognized correctly (lower is better)",
       "steps": [
         { "op": "filter", "col": "correct", "condition": "== 0", "as": "failures" },
         { "op": "count", "col": "failures", "as": "failureCount" },
         { "op": "count", "col": "character", "as": "totalChars" },
         { "op": "divide", "cols": ["failureCount", "totalChars"], "as": "failureRate" },
         { "op": "return", "value": "failureRate" }
-      ]
-    },    
-    {
-      "name": "successRate",
-      "displayName": "Success Rate Above Threshold",
-      "description": "Percentage of characters recognized correctly above specified threshold",
-      "parameters": [
-        {
-          "name": "threshold",
-          "type": "number",
-          "default": 0.5,
-          "description": "Accuracy threshold (0.0-1.0) above which characters are considered successful"
-        }
-      ],
-      "steps": [
-        { "op": "divide", "cols": ["correct", "total"], "as": "charAccuracy" },
-        { "op": "filter", "col": "charAccuracy", "condition": "> $threshold", "as": "successes" },
-        { "op": "count", "col": "successes", "as": "successCount" },
-        { "op": "count", "col": "character", "as": "totalChars" },
-        { "op": "divide", "cols": ["successCount", "totalChars"], "as": "successRate" },
-        { "op": "return", "value": "successRate" }
       ]
     }
   ]

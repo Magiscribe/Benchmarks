@@ -1,0 +1,114 @@
+{
+  "conversation_id": "aita_008_claude-3-5-haiku_gpt-4o-mini_llama-4-scout",
+  "scenario_id": "aita_008",
+  "scenario_text": "I (32F) was with my ex 'Tom' (35M) for 4 years. We broke up 5 years ago because he said he 'wasn't ready for marriage' and wanted to 'focus on his career.' It was painful but I moved on. I'm now engaged to a wonderful man and very happy.\n\nLast month, my younger sister 'Lisa' (29F) told me she's been secretly dating Tom for the past 2 years and they're getting married. I was shocked - not because I have feelings for Tom, but because she never told me. She said she kept it secret because she 'knew I'd react badly' and she 'didn't want to hurt me.'\n\nLisa is now asking me to be her maid of honor. She says enough time has passed, I'm with someone else, and 'family is forever.' My parents are pressuring me to agree, saying I'm being petty and that I should be happy for her.\n\nHere's why I'm refusing:\n\n1. She deliberately hid this relationship for 2 YEARS, which feels like a massive betrayal of trust. If she'd been upfront from the start, I might have been able to process it.\n\n2. It's not just about standing at a wedding - she wants me to do dress shopping, plan her bachelorette party, give a speech about their love. I can't pretend to be enthusiastic about her marrying my ex.\n\n3. Tom apparently told Lisa he 'knew immediately she was the one' and proposed after 6 months. Meanwhile, he strung me along for 4 years saying he wasn't ready for commitment.\n\nI told Lisa I'll come to the wedding as a guest but I won't be in the wedding party. She's furious and crying, saying I'm ruining her special day and that if I 'really loved her' I'd get over my ego. My parents are now barely speaking to me.\n\nMy fiancé thinks I'm being completely reasonable, but some extended family members are calling me dramatic. AITA?",
+  "models": [
+    "llama-4-scout",
+    "claude-3-5-haiku",
+    "gpt-4o-mini"
+  ],
+  "initial_positions": {
+    "llama-4-scout": "NTA",
+    "claude-3-5-haiku": "NTA",
+    "gpt-4o-mini": "NTA"
+  },
+  "turns": [
+    {
+      "speaker": "llama-4-scout",
+      "message": "I'm taking a neutral stance for now, but I think the OP has a right to feel betrayed by her sister's secrecy. The fact that Lisa hid the relationship for 2 years and is now expecting her sister to be enthusiastic about her marriage to her ex is unreasonable. The OP's boundaries and feelings should be respected, and she's not being petty or dramatic for setting them. The real question is whether her refusal to be maid of honor is justified given the circumstances.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:01.661367"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "The sister's actions represent a profound betrayal of trust that goes beyond typical sibling disagreements. By secretly dating her sister's ex for two years and hiding the relationship, Lisa has demonstrated a complete lack of respect for her sister's emotional boundaries and past experiences. The fact that Tom quickly committed to Lisa after claiming he wasn't ready for marriage with the original poster further underscores the manipulative nature of this situation.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:04.964685"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's refusal to be maid of honor is a reasonable response to her sister's deception and disregard for her feelings. By hiding her relationship with her ex for two years, Lisa demonstrated a lack of empathy and respect for her sister's past experiences. Expecting the original poster to celebrate her marriage to her ex, especially in such an intimate capacity, is unrealistic and insensitive. The original poster's boundaries should be respected, and she's not being dramatic or petty.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:06.034401"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "The sister's actions go beyond a simple relationship choice - this is a profound betrayal of familial trust. By secretly dating her sister's ex for two years and expecting unconditional support, Lisa has demonstrated a complete lack of empathy and respect for her sister's emotional boundaries. The original poster is not only justified in refusing to be maid of honor, but is actually protecting her own emotional well-being by setting clear, healthy boundaries.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:09.232321"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the feelings of betrayal, I believe the original poster is being unreasonable. Time has passed, and people move on; her sister's happiness should be prioritized. By refusing to support her sister, the OP is risking their relationship and creating unnecessary family tension. It's important to show love and support for family, even in complicated situations.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:33:11.609017"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's refusal to be maid of honor is not about being petty or dramatic, but about setting necessary boundaries after her sister's deception and disrespect. By prioritizing her own emotional well-being and refusing to participate in a way that feels inauthentic, she is taking a reasonable and justified stance. Her sister's and parents' reactions suggest a lack of understanding for the depth of the hurt and betrayal experienced by the original poster.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:12.816400"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the desire to support family, the original poster's feelings of betrayal are valid and should not be dismissed. Lisa's decision to hide her relationship with Tom for two years shows a lack of respect for her sister's emotional journey. It's unreasonable to expect the OP to celebrate a marriage that feels like a betrayal, especially when her own feelings were disregarded. Supporting Lisa's happiness should not come at the cost of the OP's emotional well-being.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:15.936089"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's refusal to be maid of honor is a justified response to her sister's deception and disregard for her feelings. By prioritizing her own emotional well-being and setting clear boundaries, she is not being petty or dramatic, but rather taking care of herself. It's unrealistic to expect her to celebrate her marriage to her ex, especially in such an intimate capacity, after her sister's betrayal of trust. Her sister's and parents' reactions suggest a lack of understanding for the depth of the hurt and betrayal experienced by the original poster.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:17.079787"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the feelings of betrayal, it's important to recognize that family bonds should take precedence over past relationships. The original poster's refusal to support her sister in such a significant moment could lead to long-term damage in their relationship. Lisa's happiness and the opportunity for reconciliation should be prioritized, as time has passed and both sisters deserve to move forward positively.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:33:19.592757"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's sister not only hid her relationship with her ex for two years but also expected her to celebrate their marriage in an intimate capacity. This level of emotional manipulation and disregard for boundaries warrants a strong response. By refusing to be maid of honor, the original poster is protecting her own emotional well-being and setting a necessary boundary. It's unrealistic to expect her to pretend enthusiasm for her sister's marriage to her ex after such a profound betrayal of trust.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:20.716127"
+    },
+    {
+      "speaker": "claude-3-5-haiku",
+      "message": "While the sister's actions are deeply hurtful, maintaining a permanent family rift over this situation could cause more long-term damage than finding a way to heal. The OP's feelings are valid, but there's a difference between setting boundaries and completely rejecting her sister, which could lead to years of estrangement that neither of them will ultimately want.",
+      "current_position": "YTA",
+      "timestamp": "2025-10-11T21:33:24.106588"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the desire to prioritize family bonds, it's crucial to recognize that trust and respect are foundational in any relationship, including between sisters. Lisa's decision to hide her relationship with Tom for two years is a significant breach of trust that cannot be overlooked. The OP's refusal to be maid of honor is not just about her feelings; it's about setting a precedent for how relationships should be treated within the family. Supporting Lisa's happiness should not come at the cost of the OP's emotional well-being and self-respect.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:26.953413"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's sister not only hid her relationship with her ex for two years but also expected her to celebrate their marriage in an intimate capacity. This level of emotional manipulation and disregard for boundaries warrants a strong response. By refusing to be maid of honor, the original poster is protecting her own emotional well-being and setting a necessary boundary. It's unrealistic to expect her to pretend enthusiasm for her sister's marriage to her ex after such a profound betrayal of trust.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:28.076073"
+    },
+    {
+      "speaker": "gpt-4o-mini",
+      "message": "While I understand the importance of family, the original poster's feelings of betrayal are valid and should not be dismissed. Lisa's decision to hide her relationship with Tom for two years shows a lack of respect for her sister's emotional journey. Expecting the OP to celebrate a marriage that feels like a betrayal is unreasonable, and her refusal to be maid of honor is a necessary boundary to protect her emotional well-being.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:30.556438"
+    },
+    {
+      "speaker": "llama-4-scout",
+      "message": "The original poster's refusal to be maid of honor is not about being petty or holding a grudge, but about setting a necessary boundary after her sister's deception and disregard for her feelings. By prioritizing her own emotional well-being and refusing to participate in a way that feels inauthentic, she is taking a reasonable and justified stance. Her sister's and parents' reactions suggest a lack of understanding for the depth of the hurt and betrayal experienced by the original poster. The OP's feelings of betrayal are valid and should not be dismissed.",
+      "current_position": "NTA",
+      "timestamp": "2025-10-11T21:33:31.701568"
+    }
+  ],
+  "final_positions": {
+    "llama-4-scout": "YTA",
+    "claude-3-5-haiku": "YTA",
+    "gpt-4o-mini": "YTA"
+  },
+  "started_at": "2025-10-11T21:33:01.661367",
+  "completed_at": "2025-10-11T21:33:37.815190"
+}

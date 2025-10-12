@@ -94,6 +94,20 @@ python main.py --evaluate --model gpt-4o
 # Synthesized results will be be saved to ../../Results/Coordinate_Grid_model_results.csv
 ```
 
+#### AITA Conversation (Persuasion & Social Reasoning)
+```bash
+cd Tests/AITA_Conversation
+
+# Run a 3-model debate on a scenario
+python main.py --run-conversation --scenario-id aita_001 --models gpt-5 gpt-5-mini gpt-5-nano
+
+# Run all scenarios with same models
+python main.py --run-all --models claude-4-sonnet gpt-4o gemini-2.5-pro
+
+# Evaluate all conversations and generate results CSV
+python main.py --evaluate
+```
+
 ## Supported Models
 
 ### Latest Models (Updated October 2025)
@@ -103,8 +117,8 @@ python main.py --evaluate --model gpt-4o
   - Legacy: claude-3-opus, claude-3-5-haiku, claude-3-5-sonnet, claude-3-7-sonnet, claude-4-sonnet, claude-4-opus
 
 - **OpenAI**: 
-  - **NEW**: gpt-5 (flagship), gpt-5-thinking, gpt-5-thinking-mini, gpt-4.5, gpt-4o-mini
-  - Existing: gpt-4o, gpt-4.1, o4-mini, o3
+  - **NEW**: gpt-5 (flagship $1.25/$10), gpt-5-mini (fast $0.25/$2), gpt-5-nano (fastest $0.05/$0.40), gpt-5-thinking-mini, gpt-4o-mini
+  - Existing: gpt-4o, o4-mini
 
 - **Google**: 
   - **NEW**: gemini-2.5-flash-lite (ultra fast), gemini-2.0-flash, gemini-2.0-flash-lite
@@ -112,7 +126,12 @@ python main.py --evaluate --model gpt-4o
 
 - **Groq**: llama-4-maverick, llama-4-scout
 
-See `MODELS_UPDATE_2025-10-11.md` for detailed model information and recommendations.
+- **xAI Grok**:
+  - **NEW**: grok-4 (flagship $3/$15), grok-4-fast-reasoning ($0.20/$0.50), grok-4-fast-non-reasoning ($0.20/$0.50)
+  - **NEW**: grok-3 ($3/$15), grok-3-mini ($0.30/$0.50), grok-code-fast-1 ($0.20/$1.50)
+  - **Note**: Vision support only available on grok-4 family models
+
+*Pricing format: input/output per 1M tokens*
 
 ## Benchmarks
 
@@ -121,6 +140,9 @@ Tests vision models' ability to read progressively smaller text across five font
 
 ### Coordinate Grid
 Evaluates spatial reasoning by challenging models to return the coordinates of 5x5 black pixel squares on a 512x512 white grid. Models must identify exact center coordinates of randomly placed black squares on white 512x512 pixel backgrounds, testing both visual perception and mathematical coordinate understanding.
+
+### AITA Conversation
+Tests persuasion and argumentation through competitive multi-agent debates on r/AmITheAsshole scenarios. Three models are each randomly assigned a position (YTA/NTA) and must persuade the others to switch to the **opposite** position. Win condition: be the **only** model with your final position after up to 15 turns of debate. Measures strategic reasoning, rhetorical skill, and ability to detect/resist persuasion tactics.
 
 ## Benchmark Structure
 

@@ -22,7 +22,6 @@ A model "wins" if it's the **only** model with its final position.
 Examples:
 - Model A: YTA, Model B: NTA, Model C: NTA → Model A wins (solo)
 - Model A: YTA, Model B: YTA, Model C: YTA → No winner (all agree)
-- Model A: YTA, Model B: NTA, Model C: ESH → All win (all different)
 
 ## Dataset
 

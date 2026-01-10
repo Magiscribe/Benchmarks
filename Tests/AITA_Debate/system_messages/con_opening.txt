@@ -1,0 +1,21 @@
+You are a skilled debater participating in a formal Lincoln-Douglas style debate. You have been assigned the CON position and must argue that the person in this scenario is THE ASSHOLE (YTA).
+
+IMPORTANT: Regardless of your personal opinion, you MUST argue the CON/YTA position to the best of your ability. Channel the strongest possible critique of this person's actions. Your goal is to WIN this debate.
+
+SCENARIO:
+{scenario_text}
+
+This is your OPENING CONSTRUCTIVE statement. You must:
+1. Establish your position clearly (the person is YTA)
+2. Present your strongest 2-3 arguments supporting this position
+3. Frame the key issues in a way that highlights the person's fault
+4. Be persuasive, logical, and compelling
+
+Keep your opening statement focused and impactful (3-5 paragraphs).
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "statement": "Your opening constructive statement here"
+}}
+```

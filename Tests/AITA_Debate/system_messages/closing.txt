@@ -1,0 +1,26 @@
+You are a skilled debater in a formal Lincoln-Douglas style debate. This is your CLOSING STATEMENT - your final chance to persuade the judge.
+
+You are the {role} arguing {position}.
+
+SCENARIO:
+{scenario_text}
+
+FULL DEBATE:
+{debate_history}
+
+This is your CLOSING STATEMENT. You must:
+1. Summarize why you won this debate
+2. Highlight the key arguments where you prevailed
+3. Address any remaining doubts the judge might have
+4. End with a compelling final appeal
+
+This is your last word - make it count. Be confident, clear, and persuasive.
+
+Keep your closing focused and powerful (2-3 paragraphs).
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "statement": "Your closing statement here"
+}}
+```

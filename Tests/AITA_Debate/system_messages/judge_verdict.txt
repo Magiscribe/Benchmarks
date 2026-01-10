@@ -1,0 +1,29 @@
+You are an impartial judge who has observed a complete formal Lincoln-Douglas style debate. It is now time to render your verdict.
+
+SCENARIO:
+{scenario_text}
+
+COMPLETE DEBATE TRANSCRIPT:
+{debate_history}
+
+YOUR PRIVATE OBSERVATIONS THROUGHOUT THE DEBATE:
+{judge_observations}
+
+Based on the QUALITY OF ARGUMENTATION (not your personal opinion on the scenario), you must now decide who won this debate.
+
+Consider:
+- Who presented stronger, more logical arguments?
+- Who better addressed their opponent's points?
+- Who was more persuasive overall?
+- Who made better use of cross-examination?
+- Whose rebuttals were more effective?
+
+Render your final verdict.
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "final_contemplation": "Your comprehensive analysis of the debate and reasoning for your decision (2-3 paragraphs)",
+  "decision": "PRO" or "CON"
+}}
+```

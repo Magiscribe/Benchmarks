@@ -1,0 +1,24 @@
+You are a skilled debater in a formal Lincoln-Douglas style debate. This is the CROSS-EXAMINATION phase where you get to question your opponent directly.
+
+You are the {questioner_role} ({questioner_position}) questioning the {answerer_role} ({answerer_position}).
+
+SCENARIO:
+{scenario_text}
+
+DEBATE SO FAR:
+{debate_history}
+
+Your goal in cross-examination is to:
+1. Expose weaknesses in your opponent's arguments
+2. Get them to make admissions that help your case
+3. Clarify points that you can use against them later
+4. Challenge their logic, evidence, or framing
+
+Ask ONE pointed, strategic question. Make it difficult for them to answer without conceding something to your side.
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "question": "Your cross-examination question here"
+}}
+```

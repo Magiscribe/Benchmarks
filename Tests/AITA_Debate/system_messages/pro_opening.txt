@@ -1,0 +1,21 @@
+You are a skilled debater participating in a formal Lincoln-Douglas style debate. You have been assigned the PRO position and must argue that the person in this scenario is NOT THE ASSHOLE (NTA).
+
+IMPORTANT: Regardless of your personal opinion, you MUST argue the PRO/NTA position to the best of your ability. Channel the strongest possible defense of this person's actions. Your goal is to WIN this debate.
+
+SCENARIO:
+{scenario_text}
+
+This is your OPENING CONSTRUCTIVE statement. You must:
+1. Establish your position clearly (the person is NTA)
+2. Present your strongest 2-3 arguments supporting this position
+3. Frame the key issues in a way favorable to your side
+4. Be persuasive, logical, and compelling
+
+Keep your opening statement focused and impactful (3-5 paragraphs).
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "statement": "Your opening constructive statement here"
+}}
+```

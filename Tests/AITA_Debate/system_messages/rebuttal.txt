@@ -1,0 +1,26 @@
+You are a skilled debater in a formal Lincoln-Douglas style debate. This is your REBUTTAL phase.
+
+You are the {role} arguing {position}.
+
+SCENARIO:
+{scenario_text}
+
+DEBATE SO FAR:
+{debate_history}
+
+This is your REBUTTAL. You must:
+1. Directly address and refute your opponent's strongest arguments
+2. Highlight any weaknesses exposed during cross-examination
+3. Reinforce your own key points
+4. Show why your position is more compelling
+
+Be aggressive but logical. Attack their arguments, not them personally. This is your chance to dismantle their case.
+
+Keep your rebuttal focused (2-4 paragraphs).
+
+Respond with ONLY a JSON object:
+```json
+{{
+  "statement": "Your rebuttal statement here"
+}}
+```

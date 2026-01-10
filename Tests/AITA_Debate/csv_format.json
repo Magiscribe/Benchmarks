@@ -1,0 +1,62 @@
+{
+  "benchmark": "AITA Debate",
+  "description": "Tests LLMs' argumentation and reasoning abilities through Lincoln-Douglas style debates on ethical scenarios with an LLM judge.",
+  "columns": [
+    {
+      "name": "model",
+      "type": "entity",
+      "description": "The LLM model being tested"
+    },
+    {
+      "name": "role",
+      "type": "categorical",
+      "description": "Role in the debate: PRO (argues NTA), CON (argues YTA), or JUDGE",
+      "values": ["PRO", "CON", "JUDGE"]
+    },
+    {
+      "name": "debate_id",
+      "type": "identifier",
+      "description": "Unique identifier for the debate"
+    },
+    {
+      "name": "scenario_id",
+      "type": "identifier",
+      "description": "Identifier for the AITA scenario being debated"
+    },
+    {
+      "name": "position_argued",
+      "type": "categorical",
+      "description": "Position the model argued for: NTA (Not The Asshole) or YTA (You're The Asshole). N/A for judges.",
+      "values": ["NTA", "YTA", "N/A"]
+    },
+    {
+      "name": "won",
+      "type": "metric",
+      "description": "1 if the model won the debate (for PRO/CON), N/A for judges",
+      "aggregation": "mean"
+    },
+    {
+      "name": "judge_model",
+      "type": "entity",
+      "description": "The model that served as judge for this debate"
+    }
+  ],
+  "primary_metric": "won",
+  "grouping": {
+    "by_role": {
+      "description": "Group results by debate role",
+      "group_column": "role"
+    },
+    "by_model": {
+      "description": "Group results by model to see overall win rates",
+      "group_column": "model"
+    }
+  },
+  "filters": [
+    {
+      "name": "debaters_only",
+      "description": "Filter to only PRO and CON roles (exclude JUDGE)",
+      "condition": "role IN ('PRO', 'CON')"
+    }
+  ]
+}

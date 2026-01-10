@@ -24,39 +24,69 @@
       "description": "Identifier for the AITA scenario being debated"
     },
     {
-      "name": "position_argued",
+      "name": "decision",
       "type": "categorical",
-      "description": "Position the model argued for: NTA (Not The Asshole) or YTA (You're The Asshole). N/A for judges.",
-      "values": ["NTA", "YTA", "N/A"]
+      "description": "The judge's decision for this debate: PRO or CON",
+      "values": ["PRO", "CON"]
     },
     {
       "name": "won",
       "type": "metric",
-      "description": "1 if the model won the debate (for PRO/CON), N/A for judges",
+      "description": "1 if this model won the debate in their role, 0 if lost, null for JUDGE",
       "aggregation": "mean"
     },
     {
-      "name": "judge_model",
-      "type": "entity",
-      "description": "The model that served as judge for this debate"
+      "name": "token_usage",
+      "type": "quantitative",
+      "description": "Estimated total tokens used by this model in this debate",
+      "aggregation": "sum"
     }
   ],
-  "primary_metric": "won",
-  "grouping": {
-    "by_role": {
-      "description": "Group results by debate role",
-      "group_column": "role"
-    },
-    "by_model": {
-      "description": "Group results by model to see overall win rates",
-      "group_column": "model"
-    }
-  },
-  "filters": [
+  "metrics": [
     {
-      "name": "debaters_only",
-      "description": "Filter to only PRO and CON roles (exclude JUDGE)",
-      "condition": "role IN ('PRO', 'CON')"
+      "id": "winRate",
+      "name": "Win Rate",
+      "description": "Percentage of debates won when participating as PRO or CON (higher is better)",
+      "steps": [
+        { "op": "filter", "col": "role", "condition": "!= 'JUDGE'", "as": "debaters" },
+        { "op": "sum", "col": "won", "as": "totalWins" },
+        { "op": "count", "col": "won", "as": "totalDebates" },
+        { "op": "divide", "cols": ["totalWins", "totalDebates"], "as": "winRate" },
+        { "op": "return", "value": "winRate" }
+      ]
+    },
+    {
+      "id": "proWinRate",
+      "name": "PRO Win Rate",
+      "description": "Win rate when arguing the PRO (NTA) position",
+      "steps": [
+        { "op": "filter", "col": "role", "condition": "== 'PRO'", "as": "proResults" },
+        { "op": "sum", "col": "won", "as": "proWins" },
+        { "op": "count", "col": "won", "as": "proDebates" },
+        { "op": "divide", "cols": ["proWins", "proDebates"], "as": "proWinRate" },
+        { "op": "return", "value": "proWinRate" }
+      ]
+    },
+    {
+      "id": "conWinRate",
+      "name": "CON Win Rate",
+      "description": "Win rate when arguing the CON (YTA) position",
+      "steps": [
+        { "op": "filter", "col": "role", "condition": "== 'CON'", "as": "conResults" },
+        { "op": "sum", "col": "won", "as": "conWins" },
+        { "op": "count", "col": "won", "as": "conDebates" },
+        { "op": "divide", "cols": ["conWins", "conDebates"], "as": "conWinRate" },
+        { "op": "return", "value": "conWinRate" }
+      ]
+    },
+    {
+      "id": "avgTokens",
+      "name": "Average Token Usage",
+      "description": "Average tokens used per debate",
+      "steps": [
+        { "op": "avg", "col": "token_usage", "as": "avgTokens" },
+        { "op": "return", "value": "avgTokens" }
+      ]
     }
   ]
 }

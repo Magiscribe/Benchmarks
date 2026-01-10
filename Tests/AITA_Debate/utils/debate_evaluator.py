@@ -34,49 +34,52 @@ class DebateEvaluator:
             debate: Debate log dictionary
             
         Returns:
-            List of result dictionaries, one per model/role
+            List of result dictionaries, one per model/role (3 rows per debate)
         """
         debate_id = debate['debate_id']
         scenario_id = debate['scenario_id']
         models = debate['models']
         decision = debate.get('decision', 'UNKNOWN')
+        token_usage = debate.get('token_usage', {})
         
         results = []
         
         # PRO model result
+        pro_model = models['pro']
         pro_won = 1 if decision == 'PRO' else 0
         results.append({
-            'model': models['pro'],
+            'model': pro_model,
             'role': 'PRO',
             'debate_id': debate_id,
             'scenario_id': scenario_id,
-            'position_argued': 'NTA',
+            'decision': decision,
             'won': pro_won,
-            'judge_model': models['judge']
+            'token_usage': token_usage.get(pro_model, 0)
         })
         
         # CON model result
+        con_model = models['con']
         con_won = 1 if decision == 'CON' else 0
         results.append({
-            'model': models['con'],
+            'model': con_model,
             'role': 'CON',
             'debate_id': debate_id,
             'scenario_id': scenario_id,
-            'position_argued': 'YTA',
+            'decision': decision,
             'won': con_won,
-            'judge_model': models['judge']
+            'token_usage': token_usage.get(con_model, 0)
         })
         
-        # JUDGE model result (for tracking judge behavior)
+        # JUDGE model result
+        judge_model = models['judge']
         results.append({
-            'model': models['judge'],
+            'model': judge_model,
             'role': 'JUDGE',
             'debate_id': debate_id,
             'scenario_id': scenario_id,
-            'position_argued': 'N/A',
-            'won': 'N/A',
-            'decision_made': decision,
-            'judge_model': models['judge']
+            'decision': decision,
+            'won': None,
+            'token_usage': token_usage.get(judge_model, 0)
         })
         
         return results
@@ -138,12 +141,8 @@ class DebateEvaluator:
             print("No results to save")
             return output_path
         
-        # Get all unique keys from results
-        fieldnames = []
-        for result in results:
-            for key in result.keys():
-                if key not in fieldnames:
-                    fieldnames.append(key)
+        # Define column order to match csv_format.json
+        fieldnames = ['model', 'role', 'debate_id', 'scenario_id', 'decision', 'won', 'token_usage']
         
         with open(output_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -165,17 +164,21 @@ class DebateEvaluator:
         # Count wins by model
         model_wins = {}
         model_debates = {}
+        model_tokens = {}
         
         for result in debater_results:
             model = result['model']
-            won = result.get('won', 0)
+            won = result.get('won', 0) or 0
+            tokens = result.get('token_usage', 0) or 0
             
             if model not in model_wins:
                 model_wins[model] = 0
                 model_debates[model] = 0
+                model_tokens[model] = 0
             
             model_wins[model] += won
             model_debates[model] += 1
+            model_tokens[model] += tokens
         
         print("\n" + "="*60)
         print("DEBATE RESULTS SUMMARY")
@@ -185,8 +188,9 @@ class DebateEvaluator:
         for model in sorted(model_wins.keys()):
             wins = model_wins[model]
             debates = model_debates[model]
+            tokens = model_tokens[model]
             win_rate = (wins / debates * 100) if debates > 0 else 0
-            print(f"  {model}: {wins}/{debates} ({win_rate:.1f}%)")
+            print(f"  {model}: {wins}/{debates} ({win_rate:.1f}%) - {tokens:,} tokens")
         
         # Count wins by role
         pro_wins = sum(1 for r in debater_results if r['role'] == 'PRO' and r.get('won') == 1)
@@ -196,6 +200,10 @@ class DebateEvaluator:
         print(f"\nWins by Role:")
         print(f"  PRO (NTA): {pro_wins}/{total}")
         print(f"  CON (YTA): {con_wins}/{total}")
+        
+        # Total token usage
+        total_tokens = sum(r.get('token_usage', 0) or 0 for r in results)
+        print(f"\nTotal Token Usage: {total_tokens:,}")
         
         print("="*60)
 

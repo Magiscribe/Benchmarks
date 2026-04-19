@@ -46,6 +46,11 @@ env/
 # Logs
 *.log
 
+# Agent-task harness runtime state
+Tasks/*/workspace/
+Tasks/*/.harness_state.json
+Tasks/*/last_result.json
+
 # Distribution / packaging
 .Python
 env/

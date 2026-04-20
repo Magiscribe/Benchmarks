@@ -3,20 +3,21 @@ Database module — SQLite setup and seed data.
 """
 import os
 import sqlite3
+import threading
 
 DB_PATH = os.environ.get("DB_PATH", "/app/store.db")
 
-_connection = None
+_local = threading.local()
 
 
 def get_db() -> sqlite3.Connection:
-    global _connection
-    if _connection is None:
-        _connection = sqlite3.connect(DB_PATH, check_same_thread=False)
-        _connection.row_factory = sqlite3.Row
-        _connection.execute("PRAGMA journal_mode=WAL")
-        _connection.execute("PRAGMA foreign_keys=ON")
-    return _connection
+    if not hasattr(_local, "connection") or _local.connection is None:
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA foreign_keys=ON")
+        _local.connection = conn
+    return _local.connection
 
 
 def init_db():

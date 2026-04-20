@@ -353,20 +353,21 @@ Read task.md for complete instructions. In short: the API at http://localhost:80
 """
 
 # Agent CLI commands keyed by agent name.
+# Each factory receives (prompt, model) where model may be None.
 AGENT_COMMANDS = {
-    "gemini": lambda prompt: ([
+    "gemini": lambda prompt, model: ([
         "gemini", "--yolo",
-        "-m", os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview"),
+        "-m", model or os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview"),
         "-p", prompt,
     ], None),
-    "claude": lambda prompt: ([
+    "claude": lambda prompt, model: ([
         "claude", "--dangerously-skip-permissions",
-        "--model", os.environ.get("CLAUDE_MODEL", "sonnet"),
+        "--model", model or os.environ.get("CLAUDE_MODEL", "sonnet"),
         "-p",
     ], prompt),
-    "codex": lambda prompt: ([
+    "codex": lambda prompt, model: ([
         "codex", "exec",
-        "-m", os.environ.get("CODEX_MODEL", "gpt-5.4"),
+        "-m", model or os.environ.get("CODEX_MODEL", "gpt-5.4"),
         "--dangerously-bypass-approvals-and-sandbox", "-",
     ], prompt),
 }
@@ -388,7 +389,7 @@ def cmd_run(args):
 
     # Build the prompt and CLI command
     prompt = BOOTSTRAP_PROMPT.strip()
-    cmd, stdin_input = AGENT_COMMANDS[agent](prompt)
+    cmd, stdin_input = AGENT_COMMANDS[agent](prompt, args.model)
 
     # Ensure agent-specific API key env vars are set.
     env = os.environ.copy()
@@ -400,16 +401,29 @@ def cmd_run(args):
         else:
             log("WARNING: Neither GEMINI_API_KEY nor GOOGLE_API_KEY is set.")
 
+    timeout = getattr(args, "timeout", None)
     log(f"Invoking agent: {' '.join(cmd[:3])}...")
+    if timeout:
+        log(f"(Timeout: {timeout}s. Will score on expiry.)")
     log("(Blocking until the agent CLI exits. Hit Ctrl+C to abort.)")
-    run_kwargs = dict(
+    popen_kwargs = dict(
         cwd=str(WORKSPACE),
         env=env,
         shell=(sys.platform == "win32"),
     )
     if stdin_input:
-        run_kwargs["input"] = stdin_input.encode("utf-8")
-    rc = subprocess.run(cmd, **run_kwargs).returncode
+        popen_kwargs["stdin"] = subprocess.PIPE
+    try:
+        proc = subprocess.Popen(cmd, **popen_kwargs)
+        if stdin_input:
+            proc.stdin.write(stdin_input.encode("utf-8"))
+            proc.stdin.close()
+        rc = proc.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        log(f"Timeout of {timeout}s reached. Killing agent process...")
+        proc.kill()
+        proc.wait()
+        rc = 124  # standard timeout exit code
     log(f"Runner exited with code {rc}")
 
     result, state = _score_core()
@@ -468,6 +482,8 @@ def main():
     p_run.add_argument("--agent", required=True,
                        help="Agent name (gemini, claude, codex)")
     p_run.add_argument("--model", help="Model identifier for the leaderboard")
+    p_run.add_argument("--timeout", type=int, default=None, metavar="SECONDS",
+                       help="Kill the agent and score after this many seconds")
     p_run.add_argument("--auto-cleanup", action="store_true",
                        help="Tear down after scoring (implies --sweep)")
 

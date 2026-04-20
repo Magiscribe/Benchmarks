@@ -132,6 +132,12 @@ def check_response(spec: dict) -> dict:
 
 
 def main():
+    # NOTE FOR TASK AUTHORS:
+    # The "order_total" check uses tolerance=0.001 (tight by design).
+    # The intentional bug is: `total = int(total * 100) / 100`
+    # which truncates instead of rounds, yielding 34.33 instead of 34.34.
+    # The correct fix is `total = round(total, 2)`.
+    # The tolerance must stay < 0.01 to distinguish truncation from rounding.
     traffic = json.loads(TRAFFIC_FILE.read_text())
     checks = [check_response(spec) for spec in traffic]
 

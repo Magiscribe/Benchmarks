@@ -1,7 +1,8 @@
 timestamp,agent,model,score,max_score,elapsed_seconds,done_flag,self_report,checks_passed,checks_failed,notes
-2026-04-20T03:41:16+00:00,claude,claude-haiku-4-5-20241022,3,5,91.0,True,,"products_list,orders_completed,user_orders","products_paginated,order_total",
 2026-04-20T03:43:45+00:00,codex,gpt-5.4-mini,3,5,63.8,True,"{""raw"": ""done""}","products_list,orders_completed,user_orders","products_paginated,order_total",
 2026-04-20T03:46:03+00:00,claude,claude-sonnet-4-6,3,5,119.8,True,,"products_list,orders_completed,user_orders","products_paginated,order_total",
 2026-04-20T03:48:22+00:00,claude,claude-opus-4-7,3,5,104.3,True,,"products_list,orders_completed,user_orders","products_paginated,order_total",
 2026-04-20T03:50:05+00:00,codex,gpt-5.4,4,5,89.1,True,"{""raw"": ""done""}","products_list,orders_completed,user_orders,products_paginated",order_total,
 2026-04-20T03:54:20+00:00,gemini,gemini-3-flash,4,5,135.6,True,"{""raw"": ""DONE""}","products_list,orders_completed,user_orders,order_total",products_paginated,
+2026-04-20T04:20:23+00:00,claude,claude-haiku-4-5-20251001,3,5,98.7,True,,"products_list,orders_completed,user_orders","products_paginated,order_total",
+2026-04-20T04:29:47+00:00,gemini,gemini-3.1-pro,4,5,512.5,True,"{""raw"": ""done""}","products_list,orders_completed,user_orders,order_total",products_paginated,

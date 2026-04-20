@@ -1,0 +1,84 @@
+[
+  {
+    "name": "products_list",
+    "description": "GET /products should return all 8 products with correct prices",
+    "method": "GET",
+    "path": "/products",
+    "body": null,
+    "expect_status": 200,
+    "expect_body": {
+      "type": "length",
+      "value": 8
+    }
+  },
+  {
+    "name": "orders_completed",
+    "description": "GET /orders?status=completed should return exactly 3 orders",
+    "method": "GET",
+    "path": "/orders?status=completed",
+    "body": null,
+    "expect_status": 200,
+    "expect_body": {
+      "type": "length",
+      "value": 3
+    }
+  },
+  {
+    "name": "user_orders",
+    "description": "GET /users/2/orders should return exactly 3 orders (no duplicates)",
+    "method": "GET",
+    "path": "/users/2/orders",
+    "body": null,
+    "expect_status": 200,
+    "expect_body": {
+      "type": "length",
+      "value": 3
+    }
+  },
+  {
+    "name": "products_paginated",
+    "description": "GET /products?page=2&per_page=3 should return products with IDs 4, 5, 6",
+    "method": "GET",
+    "path": "/products?page=2&per_page=3",
+    "body": null,
+    "expect_status": 200,
+    "expect_body": {
+      "type": "ids",
+      "value": [
+        4,
+        5,
+        6
+      ]
+    }
+  },
+  {
+    "name": "order_total",
+    "description": "POST /orders with specific items should calculate correct total ($34.34)",
+    "method": "POST",
+    "path": "/orders",
+    "body": {
+      "user_id": 1,
+      "items": [
+        {
+          "product_id": 1,
+          "quantity": 1
+        },
+        {
+          "product_id": 2,
+          "quantity": 4
+        },
+        {
+          "product_id": 3,
+          "quantity": 3
+        }
+      ]
+    },
+    "expect_status": 200,
+    "expect_body": {
+      "type": "field_equals",
+      "field": "total",
+      "value": 34.34,
+      "tolerance": 0.001
+    }
+  }
+]

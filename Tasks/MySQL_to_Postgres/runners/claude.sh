@@ -3,7 +3,9 @@
 # Non-interactive / "print" mode: runs the agent end-to-end and exits.
 set -u
 
-PROMPT="$(cat "$(dirname "$0")/bootstrap_prompt.txt")"
+# RUNNERS_DIR is set by harness.py; fall back to dirname $0 for manual runs.
+RUNNERS_DIR="${RUNNERS_DIR:-$(dirname "$0")}"
+PROMPT="$(cat "$RUNNERS_DIR/bootstrap_prompt.txt")"
 
 # --dangerously-skip-permissions: auto-approve tool calls (the benchmark run)
 # -p / --print: non-interactive; run until done and exit

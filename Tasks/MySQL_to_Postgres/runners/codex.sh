@@ -3,7 +3,9 @@
 # NOTE: Codex flag names shift; verify locally and edit if needed.
 set -u
 
-PROMPT="$(cat "$(dirname "$0")/bootstrap_prompt.txt")"
+# RUNNERS_DIR is set by harness.py; fall back to dirname $0 for manual runs.
+RUNNERS_DIR="${RUNNERS_DIR:-$(dirname "$0")}"
+PROMPT="$(cat "$RUNNERS_DIR/bootstrap_prompt.txt")"
 
 # `codex exec` runs a single non-interactive session with the given prompt.
 # --dangerously-bypass-approvals-and-sandbox (or --full-auto depending on

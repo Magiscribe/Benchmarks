@@ -19,6 +19,7 @@ CWD = ./workspace. It signals completion by creating ./workspace/.done
 import argparse
 import csv
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -32,6 +33,17 @@ TASK_NAME = TASK_DIR.name
 SETUP_DIR = TASK_DIR / "setup"
 EVAL_DIR = TASK_DIR / "eval"
 WORKSPACE = TASK_DIR / "workspace"
+
+# Auto-load .env from the repo root (two levels up from this task dir).
+_ENV_FILE = TASK_DIR.parent.parent / ".env"
+if _ENV_FILE.is_file():
+    with open(_ENV_FILE) as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if not _line or _line.startswith("#") or "=" not in _line:
+                continue
+            k, v = _line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip())
 RUNNERS_DIR = TASK_DIR / "runners"
 TASK_MD_SRC = TASK_DIR / "task.md"
 TASK_MD_DST = WORKSPACE / "task.md"
@@ -318,27 +330,72 @@ def cmd_score(args):
     log(f"Leaderboard: {LEADERBOARD_FILE}")
 
 
+BOOTSTRAP_PROMPT_FILE = RUNNERS_DIR / "bootstrap_prompt.txt"
+
+# Agent CLI commands keyed by agent name.  Each value is a callable that
+# receives (prompt: str) and returns (cmd: list[str], stdin_input: str|None).
+# If stdin_input is set, it's piped to the process (avoids shell quoting issues
+# with multi-line prompts on Windows).
+AGENT_COMMANDS = {
+    "gemini": lambda prompt: ([
+        "gemini", "--yolo",
+        "-m", os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview"),
+        "-p", prompt,
+    ], None),
+    "claude": lambda prompt: ([
+        "claude", "--dangerously-skip-permissions",
+        "--model", os.environ.get("CLAUDE_MODEL", "sonnet"),
+        "-p",
+    ], prompt),   # pass prompt via stdin to avoid Windows newline mangling
+    "codex": lambda prompt: ([
+        "codex", "exec",
+        "-m", os.environ.get("CODEX_MODEL", "gpt-5.4"),
+        "--dangerously-bypass-approvals-and-sandbox", "-",
+    ], prompt),   # pass prompt via stdin to avoid Windows newline mangling
+}
+
+
 def cmd_run(args):
     if STATE_FILE.exists():
         log("Harness already started. Run `cleanup` first.")
         sys.exit(1)
 
-    runner_script = RUNNERS_DIR / f"{args.agent}.sh"
-    if not runner_script.exists():
-        log(f"No runner found at {runner_script}.")
-        log(f"Available runners: {sorted(p.stem for p in RUNNERS_DIR.glob('*.sh'))}")
+    agent = args.agent
+    if agent not in AGENT_COMMANDS:
+        log(f"Unknown agent '{agent}'. Available: {sorted(AGENT_COMMANDS.keys())}")
         sys.exit(1)
 
     # Reuse cmd_start's logic via argparse namespace
     start_args = argparse.Namespace(agent=args.agent, model=args.model)
     cmd_start(start_args)
 
-    log(f"Invoking runner: {runner_script}")
+    # Read the bootstrap prompt and build the CLI command directly — avoids
+    # bash, CRLF, WSL-vs-GitBash, and Windows path translation headaches.
+    prompt = BOOTSTRAP_PROMPT_FILE.read_text(encoding="utf-8").strip()
+    cmd, stdin_input = AGENT_COMMANDS[agent](prompt)
+
+    # Ensure agent-specific API key env vars are set.
+    # Gemini CLI wants GEMINI_API_KEY; fall back to GOOGLE_API_KEY.
+    env = os.environ.copy()
+    if agent == "gemini" and "GEMINI_API_KEY" not in env:
+        gkey = env.get("GOOGLE_API_KEY")
+        if gkey:
+            env["GEMINI_API_KEY"] = gkey
+            log("Set GEMINI_API_KEY from GOOGLE_API_KEY.")
+        else:
+            log("WARNING: Neither GEMINI_API_KEY nor GOOGLE_API_KEY is set.")
+
+    log(f"Invoking agent: {' '.join(cmd[:3])}...")
     log("(Blocking until the agent CLI exits. Hit Ctrl+C to abort.)")
-    rc = subprocess.run(
-        ["bash", str(runner_script)],
+    run_kwargs = dict(
         cwd=str(WORKSPACE),
-    ).returncode
+        env=env,
+        shell=(sys.platform == "win32"),
+    )
+    if stdin_input:
+        # Pass as raw UTF-8 bytes to avoid Windows encoding the pipe as cp1252.
+        run_kwargs["input"] = stdin_input.encode("utf-8")
+    rc = subprocess.run(cmd, **run_kwargs).returncode
     log(f"Runner exited with code {rc}")
 
     result, state = _score_core()

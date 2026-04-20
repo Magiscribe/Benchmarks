@@ -1,45 +1,47 @@
 # LLM Benchmarks
 
-A scalable benchmark suite for evaluating Large Language Models across multiple tasks with shared inference infrastructure.
+A scalable benchmark suite for evaluating Large Language Models across two complementary axes:
+
+- **[Tests/](Tests/)** — LLM-endpoint benchmarks. Static prompts (often vision) sent through a shared inference engine; the model's response is scored against ground truth. Best for measuring raw model capability.
+- **[Tasks/](Tasks/)** — Agent + harness benchmarks. The harness pre-stages a Docker world, points an agentic CLI (Claude Code, Codex, Gemini CLI) at a workspace with a brief, and scores the resulting world state after the agent signals done. Best for measuring tool use, debugging, and end-to-end software work.
 
 ## Architecture
 
 ```
 Benchmarks/
 ├── requirements.txt          # Shared Python dependencies
-├── .env.template            # Environment variable template
-├── Backend/                 # FastAPI server for benchmark management
-│   ├── main.py             # Server entry point
-│   ├── api/                # API routes and models
-│   │   ├── routes/
-│   │   └── models/
-│   └── services/           # Business logic
-│       ├── data_service.py
-│       ├── dsl_executor.py
-│       └── visualization_service.py
-├── Frontend/                # React UI for benchmark visualization
-│   ├── package.json
-│   ├── vite.config.ts
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── contexts/       # React contexts
-│   │   └── utils/          # Frontend utilities
-│   └── public/             # Static assets
-├── Inference/               # Shared inference engine
-│   ├── available_models.py  # Model definitions and registry
-│   ├── config.py           # Configuration settings
-│   ├── model_runner.py     # Core model execution
-│   └── providers.py        # LLM provider implementations (Anthropic, OpenAI, Google, Groq, Grok)
-├── Results/                 # Centralized benchmark results (CSV exports)
-│   ├── Eye_Test_model_results.csv
-│   └── Coordinate_Grid_model_results.csv
-└── Tests/                   # Individual benchmark implementations
-    ├── TEMPLATE_README.md   # Guide for creating new benchmarks
-    ├── Eye_Test/           # Vision: Text recognition at varying sizes
-    ├── Coordinate_Grid/     # Vision: Spatial reasoning with grids
-    └── AITA_Conversation/   # Text: Multi-agent persuasion debates
+├── .env.template             # Environment variable template
+├── Backend/                  # FastAPI server for benchmark management
+│   ├── main.py
+│   ├── api/                  # routes + models
+│   └── services/             # data_service, dsl_executor, visualization_service
+├── Frontend/                 # React + Vite UI for results visualization
+│   └── src/                  # components, pages, hooks, contexts, utils
+├── Inference/                # Shared SDK-call engine (used by Tests/)
+│   ├── available_models.py   # Model registry
+│   ├── config.py
+│   ├── model_runner.py
+│   └── providers.py          # Anthropic, OpenAI, Google, Groq, Grok
+├── Harness/                  # Shared agent-CLI harness (used by Tasks/)
+│   ├── spec.py               # TaskSpec + HttpHealth / DockerHealth dataclasses
+│   ├── cli.py                # argparse: start | score | run | cleanup
+│   ├── runner.py             # lifecycle (container up, eval staging, scoring)
+│   ├── agents.py             # AGENT_COMMANDS registry (claude, codex, gemini)
+│   ├── docker_utils.py       # compose, port sweep, health waits
+│   ├── eval_staging.py       # hide eval/ from the agent during the run
+│   ├── leaderboard.py        # CSV append
+│   ├── state.py              # .harness_state.json + .done parsing
+│   └── env.py                # auto-load .env from repo root
+├── Results/                  # CSV exports from Tests/
+├── Tests/                    # LLM-endpoint benchmarks
+│   ├── TEMPLATE_README.md
+│   ├── Eye_Test/             # Vision: text recognition at varying sizes
+│   ├── Coordinate_Grid/      # Vision: spatial reasoning on a grid
+│   └── AITA_Debate/          # Text: multi-agent persuasion debates
+└── Tasks/                    # Agent + harness benchmarks
+    ├── TEMPLATE_README.md
+    ├── Broken_API/           # Debug a buggy FastAPI service in Docker
+    └── MySQL_to_Postgres/    # Migrate seeded MySQL → Postgres
 ```
 
 ## Features
@@ -64,7 +66,7 @@ cp .env.template .env
 # Edit .env with your API keys
 ```
 
-### Run Benchmarks
+### Run Tests (LLM-endpoint benchmarks)
 
 #### Eye Test (Text Recognition)
 ```bash
@@ -108,6 +110,32 @@ python main.py --run-all --models claude-4-sonnet gpt-4o gemini-2.5-pro
 python main.py --evaluate
 ```
 
+### Run Tasks (agent + harness benchmarks)
+
+Each task ships a tiny [`harness.py`](Tasks/Broken_API/harness.py) declaring a `TaskSpec`; the shared [`Harness/`](Harness/) module owns the full lifecycle. Requires Docker and the agent CLI you want to invoke (e.g. `claude`, `codex`, `gemini`).
+
+#### Broken API (debug a live FastAPI service)
+```bash
+cd Tasks/Broken_API
+
+# Bring up the world, run the agent, score, tear down
+python harness.py run --agent claude --model haiku --auto-cleanup
+
+# Or step through manually
+python harness.py start
+# ... drive the agent yourself, then:
+python harness.py score
+python harness.py cleanup --sweep
+```
+
+#### MySQL → Postgres (data migration)
+```bash
+cd Tasks/MySQL_to_Postgres
+python harness.py run --agent claude --model sonnet --timeout 1800 --auto-cleanup
+```
+
+Results land in each task's `last_result.json` and `leaderboard.csv`. To add a new agent CLI, edit [`Harness/agents.py`](Harness/agents.py) once — every task picks it up automatically.
+
 ## Supported Models
 
 ### Latest Models (Updated October 2025)
@@ -146,27 +174,42 @@ Tests persuasion and argumentation through competitive multi-agent debates on r/
 
 ## Benchmark Structure
 
-Each benchmark follows a consistent 4-file utility pattern:
+### Tests/ — 4-file utility pattern
 
 ```
 Tests/Coordinate_Grid/
 ├── main.py                 # Entry point with CLI
-├── test_config.py         # Benchmark-specific configuration
-├── dataset.json           # Ground truth data
-├── responses/             # Model response files
-├── assets/                # Generated test images
-├── system_messages/       # Custom prompts for models
-└── utils/                 # Benchmark-specific utilities
+├── test_config.py          # Benchmark-specific configuration
+├── dataset.json            # Ground truth data
+├── responses/              # Model response files
+├── assets/                 # Generated test images
+├── system_messages/        # Custom prompts for models
+└── utils/                  # Benchmark-specific utilities
     ├── dataset_creator.py          # Generates test datasets and metadata
-    ├── asset_generator.py          # Creates benchmark-specific test images  
+    ├── asset_generator.py          # Creates benchmark-specific test images
     ├── model_evaluator.py          # Evaluates model responses against ground truth
     └── synthesize_model_results.py # Exports results to centralized CSV files
 ```
 
+### Tasks/ — declarative TaskSpec + private eval
+
+```
+Tasks/Broken_API/
+├── task.md                 # Agent-visible brief
+├── harness.py              # ~25-line TaskSpec config — calls Harness.run_cli
+├── setup/                  # Initial-state Docker world (compose, Dockerfiles, seed data)
+├── eval/
+│   └── eval.py             # PRIVATE scorer — staged out of the workspace during the run
+├── workspace/              # Created at runtime; the agent's CWD
+├── last_result.json        # Most recent run's score + metadata
+└── leaderboard.csv         # Append-only history of all runs
+```
+
 ## Creating New Benchmarks
 
-See `Tests/TEMPLATE_README.md` for a complete guide on implementing new benchmarks using the shared infrastructure.
+- New **Test** (LLM-endpoint, ground-truth scoring): see [Tests/TEMPLATE_README.md](Tests/TEMPLATE_README.md).
+- New **Task** (agent + harness, world-state scoring): see [Tasks/TEMPLATE_README.md](Tasks/TEMPLATE_README.md).
 
 ## Results Format
 
-All benchmarks export standardized CSV files to the `Results/` directory with benchmark-specific schemas optimized for analysis and comparison. AITA does not yet have enough data to be included... coming soon
+Tests export standardized CSV files to the [Results/](Results/) directory with benchmark-specific schemas optimized for analysis and comparison. Tasks write per-task `last_result.json` (latest run) and `leaderboard.csv` (all runs) inside each task directory. AITA does not yet have enough data to be included... coming soon

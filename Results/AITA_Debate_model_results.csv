@@ -1,0 +1,7 @@
+model,role,debate_id,scenario_id,decision,won,token_usage
+gemini-2.5-flash,PRO,aita_001_gemini-2.5-flash_gpt-4o-mini_claude-4-sonnet_20260110_121358,aita_001,PRO,1,0
+gpt-4o-mini,CON,aita_001_gemini-2.5-flash_gpt-4o-mini_claude-4-sonnet_20260110_121358,aita_001,PRO,0,0
+claude-4-sonnet,JUDGE,aita_001_gemini-2.5-flash_gpt-4o-mini_claude-4-sonnet_20260110_121358,aita_001,PRO,,0
+gemini-2.0-flash-lite,PRO,aita_002_gemini-2.0-flash-lite_gpt-5-nano_grok-4-fast-reasoning_20260110_125134,aita_002,PRO,1,17901
+gpt-5-nano,CON,aita_002_gemini-2.0-flash-lite_gpt-5-nano_grok-4-fast-reasoning_20260110_125134,aita_002,PRO,0,19165
+grok-4-fast-reasoning,JUDGE,aita_002_gemini-2.0-flash-lite_gpt-5-nano_grok-4-fast-reasoning_20260110_125134,aita_002,PRO,,34100

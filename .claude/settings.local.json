@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker --version)",
+      "Bash(docker exec *)",
+      "Bash(pip install *)",
+      "Bash(python harness.py score)",
+      "Bash(python -m pip install psycopg2-binary)",
+      "Bash(python harness.py cleanup)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}

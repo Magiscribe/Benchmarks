@@ -1,0 +1,20 @@
+name: benchmark-mysql-to-postgres
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: benchmark-mysql-legacy
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: legacy
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./seed.sql:/docker-entrypoint-initdb.d/01_seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootpass"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+      start_period: 10s

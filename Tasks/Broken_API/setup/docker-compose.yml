@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: benchmark-broken-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../workspace/app:/app
+    environment:
+      - DB_PATH=/app/store.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
